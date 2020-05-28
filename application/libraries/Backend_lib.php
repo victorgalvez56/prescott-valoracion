@@ -17,12 +17,12 @@ class Backend_lib{
 
 		$infomenu = $this->CI->Backend_model->getID($url);
 
-		$permisos = $this->CI->Backend_model->getPermisos($infomenu->id_men,$this->CI->session->userdata("rol"));
+		$permisos = $this->CI->Backend_model->getPermisos($infomenu->id,$this->CI->session->userdata("rol"));
 		if ($permisos->read == 0 ) {
 			redirect(base_url()."dashboard");
 		}else{
 			return $permisos;
 		}
-
+		
 	}
 }
