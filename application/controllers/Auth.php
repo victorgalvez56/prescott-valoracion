@@ -22,7 +22,7 @@ class Auth extends CI_Controller
 	{
 		$username = $this->input->post("username");
 		$password = $this->input->post("password");
-		$res = $this->Usuarios_model->login($username, $password);
+		$res = $this->Usuarios_model->login($username, sha1($password));
 
 		if (!$res) {
 			$this->session->set_flashdata("error", "El usuario y/o contraseña son incorrectos");
@@ -33,15 +33,13 @@ class Auth extends CI_Controller
 				'nombres' => $res->nombres,
 				'apellidos' => $res->apellidos,
 				'rol' => $res->rol_id,
+				'nombreRol' => $res->nombreRol,
+				'area' => $res->area,
+				'gerencia' => $res->nombreGerencia,
 				'login' => TRUE
 			);
-			if ($res->id_rol != "8") {
-				$this->session->set_userdata($data);
-				redirect(base_url() . "dashboard");
-			} else {
-				$this->session->set_userdata($data);
-				redirect(base_url() . "salud/tarjeta_salud");
-			}
+			$this->session->set_userdata($data);
+			redirect(base_url() . "dashboard");
 		}
 	}
 

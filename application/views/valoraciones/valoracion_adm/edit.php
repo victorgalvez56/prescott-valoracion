@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Nueva Área</h1>
+                    <h1>Editar Área</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Agregar Área</li>
+                        <li class="breadcrumb-item active">Editar Área</li>
                     </ol>
                 </div>
             </div>
@@ -30,7 +30,8 @@
 
                             </div>
                         <?php endif; ?>
-                        <form action="<?php echo base_url(); ?>mantenimiento/areas/store" method="POST">
+                        <form action="<?php echo base_url(); ?>mantenimiento/areas/update" method="POST">
+                        <input type="hidden" value="<?php echo $area->id ?>" name="idArea">
                             <div class="col-md-6">
                                 <!-- general form elements -->
                                 <div class="card card-primary">
@@ -42,17 +43,17 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
-                                            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
+                                            <input type="text" class="form-control" value="<?php echo $area->nombre ?>" name="nombre" id="nombre" placeholder="Nombre" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="descripcion">Descripción</label>
-                                            <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción" required>
+                                            <input type="text" class="form-control" value="<?php echo $area->descripcion ?>" name="descripcion" id="descripcion" placeholder="Descripción" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="rol">Categorías:</label>
                                             <select name="gerencia" id="gerencia" class="form-control" required>
                                                 <?php foreach ($gerencias as $gerencia) : ?>
-                                                    <option value="<?php echo $gerencia->id; ?>"><?php echo $gerencia->nombre; ?></option>
+                                                    <option value="<?php echo $gerencia->id;?>" <?php echo $gerencia->id == $area->gerencia_id ? "selected":"";?>><?php echo $gerencia->nombre;?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -60,7 +61,7 @@
 
                                     <!-- /.card-body -->
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
                                 </div>
                                 <!-- /.card -->

@@ -27,7 +27,13 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Ingresar sus datos de usuario</p>
+                <?php if ($this->session->flashdata("error")) : ?>
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
 
+                            </div>
+                        <?php endif; ?>
                 <form action="<?php echo base_url(); ?>auth/login" method="post">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Usuario" name="username">

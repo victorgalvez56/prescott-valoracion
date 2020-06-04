@@ -19,7 +19,9 @@
         </div>
          -->
         <div class="info">
-          <a href="#" class="d-block">Victor E. Gálvez</a>
+          <a href="#" class="d-block"><?php echo $this->session->userdata("nombres")." ".$this->session->userdata("apellidos") ?> </a>
+          <a href="#" class="d-block"><?php echo $this->session->userdata("nombreRol")?> </a>
+
         </div>
       </div>
 
@@ -38,7 +40,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+          <a href="<?php echo base_url(); ?>valoracion/valoracion_adm/" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
               Valoración Personal
@@ -66,6 +68,7 @@
                   <p>Áreas</p>
                 </a>
               </li>
+              
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -113,13 +116,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>administrador/usuarios/" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Usuarios</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+              <a href="<?php echo base_url(); ?>administrador/permisos/" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Permisos</p>
                 </a>

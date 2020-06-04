@@ -1,128 +1,145 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Usuarios extends CI_Controller {
+class Usuarios extends CI_Controller
+{
 	private $permisos;
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
 		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Usuarios_model");
-
+		$this->load->model("Areas_model");
+		$this->load->model("Gerencias_model");
 	}
 
-	public function index(){
+	public function index()
+	{
 		$data  = array(
 			'permisos' => $this->permisos,
-			'usuarios' => $this->Usuarios_model->getUsuarios(), 
+			'usuarios' => $this->Usuarios_model->getUsuarios(),
 		);
 
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside",);
-		$this->load->view("admin/usuarios/list",$data);
+		$this->load->view("admin/usuarios/list", $data);
 		$this->load->view("layouts/footer");
+		//echo json_encode($this->session);
+
 	}
 
-	public function add(){
+	public function add()
+	{
 		$data  = array(
-			'roles' => $this->Usuarios_model->getRoles(), 
+			'gerencias' => $this->Gerencias_model->getGerencias(),
+			'roles' => $this->Usuarios_model->getRoles(),
+			'areas' => $this->Areas_model->getAreas(),
 		);
 
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
-		$this->load->view("admin/usuarios/add",$data);
+		$this->load->view("admin/usuarios/add", $data);
 		$this->load->view("layouts/footer");
 	}
 
-	public function store(){
+	public function store()
+	{
 
 		$nombres = $this->input->post("nombres");
 		$apellidos = $this->input->post("apellidos");
 		$telefono = $this->input->post("telefono");
 		$email = $this->input->post("email");
-		$username = $this->input->post("username");
+		$username = $this->input->post("usuario");
 		$password = $this->input->post("password");
 		$rol = $this->input->post("rol");
+		$area = $this->input->post("area");
+		$gerencia = $this->input->post("area");
 
 		$data  = array(
-			'nombres_usu' => $nombres, 
-			'apellidos_usu' => $apellidos,
-			'telefono' => $telefono,
-			'email' => $email,
+			'nombres' => $nombres,
+			'apellidos' => $apellidos,
 			'username' => $username,
-			'password' => $password,
-			'id_rol' => $rol,
-			'estado_usu' => "1"
+			'password' => sha1($password),
+			'rol_id' => $rol,
+			'area' => $area,
+			'gerencia' => $gerencia,
+			'estado' => "1"
 		);
 
 		if ($this->Usuarios_model->save($data)) {
-			redirect(base_url()."administrador/usuarios");
+			redirect(base_url() . "administrador/usuarios");
+		} else {
+			$this->session->set_flashdata("error", "No se pudo guardar la informacion");
+			redirect(base_url() . "administrador/usuarios/add");
 		}
-		else{
-			$this->session->set_flashdata("error","No se pudo guardar la informacion");
-			redirect(base_url()."administrador/usuarios/add");
-		}
-
-		
 	}
 
-	public function view(){
-		$idusuario = $this->input->post("idusuario");
-		$data = array(
-			"usuario" => $this->Usuarios_model->getUsuario($idusuario)
-		);
-		$this->load->view("admin/usuarios/view",$data);
-	}
-
-	public function edit($id){
+	public function edit($id)
+	{
 		$data  = array(
-			'roles' => $this->Usuarios_model->getRoles(), 
+			'roles' => $this->Usuarios_model->getRoles(),
 			'usuario' => $this->Usuarios_model->getUsuario($id)
 		);
 
 
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
-		$this->load->view("admin/usuarios/edit",$data);
+		$this->load->view("admin/usuarios/edit", $data);
 		$this->load->view("layouts/footer");
 	}
 
-	public function update(){
-		$idusuario = $this->input->post("idusuario");
+	public function update()
+	{
+		$idusuario = $this->input->post("idUsuario");
 		$nombres = $this->input->post("nombres");
 		$apellidos = $this->input->post("apellidos");
 		$telefono = $this->input->post("telefono");
 		$email = $this->input->post("email");
-		$username = $this->input->post("username");
+		$username = $this->input->post("usuario");
 		$password = $this->input->post("password");
 		$rol = $this->input->post("rol");
+		$area = $this->input->post("area");
 
 		$data  = array(
-			'nombres_usu' => $nombres, 
-			'apellidos_usu' => $apellidos,
-			'telefono' => $telefono,
-			'email' => $email,
+			'nombres' => $nombres,
+			'apellidos' => $apellidos,
 			'username' => $username,
-			'password' => $password,
-			'id_rol' => $rol,
+			'password' => sha1($password),
+			'rol_id' => $rol,
+			'area' => $area,
 		);
 
-		if ($this->Usuarios_model->update($idusuario,$data)) {
-			redirect(base_url()."administrador/usuarios");
+		if ($this->Usuarios_model->update($idusuario, $data)) {
+			redirect(base_url() . "administrador/usuarios");
+		} else {
+			$this->session->set_flashdata("error", "No se pudo guardar la informacion");
+			redirect(base_url() . "administrador/usuarios/edit/" . $idusuario);
 		}
-		else{
-			$this->session->set_flashdata("error","No se pudo guardar la informacion");
-			redirect(base_url()."administrador/usuarios/edit/".$idusuario);
-		}
-
-		
 	}
 
-	public function delete($id){
+	public function delete($id)
+	{
 		$data  = array(
-			'estado_usu' => "0", 
+			'estado' => "0",
 		);
-		$this->Usuarios_model->update($id,$data);
-		echo "administrador/usuarios";
+		$this->Usuarios_model->update($id, $data);
+		redirect(base_url() . "administrador/usuarios");
 	}
 
+	public function getAreasbyGerencia()
+	{
+		$id = $this->input->post("id");
+		$data = array(
+			"areas" => $this->Areas_model->getAreabyRol($id)
+		);
+		echo json_encode($data);
+	}
+	public function getRolesbyGerencia()
+	{
+		$nombre = $this->input->post("nombre");
+		$data = array(
+			"roles" => $this->Usuarios_model->getRolbyGerencia($nombre)
+		);
+		echo json_encode($data);
+	}
 }

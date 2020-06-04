@@ -43,8 +43,8 @@ class Permisos extends CI_Controller {
 		$delete = $this->input->post("delete");
 
 		$data = array(
-			"id_men" => $menu,
-			"id_rol" => $rol,
+			"menu_id" => $menu,
+			"rol_id" => $rol,
 			"read" => $read,
 			"insert" => $insert,
 			"update" => $update,

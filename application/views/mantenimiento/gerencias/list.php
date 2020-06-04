@@ -58,7 +58,7 @@
                                 <a href="<?php echo base_url() ?>mantenimiento/gerencias/edit/<?php echo $gerencia->id; ?>" class="btn btn-warning btn-lg"><span class="fas fa-edit"></span></a>
                               <?php endif; ?>
                               <?php if ($permisos->delete == 1) : ?>
-                                <button class="btn btn-danger btn-lg" value="<?php echo $gerencia->id;?>" id="modalConfirmacion" data-toggle="modal" data-target="#modal-default"><span class="fas fa-trash"></span></button>
+                                <button class="btn btn-danger btn-lg" value="<?php echo $gerencia->id;?>" id="modalConfirmacionGerencia" data-toggle="modal" data-target="#modal-default"><span class="fas fa-trash"></span></button>
                               <?php endif; ?>
                             </div>
                           </td>

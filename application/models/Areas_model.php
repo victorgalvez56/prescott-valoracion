@@ -9,6 +9,7 @@ class Areas_model extends CI_Model
 		$this->db->select("g.nombre as nombreGerencia,a.*");
 		$this->db->from("gerencias g");
 		$this->db->join("areas a", "a.gerencia_id = g.id");
+		$this->db->where("a.estado", '1');
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
@@ -21,6 +22,16 @@ class Areas_model extends CI_Model
 		$this->db->where("a.id", $id);
 		$resultado = $this->db->get("areas");
 		return $resultado->row();
+	}
+
+	public function getAreabyRol($id)
+	{
+
+		$this->db->select("*");
+		$this->db->from("areas");
+		$this->db->where("gerencia_id", $id);
+		$resultado = $this->db->get();
+		return $resultado->result();
 	}
 	//CRUD//
 	public function save($data)
