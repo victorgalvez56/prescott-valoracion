@@ -35,7 +35,9 @@
                     <tr>
                       <th>Nombre</th>
                       <th>Descripción</th>
-                      <th>Categoría</th>
+                      <th>Gerencia</th>
+                      <th>Creado por</th>
+                      <th>Actualizado por</th>
                       <th>Opciones</th>
                     </tr>
                   </thead>
@@ -46,6 +48,9 @@
                           <td><?php echo $area->nombre; ?></td>
                           <td><?php echo $area->descripcion; ?></td>
                           <td><?php echo $area->nombreGerencia; ?></td>
+                          <td><?php echo $area->create_by." ".$area->create_at; ?></td>
+                          <td><?php echo $area->update_by." ".$area->update_at ?></td>
+
                           <td>
                             <div class="btn-group">
                               <?php if ($permisos->update == 1) : ?>

@@ -44,22 +44,22 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php if (!empty($valoraciones)) : ?>
-                      <?php foreach ($valoraciones as $valoracion) : ?>
+                    <?php if (!empty($hijos)) : ?>
+                      <?php foreach ($hijos as $hijo) : ?>
                         <tr>
-                          <td><?php echo $valoracion->nombres . " " . $valoracion->apellidos; ?></td>
+                          <td><?php echo $hijo->nombres . " " . $hijo->apellidos; ?></td>
                           <td></td>
                           <td></td>
                           <td></td>
                           <td></td>
                           <td>
                             <div class="btn-group">
-                              <button class="btn btn-info btn-lg" value="<?php echo $valoracion->id; ?>" id="modalConfirmacion" data-toggle="modal" data-target="#modal-info"><span class="fas fa-search"></span></button>
+                              <!-- <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modalConfirmacion" data-toggle="modal" data-target="#modal-info"><span class="fas fa-search"></span></button>-->
                               <?php if ($permisos->update == 1) : ?>
-                                <button class="btn btn-warning btn-lg" value="<?php echo $valoracion->id; ?>" id="modal-edit" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
+                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-edit" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
                               <?php endif; ?>
                               <?php if ($permisos->delete == 1) : ?>
-                                <button class="btn btn-danger btn-lg" value="<?php echo $valoracion->id; ?>" id="modalConfirmacion" data-toggle="modal" data-target="#modal-delete"><span class="fas fa-trash"></span></button>
+                               <!--  <button class="btn btn-danger btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modalConfirmacion" data-toggle="modal" data-target="#modal-delete"><span class="fas fa-trash"></span></button>-->
                               <?php endif; ?>
                             </div>
                           </td>
@@ -134,13 +134,13 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-        </div>
+        </div>  
         <div class="modal-body">
           <p>One fine body…</p>
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <!--<button type="button" class="btn btn-primary">Save changes</button> -->
         </div>
       </div>
       <!-- /.modal-content -->

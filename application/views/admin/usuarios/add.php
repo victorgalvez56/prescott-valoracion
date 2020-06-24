@@ -61,14 +61,27 @@
                                             <select name="gerencia" id="gerenciaFetch" class="form-control" required>
                                             <option value="">Seleccione una Gerencia</option>
                                                 <?php foreach ($gerencias as $gerencia) : ?>
-                                                    <option value="<?php echo $gerencia->nombre; ?>"><?php echo $gerencia->nombre; ?></option>
+                                                    <option value="<?php echo $gerencia->id; ?>"><?php echo $gerencia->nombre; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="rol">Rol:</label>
-                                            <select name="rol" id="selectRol" class="form-control" required>
-                                              </select>
+                                            <select name="rol" id="rol" class="form-control" required>
+                                            <option value="">Seleccione un Rol</option>
+                                                <?php foreach ($roles as $rol) : ?>
+                                                    <option value="<?php echo $rol->id; ?>"><?php echo $rol->nombre; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="padre">Padre:</label>
+                                            <select name="padre" id="padre" class="form-control" required>
+                                            <option value="">Seleccione un Padre</option>
+                                                <?php foreach ($padres as $padre) : ?>
+                                                    <option value="<?php echo $padre->id; ?>"><?php echo $padre->nombres." ".$padre->apellidos; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
                                         </div>
                                         <div class="form-group" id="divArea">
                                         </div>

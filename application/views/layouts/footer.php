@@ -56,12 +56,13 @@
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
+      "ordering": false,
     });
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
       "searching": false,
-      "ordering": true,
+      "ordering": false,
       "info": true,
       "autoWidth": false,
       "responsive": true,
@@ -77,69 +78,71 @@
     $("#elementModal").attr("href", url);
   });
 
-  $(document).on('change', "#gerenciaFetch", async function() {
-    const $selectRol = $('#selectRol')
-    $selectRol.empty()
-    $selectRol.append("<option value=''>Seleccione un rol</option>")
-    const valorId = $(this).val();
-    const body = new FormData();
-    body.append('nombre', valorId);
+  /*
+    $(document).on('change', "#gerenciaFetch", async function() {
+      const $selectRol = $('#selectRol')
+      $selectRol.empty()
+      $selectRol.append("<option value=''>Seleccione un rol</option>")
+      const valorId = $(this).val();
+      const body = new FormData();
+      body.append('nombre', valorId);
 
-    try {
-      const response = await fetch(BASE_URL + 'administrador/usuarios/getRolesbyGerencia', {
-        method: 'POST',
-        body
-      })
-      const {
-        roles
-      } = await response.json();
-      $selectRol.append(
-        roles.map(rol => `<option value="${rol.id}">${rol.nombre}</option>`).join('')
-      );
-    } catch (error) {
-      console.log(error)
-    }
-  })
-
-  $(document).on('change', "#selectRol", async function() {
-    const $idGerencia = $('#gerenciaFetch').val();
-    const $selectArea = $('#selectArea')
-    const $divArea = $('#campoArea')
-    const $valorId = $(this).val();
-    $selectArea.empty()
-    $selectArea.append("<option value=''>Seleccione una área</option>")
-    const body = new FormData();
-    body.append('id', $idGerencia);
-    try {
-      if ($valorId == '2' || $valorId == '1' ) {
-        $divArea.remove();
-      } else {
-        $divArea.remove();
-        const response = await fetch(BASE_URL + 'administrador/usuarios/getAreasbyGerencia', {
+      try {
+        const response = await fetch(BASE_URL + 'administrador/usuarios/getRolesbyGerencia', {
           method: 'POST',
           body
         })
         const {
-          areas
+          roles
         } = await response.json();
-        $("#cardBody").append("<div class='form-group' id='campoArea'><label for='area'>Área:</label><select name='area' id='selectArea' class='form-control' required></select></div>")
-        $("#selectArea").append(
-          areas.map(area => `<option value="${area.id}">${area.id}</option>`).join('')
+        $selectRol.append(
+          roles.map(rol => `<option value="${rol.id}">${rol.nombre}</option>`).join('')
         );
+      } catch (error) {
+        console.log(error)
       }
+    })
+
+    $(document).on('change', "#selectRol", async function() {
+      const $idGerencia = $('#gerenciaFetch').val();
+      const $selectArea = $('#selectArea')
+      const $divArea = $('#campoArea')
+      const $valorId = $(this).val();
+      $selectArea.empty()
+      $selectArea.append("<option value=''>Seleccione una área</option>")
+      const body = new FormData();
+      body.append('id', $idGerencia);
+      try {
+        if ($valorId == '2' || $valorId == '1' ) {
+          $divArea.remove();
+        } else {
+          $divArea.remove();
+          const response = await fetch(BASE_URL + 'administrador/usuarios/getAreasbyGerencia', {
+            method: 'POST',
+            body
+          })
+          const {
+            areas
+          } = await response.json();
+          $("#cardBody").append("<div class='form-group' id='campoArea'><label for='area'>Área:</label><select name='area' id='selectArea' class='form-control' required></select></div>")
+          $("#selectArea").append(
+            areas.map(area => `<option value="${area.id}">${area.id}</option>`).join('')
+          );
+        }
 
 
-    } catch (error) {
-      console.log(error)
-    }
-  })
-
+      } catch (error) {
+        console.log(error)
+      }
+    })
+  */
+  /* Modal para agregar valoraciones */
   $(document).on("click", "#modal-edit", function() {
     console.log('ga')
     valor_id = $(this).val();
     console.log(valor_id)
     $.ajax({
-      url: BASE_URL + "valoracion/valoracion_adm/view",
+      url: BASE_URL + "valoracion/valoracion_adm/add",
       type: "POST",
       dataType: "html",
       data: {
@@ -151,10 +154,219 @@
     });
   });
 
+  /* Calculo valoraciones para agregar valoraciones */
 
+  function sumaTrabajo() {
+    const $indicador = $(".indicadorTrabajosequipo");
+    const $puntaje = $("#puntajeTrabajosequipo");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarTrabajo() {
+    const $puntaje = $("#puntajeTrabajosequipo");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+
+  function sumaComunicacion() {
+    const $indicador = $(".indicadorComunicacion");
+    const $puntaje = $("#puntajeComunicacion");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarComunicacion() {
+    const $puntaje = $("#puntajeComunicacion");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+  function sumaProactividad() {
+    const $indicador = $(".indicadorProactividad");
+    const $puntaje = $("#puntajeProactividad");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarProactividad() {
+    const $puntaje = $("#puntajeProactividad");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+
+
+  function sumaAprendizaje() {
+    const $indicador = $(".indicadorAprendizaje");
+    const $puntaje = $("#puntajeAprendizaje");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarAprendizaje() {
+    const $puntaje = $("#puntajeAprendizaje");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+
+  function cacularPromedio() {
+    const $indicadorTrabajo = $("#puntajeTrabajosequipo");
+    const $indicadorComunicacion = $("#puntajeComunicacion");
+    const $indicadorProactividad = $("#puntajeProactividad");
+    const $indicadorAprendizaje = $("#puntajeAprendizaje");
+
+
+    let $sumaIndicadores = Math.round(((
+      Number($indicadorTrabajo.val()) +
+      Number($indicadorComunicacion.val()) +
+      Number($indicadorProactividad.val()) +
+      Number($indicadorAprendizaje.val())
+    ) / 4));
+    const $inputPromedio = $("#promedioValoracion");
+
+    $inputPromedio.val($sumaIndicadores);
+
+
+  };
+
+  function pintarPromedio() {
+    const $puntaje = $("#promedioValoracion");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+
+
+
+  $(document).on('change', ".indicadorTrabajosequipo", function() {
+    sumaTrabajo();
+    pintarTrabajo();
+    cacularPromedio();
+    pintarPromedio();
+  })
+  $(document).on('change', ".indicadorComunicacion", function() {
+    sumaComunicacion();
+    pintarComunicacion();
+    cacularPromedio();
+    pintarPromedio();
+  })
+  $(document).on('change', ".indicadorProactividad", function() {
+    sumaProactividad();
+    pintarProactividad();
+    cacularPromedio();
+    pintarPromedio();
+  })
+  $(document).on('change', ".indicadorAprendizaje", function() {
+    sumaAprendizaje();
+    pintarAprendizaje();
+    cacularPromedio();
+    pintarPromedio();
+  })
 </script>
 <style>
-  input { 
-    text-align: center; 
-}
+  input {
+    text-align: center;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .textCenter {
+    display: flex;
+    text-align: center;
+    font-size: 70px;
+  }
 </style>

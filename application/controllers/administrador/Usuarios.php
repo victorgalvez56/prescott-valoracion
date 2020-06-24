@@ -24,8 +24,7 @@ class Usuarios extends CI_Controller
 		$this->load->view("layouts/aside",);
 		$this->load->view("admin/usuarios/list", $data);
 		$this->load->view("layouts/footer");
-		//echo json_encode($this->session);
-
+		echo json_encode($data);
 	}
 
 	public function add()
@@ -33,13 +32,17 @@ class Usuarios extends CI_Controller
 		$data  = array(
 			'gerencias' => $this->Gerencias_model->getGerencias(),
 			'roles' => $this->Usuarios_model->getRoles(),
-			'areas' => $this->Areas_model->getAreas(),
+			'gerencias' => $this->Gerencias_model->getGerencias(),
+			'padres' => $this->Usuarios_model->getusuariosPadres(),
+
 		);
 
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
 		$this->load->view("admin/usuarios/add", $data);
 		$this->load->view("layouts/footer");
+		echo json_encode($data);
+
 	}
 
 	public function store()

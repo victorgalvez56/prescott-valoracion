@@ -12,36 +12,16 @@
                 <?php endif; ?>
                 <form action="<?php echo base_url(); ?>mantenimiento/areas/store" method="POST">
                     <div class="row">
-                        <div class="col-md-6 col-sm-6 col-12">
-                            <div class="info-box">
-                                <span class="info-box-icon Light"><i class="far fa-copy"></i></span>
-
-                                <div class="info-box-content">
-                                <span class="info-box-number">Puntaje de Projectos</span>
-                                    <input type="number" class="form-control" name="puntajeProyectos" id="puntajeProyectos" placeholder="Puntaje Proyectos" required>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-6 col-sm-6 col-12">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-warning"><i class="far fa-star"></i></span>
-
-                                <div class="info-box-content">
-                                <span class="info-box-number">Promedio Final</span>
-                                    <span class="info-box-number">93,139</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <div class="row">
+                        <section class="connectedSortable ui-sortable ">
+                        </section>
+                        <section class="col-lg-6 connectedSortable ui-sortable center">
+                            <img src="<?php echo base_url(); ?>assets/img/leyendapuntajes.png" alt="Leyenda" class="img-fluid" style="width: 500px">
+                        </section>
                         <section class="col-lg-6 connectedSortable ui-sortable">
-                            <div class="card card-primary">
+                            <textarea class="form-control textCenter" id="promedioValoracion" rows="1" placeholder="Promedio" disabled=""></textarea>
+                        </section>
+                        <section class="col-lg-6 connectedSortable ui-sortable">
+                            <div class="card card-lightblue">
                                 <div class="card-header">
                                     <h3 class="card-title"> <?php echo $competencias[1]['nombre']; ?> </h3>
                                     <div class="card-tools">
@@ -54,13 +34,13 @@
                                     <dl class="row">
                                         <?php foreach ($trabajosequipo as $trabajo) : ?>
                                             <dd class="col-sm-8"> <?php echo $trabajo->descripcion; ?></dd>
-                                            <dt class="col-sm-4"> <input type="number" class="form-control" id="indicadorTrabajosequipo" placeholder="Escriba del 1 a 4" required>
+                                            <dt class="col-sm-4"> <input type="number" class="form-control indicadorTrabajosequipo" placeholder="Escriba del 1 a 4" min="1" max="4" required>
                                             </dt>
                                         <?php endforeach; ?>
                                     </dl>
                                 </div>
                             </div>
-                            <div class="card card-warning">
+                            <div class="card card-lightblue">
                                 <div class="card-header">
                                     <h3 class="card-title"> <?php echo $competencias[0]['nombre']; ?> </h3>
                                     <div class="card-tools">
@@ -73,7 +53,7 @@
                                     <dl class="row">
                                         <?php foreach ($comunicaciones as $comunicacion) : ?>
                                             <dd class="col-sm-8"> <?php echo $comunicacion->descripcion; ?></dd>
-                                            <dt class="col-sm-4"> <input type="number" class="form-control" id="indicadorComunicacion" placeholder="Escriba del 1 a 4" required>
+                                            <dt class="col-sm-4"> <input type="number" class="form-control indicadorComunicacion" placeholder="Escriba del 1 a 4" min="1" max="4" required>
                                             </dt>
                                         <?php endforeach; ?>
                                     </dl>
@@ -81,7 +61,7 @@
                             </div>
                         </section>
                         <section class="col-lg-6 connectedSortable ui-sortable">
-                            <div class="card card-success">
+                            <div class="card card-lightblue">
                                 <div class="card-header">
                                     <h3 class="card-title"> <?php echo $competencias[2]['nombre']; ?> </h3>
                                     <div class="card-tools">
@@ -94,13 +74,13 @@
                                     <dl class="row">
                                         <?php foreach ($proactividades as $proactividad) : ?>
                                             <dd class="col-sm-8"> <?php echo $proactividad->descripcion; ?></dd>
-                                            <dt class="col-sm-4"> <input type="number" class="form-control" id="indicadorProactividad" placeholder="Escriba del 1 a 4" required>
+                                            <dt class="col-sm-4"> <input type="number" class="form-control indicadorProactividad" placeholder="Escriba del 1 a 4" min="1" max="4" required>
                                             </dt>
                                         <?php endforeach; ?>
                                     </dl>
                                 </div>
                             </div>
-                            <div class="card card-danger">
+                            <div class="card card-lightblue">
                                 <div class="card-header">
                                     <h3 class="card-title"> <?php echo $competencias[3]['nombre']; ?> </h3>
                                     <div class="card-tools">
@@ -113,14 +93,16 @@
                                     <dl class="row">
                                         <?php foreach ($aprendizajes as $aprendizaje) : ?>
                                             <dd class="col-sm-8"> <?php echo $aprendizaje->descripcion; ?></dd>
-                                            <dt class="col-sm-4"> <input type="number" class="form-control" id="indicadorAprendizaje" placeholder="Escriba del 1 a 4" required>
+                                            <dt class="col-sm-4"> <input type="number" class="form-control indicadorAprendizaje" placeholder="Escriba del 1 a 4" min="1" max="4" required>
                                             </dt>
                                         <?php endforeach; ?>
                                     </dl>
                                 </div>
                             </div>
-
                         </section>
+                    </div>
+                    <div align="center">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
             </div>

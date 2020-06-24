@@ -4,60 +4,58 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Valoracion_adm_model extends CI_Model
 {
 	// Query para administrador de sistema //
-	public function getvaloracionTotal()
-	{
-		$this->db->select("v.*,u.nombres,u.apellidos,u.area,u.gerencia");
-		$this->db->from("valoraciones v");
-		$this->db->join("usuarios u", "u.id = v.usuario_id");
-		$this->db->join("roles r", "r.id = u.rol_id");
-		$this->db->where("v.estado", "1");
-		$this->db->where("u.gerencia", "Administración ");
-		$resultados = $this->db->get();
-		return $resultados->result();
-	}
-
-
 	public function getusuariosTotal()
 	{
-		$this->db->select("v.*,u.nombres,u.apellidos,u.area,u.gerencia");
-		$this->db->from("valoraciones v");
-		$this->db->join("usuarios u", "u.id = v.usuario_id");
-		$this->db->join("roles r", "r.id = u.rol_id");
-		$this->db->where("v.estado", "1");
-		$this->db->where("u.gerencia", "Administración ");
-		$resultados = $this->db->get();
-		return $resultados->result();
-	}
-
-
-	// Query para responsable de área //
-
-	public function getvaloracionArea($gerencia, $area, $rol)
-	{
-		$this->db->select("u.id,u.nombres,u.apellidos,u.area,u.gerencia");
+		$this->db->select("u.*,r.nombre as nombreRol,g.nombre as nombreGerencia");
 		$this->db->from("usuarios u");
 		$this->db->join("roles r", "r.id = u.rol_id");
+		$this->db->join("gerencias g", "r.gerencia_id = g.id");
 		$this->db->where("u.estado", "1");
-		$this->db->where("u.gerencia", $gerencia);
-		$this->db->where("u.area", $area);
-		$this->db->where("r.id<>", $rol);
+		$this->db->where("g.nombre", "No docentes");
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
-	// Query para jefe  de área //
 
-	public function getvaloracionGerencia($gerencia, $rol)
+	public function getusuario($id)
 	{
-		$this->db->select("u.id,u.nombres,u.apellidos,u.area,u.gerencia");
+		$this->db->select("u.*,r.nombre as nombreRol,g.nombre as nombreGerencia");
 		$this->db->from("usuarios u");
 		$this->db->join("roles r", "r.id = u.rol_id");
+		$this->db->join("gerencias g", "r.gerencia_id = g.id");
 		$this->db->where("u.estado", "1");
-		$this->db->where("u.gerencia", $gerencia);
-		$this->db->where("r.id<>", $rol);
+		$this->db->where("u.id", $id);
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
 
+	public function getusuariosHijos($idPadre)
+	{
+		$this->db->select("h.*,u.*");
+		$this->db->from("hijos h");
+		$this->db->join("padres p", "p.id = h.padre_id");
+		$this->db->join("usuarios u", "u.id = h.hijo_id");
+		$this->db->where("h.padre_id", $idPadre);
+		$this->db->where("h.estado", "1");
+		$resultados = $this->db->get();
+		return $resultados->result();
+	}
+
+	public function validacionValoracion($id)
+	{
+		$this->db->select("v.tipo_valoracion_id");
+		$this->db->from("usuarios u");
+		$this->db->join("valoraciones v", "v.usuario_id = u.id");
+		$this->db->join("tipos_valoracion t", "v.tipo_valoracion_id = t.id");
+		$this->db->where("u.estado", "1");
+		$this->db->where("u.id", $id);
+		$this->db->order_by("v.tipo_valoracion_id", "desc");
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->row();
+		} else {
+			return false;
+		}
+	}
 
 	public function getCompetencias()
 	{

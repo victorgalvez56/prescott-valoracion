@@ -33,11 +33,12 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>Nombre</th>
+                      <th>Hijo</th>
                       <th>Usuario</th>
                       <th>Gerencia</th>
                       <th>Rol</th>
                       <th>Área</th>
+                      <th>Padre</th>
                       <th>Opciones</th>
                     </tr>
                   </thead>
@@ -49,7 +50,9 @@
                           <td><?php echo $usuario->username; ?></td>
                           <td><?php echo $usuario->nombreGerencia; ?></td>
                           <td><?php echo $usuario->nombreRol; ?></td>
-                          <td><?php echo $usuario->area; ?></td>
+                          <td><?php echo $usuario->nombreArea; ?></td>
+                          <td><?php echo $usuario->nombrePadre." ".$usuario->apellidoPadre; ?></td>
+
                           <td>
                             <div class="btn-group">
                               <?php if ($permisos->update == 1) : ?>

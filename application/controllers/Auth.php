@@ -24,6 +24,7 @@ class Auth extends CI_Controller
 		$password = $this->input->post("password");
 		$res = $this->Usuarios_model->login($username, sha1($password));
 
+	
 		if (!$res) {
 			$this->session->set_flashdata("error", "El usuario y/o contraseña son incorrectos");
 			redirect(base_url());
@@ -33,8 +34,9 @@ class Auth extends CI_Controller
 				'nombres' => $res->nombres,
 				'apellidos' => $res->apellidos,
 				'rol' => $res->rol_id,
+				'idPadre' => $res->idPadre,
 				'nombreRol' => $res->nombreRol,
-				'area' => $res->area,
+				'area' => $res->nombreArea,
 				'gerencia' => $res->nombreGerencia,
 				'login' => TRUE
 			);

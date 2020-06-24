@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Categorías</h1>
+            <h1>Gerencias</h1>
             <?php if ($permisos->insert == 1) : ?>
               <a href="<?php echo base_url(); ?>mantenimiento/gerencias/add" class="btn btn-primary btn-flat"><span class="fa fa-plus"></span>Agregar Gerencia</a>
             <?php endif; ?>
@@ -50,8 +50,8 @@
                         <tr>
                           <td><?php echo $gerencia->nombre; ?></td>
                           <td><?php echo $gerencia->descripcion; ?></td>
-                          <td><?php echo $gerencia->create_at; ?></td>
-                          <td><?php echo $gerencia->update_at; ?></td>
+                          <td><?php echo $gerencia->create_by." ".$gerencia->create_at; ?></td>
+                          <td><?php echo $gerencia->update_by." ".$gerencia->update_at ?></td>
                           <td>
                             <div class="btn-group">
                               <?php if ($permisos->update == 1) : ?>
