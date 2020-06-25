@@ -117,9 +117,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
+              <a href="<?php echo base_url(); ?>mantenimiento/competencias/" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>General</p>
+                  <p>Competencias</p>
                 </a>
               </li>
               <li class="nav-item">

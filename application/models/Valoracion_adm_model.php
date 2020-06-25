@@ -69,7 +69,7 @@ class Valoracion_adm_model extends CI_Model
 		$this->db->from("indicadores i");
 		$this->db->join("competencias c", "c.id = i.competencia_id");
 		$this->db->where("i.estado", "1");
-		$this->db->where("c.nombre", "COMUNICACIÓN");
+		$this->db->where("c.id", "1");
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
@@ -79,7 +79,7 @@ class Valoracion_adm_model extends CI_Model
 		$this->db->from("indicadores i");
 		$this->db->join("competencias c", "c.id = i.competencia_id");
 		$this->db->where("i.estado", "1");
-		$this->db->where("c.nombre", "TRABAJO EN EQUIPO");
+		$this->db->where("c.id", "2");
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
@@ -89,7 +89,7 @@ class Valoracion_adm_model extends CI_Model
 		$this->db->from("indicadores i");
 		$this->db->join("competencias c", "c.id = i.competencia_id");
 		$this->db->where("i.estado", "1");
-		$this->db->where("c.nombre", "APRENDIZAJE");
+		$this->db->where("c.id", "3");
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
@@ -99,7 +99,7 @@ class Valoracion_adm_model extends CI_Model
 		$this->db->from("indicadores i");
 		$this->db->join("competencias c", "c.id = i.competencia_id");
 		$this->db->where("i.estado", "1");
-		$this->db->where("c.nombre", "PROACTIVIDAD");
+		$this->db->where("c.id", "4");
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}

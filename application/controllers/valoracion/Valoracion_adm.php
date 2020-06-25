@@ -42,8 +42,8 @@ class Valoracion_adm extends CI_Controller
 				'aprendizajes' => $this->Valoracion_adm_model->getindicadorAprendizajes(),
 				'proactividades' => $this->Valoracion_adm_model->getindicadorProactividades(),
 				'validacion' => $validacion,
-
 			);
+			echo json_encode($data);
 			$this->load->view("valoraciones/valoracion_adm/add", $data);
 		} else if ($validacion->tipo_valoracion_id == '1') {
 			$data = array(
