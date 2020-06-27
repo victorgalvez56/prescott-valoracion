@@ -77,7 +77,10 @@
     url = BASE_URL + "administrador/usuarios/delete/" + $(this).val();
     $("#elementModal").attr("href", url);
   });
-
+  $("button[id='modalConfirmacionIndicador']").click(function() {
+    url = BASE_URL + "mantenimiento/indicadores/delete/" + $(this).val();
+    $("#elementModal").attr("href", url);
+  });
   /*
     $(document).on('change', "#gerenciaFetch", async function() {
       const $selectRol = $('#selectRol')

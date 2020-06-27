@@ -117,9 +117,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-              <a href="<?php echo base_url(); ?>mantenimiento/competencias/" class="nav-link">
+                <a href="<?php echo base_url(); ?>mantenimiento/competencias/" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Competencias</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>mantenimiento/indicadores/" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Indicadores</p>
                 </a>
               </li>
               <li class="nav-item">
