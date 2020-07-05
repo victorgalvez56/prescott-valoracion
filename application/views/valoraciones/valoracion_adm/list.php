@@ -6,9 +6,6 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Valoraciones</h1>
-            <?php if ($permisos->insert == 1) : ?>
-              <a href="<?php echo base_url(); ?>valoracion/valoracion_adm/add" class="btn btn-primary btn-flat"><span class="fa fa-plus"></span>Agregar Área</a>
-            <?php endif; ?>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -34,35 +31,40 @@
                   <thead>
                     <tr>
                       <th>Nombres</th>
-                      <th>Promedio Final</th>
-
-                      <th>Valoración por objetivos</th>
-
-                      <th>Promedio valoración 1</th>
-                      <th>Promedio valoración 2</th>
-                      <th>Opciones</th>
-                    </tr>
+                      <th>Valoración 1</th>
+                      <th>Valoración 2</th>
+                      <th>Valoración Objetivos</th>
+                      </tr>
                   </thead>
                   <tbody>
                     <?php if (!empty($hijos)) : ?>
                       <?php foreach ($hijos as $hijo) : ?>
                         <tr>
                           <td><?php echo $hijo->nombres . " " . $hijo->apellidos; ?></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>
-                            <div class="btn-group">
-                              <!-- <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modalConfirmacion" data-toggle="modal" data-target="#modal-info"><span class="fas fa-search"></span></button>-->
-                              <?php if ($permisos->update == 1) : ?>
+                          <td><div class="btn-group">
+                              <?php if ($permisovaloracion == "Registrar") : ?>
                                 <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-edit" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
                               <?php endif; ?>
-                              <?php if ($permisos->delete == 1) : ?>
-                               <!--  <button class="btn btn-danger btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modalConfirmacion" data-toggle="modal" data-target="#modal-delete"><span class="fas fa-trash"></span></button>-->
+                              <?php if ($permisovaloracion == "Leer") : ?>
+                                <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-info" data-toggle="modal" data-target="#modalInfo"><span class="fas fa-search"></span></button>
                               <?php endif; ?>
-                            </div>
-                          </td>
+                            </div></td>
+                          <td><div class="btn-group">
+                              <?php if ($permisovaloracion == "Registrar") : ?>
+                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-edit" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
+                              <?php endif; ?>
+                              <?php if ($permisovaloracion == "Leer") : ?>
+                                <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-info" data-toggle="modal" data-target="#modalInfo"><span class="fas fa-search"></span></button>
+                              <?php endif; ?>
+                            </div></td>
+                          <td><div class="btn-group">
+                              <?php if ($permisovaloracion == "Registrar") : ?>
+                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-edit" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
+                              <?php endif; ?>
+                              <?php if ($permisovaloracion == "Leer") : ?>
+                                <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-info" data-toggle="modal" data-target="#modalInfo"><span class="fas fa-search"></span></button>
+                              <?php endif; ?>
+                            </div></td>
                         </tr>
                       <?php endforeach; ?>
                     <?php endif; ?>
@@ -130,11 +132,11 @@
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Extra Large Modal</h4>
+          <h4 class="modal-title"><input type="button" value="" id="titleValoracion" class="btn btn-block bg-gradient-success btn-lg"></h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-        </div>  
+        </div>
         <div class="modal-body">
           <p>One fine body…</p>
         </div>
@@ -146,3 +148,6 @@
       <!-- /.modal-content -->
     </div>
   </div>
+
+
+ 

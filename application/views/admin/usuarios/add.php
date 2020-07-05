@@ -59,34 +59,23 @@
                                         <div class="form-group">
                                             <label for="gerencia">Gerencia:</label>
                                             <select name="gerencia" id="gerenciaFetch" class="form-control" required>
-                                            <option value="">Seleccione una Gerencia</option>
+                                                <option value="">Seleccione una Gerencia</option>
                                                 <?php foreach ($gerencias as $gerencia) : ?>
                                                     <option value="<?php echo $gerencia->id; ?>"><?php echo $gerencia->nombre; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="rol">Rol:</label>
-                                            <select name="rol" id="rol" class="form-control" required>
-                                            <option value="">Seleccione un Rol</option>
-                                                <?php foreach ($roles as $rol) : ?>
-                                                    <option value="<?php echo $rol->id; ?>"><?php echo $rol->nombre; ?></option>
-                                                <?php endforeach; ?>
+                                            <label for="rol">Roles:</label>
+                                            <select name="rol" id="selectRol" class="form-control" required>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="padre">Padre:</label>
-                                            <select name="padre" id="padre" class="form-control" required>
-                                            <option value="">Seleccione un Padre</option>
-                                                <?php foreach ($padres as $padre) : ?>
-                                                    <option value="<?php echo $padre->id; ?>"><?php echo $padre->nombres." ".$padre->apellidos; ?></option>
-                                                <?php endforeach; ?>
+                                            <label for="area">Áreas:</label>
+                                            <select name="area" id="selectArea" class="form-control" required>
                                             </select>
                                         </div>
-                                        <div class="form-group" id="divArea">
-                                        </div>
                                     </div>
-
                                     <!-- /.card-body -->
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -105,3 +94,56 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<div class="modal fade" id="modal-buscarUsuario">
+    <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Listado de Usuarios</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nombres</th>
+                                    <th>Gerencia</th>
+                                    <th>Rol</th>
+                                    <th>Área</th>
+                                    <th>Registrar</th>
+                                    <th>Leer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($usuarios)) : ?>
+                                    <?php foreach ($usuarios as $usuario) : ?>
+                                        <tr>
+                                            <td><?php echo $usuario->nombres . " " . $usuario->apellidos; ?></td>
+                                            <td><?php echo $usuario->nombreGerencia; ?></td>
+                                            <td><?php echo $usuario->nombreRol; ?></td>
+                                            <td><?php echo $usuario->nombreArea; ?></td>
+                                            <td>
+                                                <input type="checkbox" value="<?php echo $usuario->id; ?>" id="registrarValoracion" name="">                                            </td>
+                                            <td>
+                                                <input type="checkbox" value="<?php echo $usuario->id; ?>" id="leerValoracion" name="">
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="añadirPadre" class="btn btn-primary">Añadir</button>
+                </div>
+    </div>
+</div>
+</div>

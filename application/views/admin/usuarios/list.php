@@ -1,5 +1,5 @@
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -33,12 +33,11 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>Hijo</th>
+                      <th>Nombres</th>
                       <th>Usuario</th>
                       <th>Gerencia</th>
                       <th>Rol</th>
                       <th>Área</th>
-                      <th>Padre</th>
                       <th>Opciones</th>
                     </tr>
                   </thead>
@@ -51,8 +50,6 @@
                           <td><?php echo $usuario->nombreGerencia; ?></td>
                           <td><?php echo $usuario->nombreRol; ?></td>
                           <td><?php echo $usuario->nombreArea; ?></td>
-                          <td><?php echo $usuario->nombrePadre." ".$usuario->apellidoPadre; ?></td>
-
                           <td>
                             <div class="btn-group">
                               <?php if ($permisos->update == 1) : ?>

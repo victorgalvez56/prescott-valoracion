@@ -42,6 +42,13 @@
 <script src="<?php echo BASE_URL(); ?>assets/newtemplate/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo BASE_URL(); ?>assets/newtemplate/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
+
+
+<script src="<?php echo BASE_URL(); ?>assets/newtemplate/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+
+
+
+
 <script>
   console.log('Prueba que carga bien el script')
 </script>
@@ -60,9 +67,9 @@
     });
     $('#example2').DataTable({
       "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": false,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
       "info": true,
       "autoWidth": false,
       "responsive": true,
@@ -81,67 +88,56 @@
     url = BASE_URL + "mantenimiento/indicadores/delete/" + $(this).val();
     $("#elementModal").attr("href", url);
   });
-  /*
-    $(document).on('change', "#gerenciaFetch", async function() {
-      const $selectRol = $('#selectRol')
-      $selectRol.empty()
-      $selectRol.append("<option value=''>Seleccione un rol</option>")
-      const valorId = $(this).val();
-      const body = new FormData();
-      body.append('nombre', valorId);
 
-      try {
-        const response = await fetch(BASE_URL + 'administrador/usuarios/getRolesbyGerencia', {
-          method: 'POST',
-          body
-        })
-        const {
-          roles
-        } = await response.json();
-        $selectRol.append(
-          roles.map(rol => `<option value="${rol.id}">${rol.nombre}</option>`).join('')
-        );
-      } catch (error) {
-        console.log(error)
-      }
-    })
-
-    $(document).on('change', "#selectRol", async function() {
-      const $idGerencia = $('#gerenciaFetch').val();
-      const $selectArea = $('#selectArea')
-      const $divArea = $('#campoArea')
-      const $valorId = $(this).val();
-      $selectArea.empty()
-      $selectArea.append("<option value=''>Seleccione una área</option>")
-      const body = new FormData();
-      body.append('id', $idGerencia);
-      try {
-        if ($valorId == '2' || $valorId == '1' ) {
-          $divArea.remove();
-        } else {
-          $divArea.remove();
-          const response = await fetch(BASE_URL + 'administrador/usuarios/getAreasbyGerencia', {
-            method: 'POST',
-            body
-          })
-          const {
-            areas
-          } = await response.json();
-          $("#cardBody").append("<div class='form-group' id='campoArea'><label for='area'>Área:</label><select name='area' id='selectArea' class='form-control' required></select></div>")
-          $("#selectArea").append(
-            areas.map(area => `<option value="${area.id}">${area.id}</option>`).join('')
-          );
-        }
+  $(document).on('change', "#gerenciaFetch", async function() {
+    const $selectRol = $('#selectRol')
+    $selectRol.empty()
+    $selectRol.append("<option value=''>Seleccione un rol</option>")
+    const valorId = $(this).val();
+    const body = new FormData();
+    body.append('id', valorId);
+    try {
+      const response = await fetch(BASE_URL + 'administrador/parentesco/getRolesbyGerencia', {
+        method: 'POST',
+        body
+      })
+      const {
+        roles
+      } = await response.json();
+      $selectRol.append(
+        roles.map(rol => `<option value="${rol.id}">${rol.nombre}</option>`).join('')
+      );
+    } catch (error) {
+      console.log(error)
+    }
+  })
 
 
-      } catch (error) {
-        console.log(error)
-      }
-    })
-  */
+  $(document).on('change', "#gerenciaFetch", async function() {
+    const $selectArea = $('#selectArea')
+    const valorId = $(this).val();
+    $selectArea.empty()
+    $selectArea.append("<option value=''>Seleccione una área</option>")
+    const body = new FormData();
+    body.append('id', valorId);
+    try {
+      const response = await fetch(BASE_URL + 'administrador/parentesco/getAreasbyGerencia', {
+        method: 'POST',
+        body
+      })
+      const {
+        areas
+      } = await response.json();
+      $("#selectArea").append(
+        areas.map(area => `<option value="${area.id}">${area.nombre}</option>`).join('')
+      );
+    } catch (error) {
+      console.log(error)
+    }
+  })
+
   /* Modal para agregar valoraciones */
   $(document).on("click", "#modal-edit", function() {
-    console.log('ga')
     valor_id = $(this).val();
     console.log(valor_id)
     $.ajax({
@@ -153,6 +149,18 @@
       },
       success: function(data) {
         $("#modalEdit .modal-body").html(data);
+        console.log($("#tipo_validacion").val())
+
+        if ($("#tipo_validacion").val() == 1) {
+          $("#titleValoracion").val("Valoración 1");
+        }
+        if ($("#tipo_validacion").val() == 2) {
+          $("#titleValoracion").val("Valoración 2");
+        }
+        if ($("#tipo_validacion").val() == 3) {
+          $("#titleValoracion").val("Valoración por objetivos");
+        }
+
       }
     });
   });
@@ -355,6 +363,117 @@
     cacularPromedio();
     pintarPromedio();
   })
+  $("#añadirPadre").click(function() {
+    $('#registrarValoracion:checked').each(
+      function() {
+        $(".press").append("<input type='hidden' class='form-control rounded-2' id='inputPadres' name='valoracion[]' value='" + $(this).val() + "'>");
+      }
+    );
+    $('#leerValoracion:checked').each(
+      function() {
+        $(".press").append("<input type='hidden' class='form-control rounded-2' id='inputPadres' name='leer[]' value='" + $(this).val() + "'>");
+      }
+    );
+    $("#modal-buscarUsuario").modal("hide");
+  });
+
+
+  $(document).on("click", ".btn-view-padres", function() {
+    valor_id = $(this).val();
+    $.ajax({
+      url: BASE_URL + "administrador/parentesco/view",
+      type: "POST",
+      dataType: "html",
+      data: {
+        id: valor_id
+      },
+      success: function(data) {
+        $("#modal-defaultinfo .modal-body").html(data);
+        $("#modal-defaultinfo .modal-body").html(data);
+      }
+    });
+  });
+  $("#añadirHijos").click(function() {
+    $(".inputHijosPermitions").empty();
+
+    $('#registrarPermitions:checked').each(
+      function() {
+        $(".inputHijosPermitions").append("<input type='hidden' class='form-control rounded-2' id='inputPadres' name='valoracion[]' value='" + $(this).val() + "'>");
+      }
+    );
+    $('#leerPermitions:checked').each(
+      function() {
+        $(".inputHijosPermitions").append("<input type='hidden' class='form-control rounded-2' id='inputPadres' name='leer[]' value='" + $(this).val() + "'>");
+      }
+    );
+    $("#modal-buscarUsuario").modal("hide");
+    $("#modal-defaultHijos").modal("hide");
+  });
+  $("#añadirPadres").click(function() {
+    $('#addPadres:checked').each(
+      function() {
+        $(".inputPadresPermitions").append("<input type='hidden' class='form-control rounded-2' id='inputPadres' name='idPadres[]' value='" + $(this).val() + "'>");
+      }
+    );
+    $("#modal-buscarUsuario").modal("hide");
+    $("#modal-defaultPadres").modal("hide");
+  });
+
+
+  $(document).on("click", ".btn-remove", function() {
+    $(this).closest("tr").remove();
+  });
+
+  /* Busca periodo por años list */
+  $(document).on("change", "#selectPeriodo", function() {
+    $('#bodytable tr').empty(); 
+    valor_id = $(this).val();
+    $.ajax({
+      url: BASE_URL + "administrador/periodos/getDetallePeriodo",
+      type: "POST",
+      dataType: "json",
+      data: {
+        id: valor_id
+      },
+      success: function(data) {
+        console.warn(data.detallesPeriodo)
+        html = "<tr>";
+        html += "<td>" + data.detallesPeriodo[0]['nombre'] + "</td>";
+        html += "<td>" + data.detallesPeriodo[0]['fecha_inicio'] + "</td>";
+        html += "<td>" + data.detallesPeriodo[0]['fecha_fin'] + "</td>";
+        html += "<td><div class='btn-group'><a href='" + BASE_URL + "administrador/periodos/edit/" + data.detallesPeriodo[0]['id'] + "' class='btn btn-warning btn-lg'><span class='fas fa-edit'></span></a>";
+        html += "</div>";
+        html += "</tr>";
+
+        html += "<tr>";
+        html += "<td>" + data.detallesPeriodo[1]['nombre'] + "</td>";
+        html += "<td>" + data.detallesPeriodo[1]['fecha_inicio'] + "</td>";
+        html += "<td>" + data.detallesPeriodo[1]['fecha_fin'] + "</td>";
+        html += "<td><div class='btn-group'><a href='" + BASE_URL + "administrador/periodos/edit/" + data.detallesPeriodo[1]['id'] + "' class='btn btn-warning btn-lg'><span class='fas fa-edit'></span></a>";
+        html += "</div>";
+        html += "</tr>";
+
+
+        html += "<tr>";
+        html += "<td>" + data.detallesPeriodo[2]['nombre'] + "</td>";
+        html += "<td>" + data.detallesPeriodo[2]['fecha_inicio'] + "</td>";
+        html += "<td>" + data.detallesPeriodo[2]['fecha_fin'] + "</td>";
+        html += "<td><div class='btn-group'><a href='" + BASE_URL + "administrador/periodos/edit/" + data.detallesPeriodo[2]['id'] + "' class='btn btn-warning btn-lg'><span class='fas fa-edit'></span></a>";
+        html += "</div>";
+        html += "</tr>";
+
+        html += "<tr>";
+        html += "<td>" + data.detallesPeriodo[3]['nombre'] + "</td>";
+        html += "<td>" + data.detallesPeriodo[3]['fecha_inicio'] + "</td>";
+        html += "<td>" + data.detallesPeriodo[3]['fecha_fin'] + "</td>";
+        html += "<td><div class='btn-group'><a href='" + BASE_URL + "administrador/periodos/edit/" + data.detallesPeriodo[3]['id'] + "' class='btn btn-warning btn-lg'><span class='fas fa-edit'></span></a>";
+        html += "</div>";
+        html += "</tr>";
+        $('#bodytable tr:last').empty();
+        $('#bodytable tr:last').after(html);
+      }
+    });
+  });
 </script>
 <style>
   input {
@@ -370,6 +489,6 @@
   .textCenter {
     display: flex;
     text-align: center;
-    font-size: 70px;
+    font-size: 55px;
   }
 </style>

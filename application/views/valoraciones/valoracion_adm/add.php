@@ -10,7 +10,11 @@
                         <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
                     </div>
                 <?php endif; ?>
-                <form action="<?php echo base_url(); ?>mantenimiento/areas/store" method="POST">
+                <form action="<?php echo base_url(); ?>valoracion/valoracion_adm/store" method="POST">
+                <input type="hidden" id="tipo_validacion" name="tipo_validacion" value=" <?php echo $tipo_validacion; ?>">
+                <input type="hidden" id="nameUsuario" name="idUsuario" value=" <?php echo $usuario->nombres." ".$usuario->apellidos; ?>">
+                <input type="hidden" id="idUsuario" name="idUsuario" value=" <?php echo $usuario->id; ?>">
+
                     <div class="row">
                         <section class="connectedSortable ui-sortable ">
                         </section>
@@ -18,7 +22,8 @@
                             <img src="<?php echo base_url(); ?>assets/img/leyendapuntajes.png" alt="Leyenda" class="img-fluid" style="width: 500px">
                         </section>
                         <section class="col-lg-6 connectedSortable ui-sortable">
-                            <textarea class="form-control textCenter" id="promedioValoracion" rows="1" placeholder="Promedio" disabled=""></textarea>
+                        <!-- <textarea class="form-control textCenter" id="promedioValoracion" rows="1" placeholder="Promedio" disabled=""></textarea> -->
+                            <input type="number" class="form-control textCenter" name="promediovaloracion" id="promedioValoracion"placeholder="Promedio" readonly>
                         </section>
                         <section class="col-lg-6 connectedSortable ui-sortable">
                             <div class="card card-lightblue">
@@ -34,8 +39,9 @@
                                     <dl class="row">
                                         <?php foreach ($trabajosequipo as $trabajo) : ?>
                                             <dd class="col-sm-8"> <?php echo $trabajo->descripcion; ?></dd>
-                                            <dt class="col-sm-4"> <input type="number" class="form-control indicadorTrabajosequipo" placeholder="Escriba del 1 a 4" min="1" max="4" required>
+                                            <dt class="col-sm-4"> <input type="number"  name="inputTrabajo[]" class="form-control indicadorTrabajosequipo" placeholder="Escriba del 1 a 4" min="1" max="4" required>
                                             </dt>
+                                            <input type="hidden" name="idPuntajeTrabajo[]" value="<?php echo $trabajo->id; ?>">
                                         <?php endforeach; ?>
                                     </dl>
                                 </div>
@@ -53,8 +59,9 @@
                                     <dl class="row">
                                         <?php foreach ($comunicaciones as $comunicacion) : ?>
                                             <dd class="col-sm-8"> <?php echo $comunicacion->descripcion; ?></dd>
-                                            <dt class="col-sm-4"> <input type="number" class="form-control indicadorComunicacion" placeholder="Escriba del 1 a 4" min="1" max="4" required>
+                                            <dt class="col-sm-4"> <input type="number" name="inputComunicacion[]" class="form-control indicadorComunicacion" placeholder="Escriba del 1 a 4" min="1" max="4" required>
                                             </dt>
+                                            <input type="hidden" name="idPuntajeComunicaciones[]" value="<?php echo $comunicacion->id; ?>">
                                         <?php endforeach; ?>
                                     </dl>
                                 </div>
@@ -74,8 +81,9 @@
                                     <dl class="row">
                                         <?php foreach ($proactividades as $proactividad) : ?>
                                             <dd class="col-sm-8"> <?php echo $proactividad->descripcion; ?></dd>
-                                            <dt class="col-sm-4"> <input type="number" class="form-control indicadorProactividad" placeholder="Escriba del 1 a 4" min="1" max="4" required>
+                                            <dt class="col-sm-4"> <input type="number" name="inputProactividad[]"  class="form-control indicadorProactividad" placeholder="Escriba del 1 a 4" min="1" max="4" required>
                                             </dt>
+                                            <input type="hidden" name="idPuntajeProactividad[]" value="<?php echo $proactividad->id; ?>">
                                         <?php endforeach; ?>
                                     </dl>
                                 </div>
@@ -93,8 +101,9 @@
                                     <dl class="row">
                                         <?php foreach ($aprendizajes as $aprendizaje) : ?>
                                             <dd class="col-sm-8"> <?php echo $aprendizaje->descripcion; ?></dd>
-                                            <dt class="col-sm-4"> <input type="number" class="form-control indicadorAprendizaje" placeholder="Escriba del 1 a 4" min="1" max="4" required>
+                                            <dt class="col-sm-4"> <input type="number" name="inputAprendizaje[]" class="form-control indicadorAprendizaje" placeholder="Escriba del 1 a 4" min="1" max="4" required>
                                             </dt>
+                                            <input type="hidden" name="idPuntajeAprendizaje[]" value="<?php echo $aprendizaje->id; ?>">
                                         <?php endforeach; ?>
                                     </dl>
                                 </div>
@@ -110,3 +119,7 @@
     </div>
     <!-- /.box-body -->
 </div>
+
+<script>
+
+  </script>

@@ -67,7 +67,6 @@ class Indicadores extends CI_Controller {
 		$this->load->view("layouts/aside");
 		$this->load->view("mantenimiento/indicadores/edit",$data);
 		$this->load->view("layouts/footer");
-		echo json_encode($data);
 	}
 
 	public function update(){

@@ -24,25 +24,20 @@ class Usuarios extends CI_Controller
 		$this->load->view("layouts/aside",);
 		$this->load->view("admin/usuarios/list", $data);
 		$this->load->view("layouts/footer");
-		echo json_encode($data);
 	}
 
 	public function add()
 	{
 		$data  = array(
-			'gerencias' => $this->Gerencias_model->getGerencias(),
 			'roles' => $this->Usuarios_model->getRoles(),
 			'gerencias' => $this->Gerencias_model->getGerencias(),
-			'padres' => $this->Usuarios_model->getusuariosPadres(),
-
+			'usuarios' => $this->Usuarios_model->getUsuarios(),
 		);
 
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
 		$this->load->view("admin/usuarios/add", $data);
 		$this->load->view("layouts/footer");
-		echo json_encode($data);
-
 	}
 
 	public function store()
@@ -64,8 +59,7 @@ class Usuarios extends CI_Controller
 			'username' => $username,
 			'password' => sha1($password),
 			'rol_id' => $rol,
-			'area' => $area,
-			'gerencia' => $gerencia,
+			'area_id' => $area,
 			'estado' => "1"
 		);
 
@@ -80,6 +74,7 @@ class Usuarios extends CI_Controller
 	public function edit($id)
 	{
 		$data  = array(
+			'areas' => $this->Areas_model->getAreas(),
 			'roles' => $this->Usuarios_model->getRoles(),
 			'usuario' => $this->Usuarios_model->getUsuario($id)
 		);
@@ -109,7 +104,7 @@ class Usuarios extends CI_Controller
 			'username' => $username,
 			'password' => sha1($password),
 			'rol_id' => $rol,
-			'area' => $area,
+			'area_id' => $area,
 		);
 
 		if ($this->Usuarios_model->update($idusuario, $data)) {

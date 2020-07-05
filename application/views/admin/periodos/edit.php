@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Editar Indicador</h1>
+                    <h1>Editar Periodo <?php echo $detalle_periodo->periodo ?></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Editar Indicador</li>
+                        <li class="breadcrumb-item active">Editar Periodo</li>
                     </ol>
                 </div>
             </div>
@@ -30,28 +30,24 @@
 
                             </div>
                         <?php endif; ?>
-                        <form action="<?php echo base_url(); ?>mantenimiento/indicadores/update" method="POST">
-                        <input type="hidden" value="<?php echo $indicador->id ?>" name="idIndicador">
+                        <form action="<?php echo base_url(); ?>administrador/periodos/update" method="POST">
+                            <input type="hidden" value="<?php echo $detalle_periodo->id ?>" name="idDetallePeriodo">
                             <div class="col-md-6">
                                 <!-- general form elements -->
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Registre los datos para una nueva área</h3>
+                                        <h3 class="card-title"><?php echo $detalle_periodo->nombre ?></h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="descripcion">Descripción</label>
-                                            <input type="text" class="form-control" value="<?php echo $indicador->descripcion ?>" name="descripcion" id="descripcion" placeholder="Descripción" required>
+                                            <label for="nombres">Fecha Inicio</label>
+                                            <input type="date" class="form-control" value="<?php echo $detalle_periodo->fecha_inicio ?>" name="fecha_inicio" id="fecha_inicio" placeholder="Fecha Inicion" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="rol">Competencias:</label>
-                                            <select name="competencia" id="competencia" class="form-control" required>
-                                                <?php foreach ($competencias as $competencia) : ?>
-                                                    <option value="<?php echo $competencia->id;?>" <?php echo $competencia->id == $indicador->competencia_id ? "selected":"";?>><?php echo $competencia->nombre    ;?></option>
-                                                <?php endforeach; ?>
-                                            </select>
+                                            <label for="apellidos">Fecha Fin</label>
+                                            <input type="date" class="form-control" value="<?php echo $detalle_periodo->fecha_fin ?>" name="fecha_fin" id="fecha_fin" placeholder="Fecha Fin" required>
                                         </div>
                                     </div>
 

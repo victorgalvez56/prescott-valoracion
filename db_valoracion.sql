@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 24-06-2020 a las 23:59:12
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.5
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 29-06-2020 a las 18:26:18
+-- Versión del servidor: 10.4.13-MariaDB
+-- Versión de PHP: 7.3.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,20 +27,6 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `areas`
 --
 
-CREATE TABLE `areas` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(35) NOT NULL,
-  `descripcion` varchar(65) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
-  `gerencia_id` int(11) NOT NULL,
-  `create_at` varchar(35) NOT NULL,
-  `create_by` varchar(35) NOT NULL,
-  `update_at` varchar(35) NOT NULL,
-  `update_by` varchar(35) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `areas`
 --
 
 INSERT INTO `areas` (`id`, `nombre`, `descripcion`, `estado`, `gerencia_id`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
@@ -64,22 +50,11 @@ INSERT INTO `areas` (`id`, `nombre`, `descripcion`, `estado`, `gerencia_id`, `cr
 -- Estructura de tabla para la tabla `competencias`
 --
 
-CREATE TABLE `competencias` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `estado` tinyint(4) NOT NULL,
-  `create_at` varchar(35) NOT NULL,
-  `create_by` varchar(35) NOT NULL,
-  `update_at` varchar(35) NOT NULL,
-  `update_by` varchar(35) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
 -- Volcado de datos para la tabla `competencias`
 --
 
 INSERT INTO `competencias` (`id`, `nombre`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(1, 'COMUNIaa', 1, '', '', '', ''),
+(1, 'COMUNICACIÓN', 1, '', '', '25-06-2020 18:14:30', 'Administrador Sistema'),
 (2, 'TRABAJO EN EQUIPO', 1, '', '', '', ''),
 (3, 'PROACTIVIDAD', 1, '', '', '', ''),
 (4, 'APRENDIZAJE', 1, '', '', '', '');
@@ -89,19 +64,6 @@ INSERT INTO `competencias` (`id`, `nombre`, `estado`, `create_at`, `create_by`, 
 --
 -- Estructura de tabla para la tabla `detalles_valoraciones`
 --
-
-CREATE TABLE `detalles_valoraciones` (
-  `id` int(11) NOT NULL,
-  `puntaje` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
-  `valoracion_id` int(11) NOT NULL,
-  `indicador_id` int(11) NOT NULL,
-  `create_at` int(11) NOT NULL,
-  `create_by` int(11) NOT NULL,
-  `update_at` int(11) NOT NULL,
-  `update_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- --------------------------------------------------------
 
 --
@@ -126,29 +88,6 @@ CREATE TABLE `gerencias` (
 INSERT INTO `gerencias` (`id`, `nombre`, `descripcion`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
 (1, 'Docentes', 'xxxx', 1, '', '', '08-06-2020 17:18:22', 'Administrador Sistema'),
 (2, 'No docentes', 'Descripción ', 1, '', '', '2020-06-05 11:41:01', 'Administrador Sistema');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `hijos`
---
-
-CREATE TABLE `hijos` (
-  `id` int(11) NOT NULL,
-  `hijo_id` int(11) NOT NULL,
-  `padre_id` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `hijos`
---
-
-INSERT INTO `hijos` (`id`, `hijo_id`, `padre_id`, `estado`) VALUES
-(1, 5, 2, 1),
-(2, 5, 1, 1),
-(3, 5, 3, 1),
-(4, 4, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -214,28 +153,34 @@ INSERT INTO `menus` (`id`, `nombre`, `link`) VALUES
 (2, 'Áreas', 'mantenimiento/areas'),
 (3, 'Usuarios', 'administrador/usuarios\r\n'),
 (4, 'Permisos ', 'administrador/permisos\r\n'),
-(5, 'Valoración Administración', 'valoracion/valoracion_adm');
+(5, 'Valoración Administración', 'valoracion/valoracion_adm'),
+(6, 'Competencias', 'mantenimiento/competencias'),
+(7, 'Indicadores', 'mantenimiento/indicadores');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `padres`
+-- Estructura de tabla para la tabla `parentesco`
 --
 
-CREATE TABLE `padres` (
+CREATE TABLE `parentesco` (
   `id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
+  `hijo_id` int(11) NOT NULL,
+  `padre_id` int(11) NOT NULL,
+  `registrar` int(11) NOT NULL DEFAULT 0,
+  `leer` int(11) NOT NULL DEFAULT 0,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `padres`
+-- Volcado de datos para la tabla `parentesco`
 --
 
-INSERT INTO `padres` (`id`, `usuario_id`, `estado`) VALUES
-(1, 2, 1),
-(2, 3, 1),
-(3, 1, 1);
+INSERT INTO `parentesco` (`id`, `hijo_id`, `padre_id`, `registrar`, `leer`, `estado`) VALUES
+(1, 5, 2, 0, 0, 1),
+(2, 5, 1, 0, 0, 1),
+(3, 5, 3, 0, 0, 1),
+(4, 4, 1, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -272,7 +217,9 @@ INSERT INTO `permisos` (`id`, `read`, `insert`, `update`, `delete`, `menu_id`, `
 (8, 1, 1, 1, 1, 5, 4, '', '', '', ''),
 (9, 1, 1, 1, 1, 5, 5, '', '', '', ''),
 (10, 1, 1, 1, 1, 5, 6, '', '', '', ''),
-(12, 1, 1, 1, 1, 1, 3, '', '', '', '');
+(12, 1, 1, 1, 1, 1, 3, '', '', '', ''),
+(13, 1, 1, 1, 1, 6, 1, '', '', '', ''),
+(14, 1, 1, 1, 1, 7, 1, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -299,7 +246,6 @@ INSERT INTO `roles` (`id`, `nombre`, `descripcion`, `gerencia_id`, `estado`) VAL
 (4, 'Asistente área', NULL, 2, 1),
 (5, 'Auxiliar área', NULL, 2, 1),
 (6, 'Personal Mantenimiento', NULL, 2, 1),
-(7, 'Personal Mantenimiento', NULL, 2, 1),
 (8, 'Profesor', NULL, 1, 1);
 
 -- --------------------------------------------------------
@@ -357,10 +303,13 @@ INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `username`, `password`, `r
 (1, 'Administrador', 'Sistema', 'admin@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1, 11, 1, NULL, '', NULL, ''),
 (2, 'Fernando ', 'Salas', 'fsalas@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2, 11, 1, NULL, '', NULL, ''),
 (3, 'Javier', 'Butrón', 'jbutron@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3, 3, 1, NULL, '', NULL, ''),
-(4, 'Saul', 'Llosa', 'allosa@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 8, 7, 1, NULL, '', NULL, ''),
+(4, 'Saul', 'Llosa', 'allosa@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 8, 3, 1, NULL, '', NULL, ''),
 (5, 'Victor Edison', 'Gálvez Chávez', 'vgalvez@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 5, 3, 1, NULL, '', NULL, ''),
 (6, 'Elias', NULL, 'mantenimiento@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 7, 5, 1, NULL, '', NULL, ''),
-(7, 'Paola Cárdenas', NULL, 'pcardenas@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3, 5, 1, NULL, '', NULL, '');
+(7, 'Paola Cárdenas', NULL, 'pcardenas@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3, 5, 1, NULL, '', NULL, ''),
+(8, 'prueba', 'prueba ', 'admin@prescott.edu.pe', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 8, 7, 1, NULL, '', NULL, ''),
+(9, 'prueba', 'prueba', 'prueba@prescott.edu.pe', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 8, 7, 1, NULL, '', NULL, ''),
+(10, 'prueba', 'prueba', 'prueba@prescott.edu.pe', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 8, 7, 1, NULL, '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -420,14 +369,6 @@ ALTER TABLE `gerencias`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `hijos`
---
-ALTER TABLE `hijos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_padre_hijos` (`padre_id`),
-  ADD KEY `fk_hijo_usuarios` (`hijo_id`);
-
---
 -- Indices de la tabla `indicadores`
 --
 ALTER TABLE `indicadores`
@@ -441,11 +382,12 @@ ALTER TABLE `menus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `padres`
+-- Indices de la tabla `parentesco`
 --
-ALTER TABLE `padres`
+ALTER TABLE `parentesco`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_padre_usuarios` (`usuario_id`);
+  ADD KEY `fk_hijo_usuarios` (`hijo_id`),
+  ADD KEY `fk_padre_usuarios` (`padre_id`);
 
 --
 -- Indices de la tabla `permisos`
@@ -513,34 +455,28 @@ ALTER TABLE `gerencias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `hijos`
---
-ALTER TABLE `hijos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT de la tabla `indicadores`
 --
 ALTER TABLE `indicadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `padres`
+-- AUTO_INCREMENT de la tabla `parentesco`
 --
-ALTER TABLE `padres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `parentesco`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -558,7 +494,7 @@ ALTER TABLE `tipos_valoracion`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `valoraciones`
@@ -584,23 +520,17 @@ ALTER TABLE `detalles_valoraciones`
   ADD CONSTRAINT `fk_valoracion_detalle` FOREIGN KEY (`valoracion_id`) REFERENCES `valoraciones` (`id`);
 
 --
--- Filtros para la tabla `hijos`
---
-ALTER TABLE `hijos`
-  ADD CONSTRAINT `fk_hijo_usuarios` FOREIGN KEY (`hijo_id`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `fk_padre_hijos` FOREIGN KEY (`padre_id`) REFERENCES `padres` (`id`);
-
---
 -- Filtros para la tabla `indicadores`
 --
 ALTER TABLE `indicadores`
   ADD CONSTRAINT `fk_competencias_indicador` FOREIGN KEY (`competencia_id`) REFERENCES `competencias` (`id`);
 
 --
--- Filtros para la tabla `padres`
+-- Filtros para la tabla `parentesco`
 --
-ALTER TABLE `padres`
-  ADD CONSTRAINT `fk_padre_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
+ALTER TABLE `parentesco`
+  ADD CONSTRAINT `fk_hijo_usuarios` FOREIGN KEY (`hijo_id`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `fk_padre_usuarios` FOREIGN KEY (`padre_id`) REFERENCES `usuarios` (`id`);
 
 --
 -- Filtros para la tabla `permisos`

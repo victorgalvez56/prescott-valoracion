@@ -34,7 +34,6 @@ class Auth extends CI_Controller
 				'nombres' => $res->nombres,
 				'apellidos' => $res->apellidos,
 				'rol' => $res->rol_id,
-				'idPadre' => $res->idPadre,
 				'nombreRol' => $res->nombreRol,
 				'area' => $res->nombreArea,
 				'gerencia' => $res->nombreGerencia,

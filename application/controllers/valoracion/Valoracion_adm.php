@@ -9,24 +9,43 @@ class Valoracion_adm extends CI_Controller
 		parent::__construct();
 		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Valoracion_adm_model");
+		$this->load->model("Periodos_model");
+		$this->load->helper('date');
 	}
 
 	public function index()
 	{
+		
+		$now = time();
+		$añoActual = date("Y",  $now);
 
+		echo $añoActual;
+		$fecha_inicio = $this->Periodos_model->getFechaInicio($añoActual);
+		echo json_encode($fecha_inicio);
 		$data  = array(
 			'permisos' => $this->permisos,
-			'hijos' => $this->Valoracion_adm_model->getusuariosHijos($this->session->userdata("idPadre"))
+			'hijos' => $this->Valoracion_adm_model->getusuariosHijosRegistrar($this->session->userdata("id")),
+			'permisovaloracion' => 'Registrar'
 		);
 
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside",);
 		$this->load->view("valoraciones/valoracion_adm/list", $data);
 		$this->load->view("layouts/footer");
-		//echo json_encode($this->session->userdata());
-		//echo json_encode($data);
 	}
+	public function show()
+	{
+		$data  = array(
+			'permisos' => $this->permisos,
+			'hijos' => $this->Valoracion_adm_model->getusuariosHijosLeer($this->session->userdata("id")),
+			'permisovaloracion' => 'Leer'
+		);
 
+		$this->load->view("layouts/header");
+		$this->load->view("layouts/aside",);
+		$this->load->view("valoraciones/valoracion_adm/list", $data);
+		$this->load->view("layouts/footer");
+	}
 
 	public function add()
 	{
@@ -41,9 +60,8 @@ class Valoracion_adm extends CI_Controller
 				'trabajosequipo' => $this->Valoracion_adm_model->getindicadorTrabajos(),
 				'aprendizajes' => $this->Valoracion_adm_model->getindicadorAprendizajes(),
 				'proactividades' => $this->Valoracion_adm_model->getindicadorProactividades(),
-				'validacion' => $validacion,
+				'tipo_validacion' => '1',
 			);
-			echo json_encode($data);
 			$this->load->view("valoraciones/valoracion_adm/add", $data);
 		} else if ($validacion->tipo_valoracion_id == '1') {
 			$data = array(
@@ -54,44 +72,137 @@ class Valoracion_adm extends CI_Controller
 				'trabajosequipo' => $this->Valoracion_adm_model->getindicadorTrabajos(),
 				'aprendizajes' => $this->Valoracion_adm_model->getindicadorAprendizajes(),
 				'proactividades' => $this->Valoracion_adm_model->getindicadorProactividades(),
-				'validacion' => $validacion,
+				'tipo_validacion' => '2',
 
 			);
 			$this->load->view("valoraciones/valoracion_adm/add", $data);
-
 		} else if ($validacion->tipo_valoracion_id == '2') {
 			$data = array(
 				'permisos' => $this->permisos,
 				'usuario' => $this->Valoracion_adm_model->getusuario($id),
-				'validacion' => $validacion,
+				'tipo_validacion' => '3',
 			);
 			$this->load->view("valoraciones/valoracion_adm/addObjetivos", $data);
 		}
 	}
 	public function store()
 	{
-		$nombre = $this->input->post("nombre");
-		$descripcion = $this->input->post("descripcion");
+		$now = time();
+		$nowFormat = date("d-m-Y H:i:s",  $now);
+		$idUsuario = $this->input->post("idUsuario");
 
-		$data  = array(
-			'nombre' => $nombre,
-			'descripcion' => $descripcion,
-			'estado' => "1",
-			'create_at' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
-		);
+		$tipo_validacion = $this->input->post("tipo_validacion");
+		$promediovaloracion = $this->input->post("promediovaloracion");
 
-		if ($this->Gerencias_model->save($data)) {
-			redirect(base_url() . "mantenimiento/gerencias");
-		} else {
-			$this->session->set_flashdata("error", "No se pudo guardar la informacion");
-			redirect(base_url() . "mantenimiento/gerencias/add");
+		$puntajeTrabajosequipo = $this->input->post("puntajeTrabajosequipo");
+		$puntajeComunicacion = $this->input->post("puntajeComunicacion");
+		$puntajeProactividad = $this->input->post("puntajeProactividad");
+		$puntajeAprendizaje = $this->input->post("puntajeAprendizaje");
+
+		$inputTrabajo = $this->input->post("inputTrabajo");
+		$inputComunicacion = $this->input->post("inputComunicacion");
+		$inputProactividad = $this->input->post("inputProactividad");
+		$inputAprendizaje = $this->input->post("inputAprendizaje");
+
+		$idPuntajeComunicaciones = $this->input->post("idPuntajeComunicaciones");
+		$idPuntajeProactividad = $this->input->post("idPuntajeProactividad");
+		$idPuntajeAprendizaje = $this->input->post("idPuntajeAprendizaje");
+		$idPuntajeTrabajo = $this->input->post("idPuntajeTrabajo");
+
+
+		if ($tipo_validacion == '1') {
+			$data  = array(
+				'total_valoracion' => $promediovaloracion,
+				'estado' => "1",
+				'usuario_id' => $idUsuario,
+				'tipo_valoracion_id	' => $tipo_validacion,
+				'create_at' => $nowFormat,
+				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
+			);
+			if ($this->Valoracion_adm_model->save($data)) {
+				$idvaloracion = $this->Valoracion_adm_model->lastID();
+				$this->save_detalleValoracion($idvaloracion,$inputTrabajo,$inputComunicacion,$inputProactividad,$inputAprendizaje,
+				$idPuntajeComunicaciones, $idPuntajeProactividad, $idPuntajeAprendizaje,$idPuntajeTrabajo);
+				redirect(base_url() . "valoracion/valoracion_adm");
+
+			} else {
+				$this->session->set_flashdata("error", "No se pudo guardar la informacion");
+				redirect(base_url() . "valoracion/valoracion_adm/add");
+			}
+		}elseif($tipo_validacion == '2'){
+			$data  = array(
+				'total_valoracion' => $promediovaloracion,
+				'estado' => "1",
+				'usuario_id' => $idUsuario,
+				'tipo_valoracion_id	' => $tipo_validacion,
+				'create_at' => $nowFormat,
+				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
+			);
+			if ($this->Valoracion_adm_model->save($data)) {
+				$idvaloracion = $this->Valoracion_adm_model->lastID();
+				$this->save_detalleValoracion($idvaloracion,$inputTrabajo,$inputComunicacion,$inputProactividad,$inputAprendizaje,
+				$idPuntajeComunicaciones, $idPuntajeProactividad, $idPuntajeAprendizaje,$idPuntajeTrabajo);
+				redirect(base_url() . "valoracion/valoracion_adm");
+
+			} else {
+				$this->session->set_flashdata("error", "No se pudo guardar la informacion");
+				redirect(base_url() . "valoracion/valoracion_adm/add");
+			}
 		}
 	}
 
 
 
-
-
+	protected function save_detalleValoracion($idvaloracion,$inputTrabajo,$inputComunicacion,$inputProactividad,$inputAprendizaje,
+	$idPuntajeComunicaciones, $idPuntajeProactividad, $idPuntajeAprendizaje,$idPuntajeTrabajo)
+	{
+		$now = time();
+		$nowFormat = date("d-m-Y H:i:s",  $now);
+		for ($i = 0; $i < count($inputTrabajo); $i++) {
+			$data  = array(
+				'puntaje' => $inputTrabajo[$i],
+				'estado' => '1',
+				'valoracion_id' => $idvaloracion,
+				'indicador_id' => $idPuntajeTrabajo[$i],
+				'create_at' => $nowFormat,
+				'create_by' => $this->session->userdata("nombres")." ".$this->session->userdata("apellidos")		
+			);
+			$this->Valoracion_adm_model->save_detalleValoracion($data);
+		}
+		for ($i = 0; $i < count($inputComunicacion); $i++) {
+			$data  = array(
+				'puntaje' => $inputComunicacion[$i],
+				'estado' => '1',
+				'valoracion_id' => $idvaloracion,
+				'indicador_id' => $idPuntajeComunicaciones[$i],
+				'create_at' => $nowFormat,
+				'create_by' => $this->session->userdata("nombres")." ".$this->session->userdata("apellidos")	
+			);
+			$this->Valoracion_adm_model->save_detalleValoracion($data);
+		}
+		for ($i = 0; $i < count($inputProactividad); $i++) {
+			$data  = array(
+				'puntaje' => $inputProactividad[$i],
+				'estado' => '1',
+				'valoracion_id' => $idvaloracion,
+				'indicador_id' => $idPuntajeProactividad[$i],
+				'create_at' => $nowFormat,
+				'create_by' => $this->session->userdata("nombres")." ".$this->session->userdata("apellidos")	
+			);
+			$this->Valoracion_adm_model->save_detalleValoracion($data);
+		}
+		for ($i = 0; $i < count($inputAprendizaje); $i++) {
+			$data  = array(
+				'puntaje' => $inputAprendizaje[$i],
+				'estado' => '1',
+				'valoracion_id' => $idvaloracion,
+				'indicador_id' => $idPuntajeAprendizaje[$i],
+				'create_at' => $nowFormat,
+				'create_by' => $this->session->userdata("nombres")." ".$this->session->userdata("apellidos")	
+			);
+			$this->Valoracion_adm_model->save_detalleValoracion($data);
+		}
+	}
 
 	/*
 	public function edit($id){

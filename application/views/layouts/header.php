@@ -28,6 +28,19 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/newtemplate/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/newtemplate/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/newtemplate/dist/css/adminlte.css">
+
+
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/newtemplate/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/newtemplate/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/newtemplate/plugins/select2/css/select2.min.css">
+
+    
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

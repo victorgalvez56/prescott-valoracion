@@ -24,18 +24,29 @@ class Valoracion_adm_model extends CI_Model
 		$this->db->join("gerencias g", "r.gerencia_id = g.id");
 		$this->db->where("u.estado", "1");
 		$this->db->where("u.id", $id);
+		$resultado = $this->db->get();
+		return $resultado->row();
+	}
+
+	public function getusuariosHijosRegistrar($idPadre)
+	{
+		$this->db->select("p.*,u.*");
+		$this->db->from("parentesco p");
+		$this->db->join("usuarios u", "u.id = p.hijo_id");
+		$this->db->where("p.padre_id", $idPadre);
+		$this->db->where("p.estado", "1");
+		$this->db->where("p.registrar", "1");
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
-
-	public function getusuariosHijos($idPadre)
+	public function getusuariosHijosLeer($idPadre)
 	{
-		$this->db->select("h.*,u.*");
-		$this->db->from("hijos h");
-		$this->db->join("padres p", "p.id = h.padre_id");
-		$this->db->join("usuarios u", "u.id = h.hijo_id");
-		$this->db->where("h.padre_id", $idPadre);
-		$this->db->where("h.estado", "1");
+		$this->db->select("p.*,u.*");
+		$this->db->from("parentesco p");
+		$this->db->join("usuarios u", "u.id = p.hijo_id");
+		$this->db->where("p.padre_id", $idPadre);
+		$this->db->where("p.estado", "1");
+		$this->db->where("p.leer", "1");
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
@@ -57,6 +68,13 @@ class Valoracion_adm_model extends CI_Model
 		}
 	}
 
+	public function save_detalleValoracion($data){
+		$this->db->insert("detalles_valoraciones",$data);
+	}
+
+	public function lastID(){
+		return $this->db->insert_id();
+	}
 	public function getCompetencias()
 	{
 		$resultado = $this->db->get("competencias");
@@ -125,12 +143,12 @@ class Valoracion_adm_model extends CI_Model
 	//CRUD//
 	public function save($data)
 	{
-		return $this->db->insert("areas", $data);
+		return $this->db->insert("valoraciones", $data);
 	}
 
 	public function update($id, $data)
 	{
 		$this->db->where("id", $id);
-		return $this->db->update("areas", $data);
+		return $this->db->update("valoraciones", $data);
 	}
 }

@@ -36,7 +36,7 @@ class Areas extends CI_Controller {
 
 	public function store(){
 		$now = time();
-		$nowFormat = date("d-m-Y H:i:s",  $now);;
+		$nowFormat = date("d-m-Y H:i:s",  $now);
 		$nombre = $this->input->post("nombre");
 		$descripcion = $this->input->post("descripcion");
 		$gerencia = $this->input->post("gerencia");
