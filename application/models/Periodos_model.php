@@ -33,15 +33,16 @@ class Periodos_model extends CI_Model
 		$resultado = $this->db->get();
 		return $resultado->row();
 	}
-	public function getFechaInicio($añoactual)
+	public function getFechasValidacion($añoactual,$validacion)
 	{
 		$this->db->select("tv.nombre,dp.fecha_inicio,dp.fecha_fin");
 		$this->db->from("periodos p");
 		$this->db->join("detalles_periodos dp", "dp.periodo_id = p.id");
 		$this->db->join("tipos_valoracion tv", "dp.tipo_valoracion_id = tv.id");
 		$this->db->where("p.periodo", $añoactual);
+		$this->db->where("dp.tipo_valoracion_id", $validacion);
 		$resultado = $this->db->get();
-		return $resultado->result();
+		return $resultado->row();
 	}
 
 	

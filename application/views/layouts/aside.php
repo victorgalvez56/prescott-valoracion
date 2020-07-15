@@ -39,6 +39,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo base_url(); ?>valoracion/mi_valoracion_adm/" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Mi Valoración
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo base_url(); ?>valoracion/valoracion_adm/" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -89,7 +97,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
@@ -117,7 +125,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>

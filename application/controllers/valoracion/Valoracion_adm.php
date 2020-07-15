@@ -15,13 +15,8 @@ class Valoracion_adm extends CI_Controller
 
 	public function index()
 	{
-		
-		$now = time();
-		$añoActual = date("Y",  $now);
 
-		echo $añoActual;
-		$fecha_inicio = $this->Periodos_model->getFechaInicio($añoActual);
-		echo json_encode($fecha_inicio);
+
 		$data  = array(
 			'permisos' => $this->permisos,
 			'hijos' => $this->Valoracion_adm_model->getusuariosHijosRegistrar($this->session->userdata("id")),
@@ -47,49 +42,150 @@ class Valoracion_adm extends CI_Controller
 		$this->load->view("layouts/footer");
 	}
 
-	public function add()
+	public function validacion1_leer()
 	{
-		$id = $this->input->post("id");
-		$validacion = $this->Valoracion_adm_model->validacionValoracion($id);
-		if ($validacion == false) {
-			$data = array(
-				'permisos' => $this->permisos,
-				'usuario' => $this->Valoracion_adm_model->getusuario($id),
-				'competencias' => $this->Valoracion_adm_model->getCompetencias(),
-				'comunicaciones' => $this->Valoracion_adm_model->getindicadorComunicacion(),
-				'trabajosequipo' => $this->Valoracion_adm_model->getindicadorTrabajos(),
-				'aprendizajes' => $this->Valoracion_adm_model->getindicadorAprendizajes(),
-				'proactividades' => $this->Valoracion_adm_model->getindicadorProactividades(),
-				'tipo_validacion' => '1',
-			);
-			$this->load->view("valoraciones/valoracion_adm/add", $data);
-		} else if ($validacion->tipo_valoracion_id == '1') {
-			$data = array(
-				'permisos' => $this->permisos,
-				'usuario' => $this->Valoracion_adm_model->getusuario($id),
-				'competencias' => $this->Valoracion_adm_model->getCompetencias(),
-				'comunicaciones' => $this->Valoracion_adm_model->getindicadorComunicacion(),
-				'trabajosequipo' => $this->Valoracion_adm_model->getindicadorTrabajos(),
-				'aprendizajes' => $this->Valoracion_adm_model->getindicadorAprendizajes(),
-				'proactividades' => $this->Valoracion_adm_model->getindicadorProactividades(),
-				'tipo_validacion' => '2',
 
-			);
-			$this->load->view("valoraciones/valoracion_adm/add", $data);
-		} else if ($validacion->tipo_valoracion_id == '2') {
+		$now = time();
+		$añoActual = date("Y",  $now);
+		$id = $this->input->post("id");
+
+		$validacion = "1";
+		$data = array(
+			'permisos' => $this->permisos,
+			'detalle_valoraciones' => $this->Valoracion_adm_model->getDetalleValoracion($id, $añoActual),
+			'tipo_validacion' => $validacion,
+			'usuario' => $this->Valoracion_adm_model->getusuario($id),
+			'competencias' => $this->Valoracion_adm_model->getCompetencias(),
+			'comunicaciones' => $this->Valoracion_adm_model->getindicadorComunicacion(),
+			'trabajosequipo' => $this->Valoracion_adm_model->getindicadorTrabajos(),
+			'aprendizajes' => $this->Valoracion_adm_model->getindicadorAprendizajes(),
+			'proactividades' => $this->Valoracion_adm_model->getindicadorProactividades(),
+			'permisovaloracion' => 'Leer'
+		);
+		$this->load->view("valoraciones/valoracion_adm/view", $data);
+	}
+
+	public function validacion1_registro()
+	{
+		$now = time();
+		$añoActual = date("Y",  $now);
+		$fechaActual = date("Y-m-d",  $now);
+
+		$validacion = "1";
+		$fechas_valoraciones = $this->Periodos_model->getFechasValidacion($añoActual, $validacion);
+		$fecha_inicio_val1 = $fechas_valoraciones->fecha_inicio;
+		$fecha_fin_val1 = $fechas_valoraciones->fecha_fin;
+		$id = $this->input->post("id");
+
+		$previo_registro = $this->Valoracion_adm_model->validacionValoracion($id,$validacion);
+		if ($previo_registro == true) {
 			$data = array(
+				'previo_registro' => $this->Valoracion_adm_model->validacionValoracion($id,$validacion),
 				'permisos' => $this->permisos,
 				'usuario' => $this->Valoracion_adm_model->getusuario($id),
-				'tipo_validacion' => '3',
+				'tipo_validacion' => $validacion,
+				'puntajes1_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 1, 1),
+				'puntajes2_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 2, 1),
+				'puntajes3_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 3, 1),
+				'puntajes4_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 4, 1),
 			);
-			$this->load->view("valoraciones/valoracion_adm/addObjetivos", $data);
+		} else {
+			$data = array(
+				'previo_registro' => $this->Valoracion_adm_model->validacionValoracion($id,$validacion),
+				'permisos' => $this->permisos,
+				'usuario' => $this->Valoracion_adm_model->getusuario($id),
+				'tipo_validacion' => $validacion,
+				'competencias' => $this->Valoracion_adm_model->getCompetencias(),
+				'comunicaciones' => $this->Valoracion_adm_model->getindicadorComunicacion(),
+				'trabajosequipo' => $this->Valoracion_adm_model->getindicadorTrabajos(),
+				'aprendizajes' => $this->Valoracion_adm_model->getindicadorAprendizajes(),
+				'proactividades' => $this->Valoracion_adm_model->getindicadorProactividades(),
+			);
+		}
+		if ($fechaActual >= $fecha_inicio_val1 && $fechaActual <= $fecha_fin_val1) {
+			$this->load->view("valoraciones/valoracion_adm/add", $data);
+		} else {
+			$this->load->view("valoraciones/valoracion_adm/valoracion_cerrada", $data);
 		}
 	}
+
+	public function validacion2_registro()
+	{
+		$now = time();
+		$añoActual = date("Y",  $now);
+		$fechaActual = date("Y-m-d",  $now);
+
+		$validacion = "2";
+		$fechas_valoraciones = $this->Periodos_model->getFechasValidacion($añoActual, $validacion);
+		$fecha_inicio_val1 = $fechas_valoraciones->fecha_inicio;
+		$fecha_fin_val1 = $fechas_valoraciones->fecha_fin;
+		$id = $this->input->post("id");
+
+		$previo_registro = $this->Valoracion_adm_model->validacionValoracion($id,$validacion);
+		if ($previo_registro == true) {
+			$data = array(
+				'previo_registro' => $this->Valoracion_adm_model->validacionValoracion($id,$validacion),
+				'permisos' => $this->permisos,
+				'usuario' => $this->Valoracion_adm_model->getusuario($id),
+				'tipo_validacion' => $validacion,
+				'puntajes1_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 1, 2),
+				'puntajes2_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 2, 2),
+				'puntajes3_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 3, 2),
+				'puntajes4_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 4, 2),
+			);
+		} else {
+			$data = array(
+				'previo_registro' => $this->Valoracion_adm_model->validacionValoracion($id,$validacion),
+				'permisos' => $this->permisos,
+				'usuario' => $this->Valoracion_adm_model->getusuario($id),
+				'tipo_validacion' => $validacion,
+				'competencias' => $this->Valoracion_adm_model->getCompetencias(),
+				'comunicaciones' => $this->Valoracion_adm_model->getindicadorComunicacion(),
+				'trabajosequipo' => $this->Valoracion_adm_model->getindicadorTrabajos(),
+				'aprendizajes' => $this->Valoracion_adm_model->getindicadorAprendizajes(),
+				'proactividades' => $this->Valoracion_adm_model->getindicadorProactividades(),
+			);
+		}
+		if ($fechaActual >= $fecha_inicio_val1 && $fechaActual <= $fecha_fin_val1) {
+			$this->load->view("valoraciones/valoracion_adm/add", $data);
+		} else {
+			$this->load->view("valoraciones/valoracion_adm/valoracion_cerrada", $data);
+		}
+	}
+
+	public function validacion3_registro()
+	{
+		$now = time();
+		$añoActual = date("Y",  $now);
+		$fechaActual = date("Y-m-d",  $now);
+
+		$validacion = "3";
+		$fechas_valoraciones = $this->Periodos_model->getFechasValidacion($añoActual, $validacion);
+		$fecha_inicio_val1 = $fechas_valoraciones->fecha_inicio;
+		$fecha_fin_val1 = $fechas_valoraciones->fecha_fin;
+		$id = $this->input->post("id");
+		$data = array(
+			'permisos' => $this->permisos,
+			'usuario' => $this->Valoracion_adm_model->getusuario($id),
+			'tipo_validacion' => $validacion,
+			'competencias' => $this->Valoracion_adm_model->getCompetencias(),
+			'comunicaciones' => $this->Valoracion_adm_model->getindicadorComunicacion(),
+			'trabajosequipo' => $this->Valoracion_adm_model->getindicadorTrabajos(),
+			'aprendizajes' => $this->Valoracion_adm_model->getindicadorAprendizajes(),
+			'proactividades' => $this->Valoracion_adm_model->getindicadorProactividades(),
+		);
+		if ($fechaActual >= $fecha_inicio_val1 && $fechaActual <= $fecha_fin_val1) {
+			$this->load->view("valoraciones/valoracion_adm/addObjetivos", $data);
+		} else {
+			$this->load->view("valoraciones/valoracion_adm/valoracion_cerrada", $data);
+		}
+	}
+
 	public function store()
 	{
 		$now = time();
-		$nowFormat = date("d-m-Y H:i:s",  $now);
 		$idUsuario = $this->input->post("idUsuario");
+		$fechaActual = date("Y-m-d",  $now);
 
 		$tipo_validacion = $this->input->post("tipo_validacion");
 		$promediovaloracion = $this->input->post("promediovaloracion");
@@ -109,41 +205,69 @@ class Valoracion_adm extends CI_Controller
 		$idPuntajeAprendizaje = $this->input->post("idPuntajeAprendizaje");
 		$idPuntajeTrabajo = $this->input->post("idPuntajeTrabajo");
 
+		$suma1 = 0;
+		$suma2 = 0;
+		$suma3 = 0;
+		$suma4 = 0;
+
+		for ($i = 0; $i < count($inputComunicacion); $i++) {
+			$suma1  = $suma1 + $inputComunicacion[$i];
+			$suma2  = $suma2 + $inputTrabajo[$i];
+			$suma3  = $suma3 + $inputProactividad[$i];
+			$suma4  = $suma4 + $inputAprendizaje[$i];
+		}
+		$promedio_final = ($suma1 + $suma2 + $suma3 + $suma4) / 4;
 
 		if ($tipo_validacion == '1') {
 			$data  = array(
-				'total_valoracion' => $promediovaloracion,
+				'total_valoracion' => $promedio_final,
 				'estado' => "1",
 				'usuario_id' => $idUsuario,
 				'tipo_valoracion_id	' => $tipo_validacion,
-				'create_at' => $nowFormat,
+				'create_at' => $fechaActual,
 				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 			);
 			if ($this->Valoracion_adm_model->save($data)) {
 				$idvaloracion = $this->Valoracion_adm_model->lastID();
-				$this->save_detalleValoracion($idvaloracion,$inputTrabajo,$inputComunicacion,$inputProactividad,$inputAprendizaje,
-				$idPuntajeComunicaciones, $idPuntajeProactividad, $idPuntajeAprendizaje,$idPuntajeTrabajo);
+				$this->save_detalleValoracion(
+					$idvaloracion,
+					$inputTrabajo,
+					$inputComunicacion,
+					$inputProactividad,
+					$inputAprendizaje,
+					$idPuntajeComunicaciones,
+					$idPuntajeProactividad,
+					$idPuntajeAprendizaje,
+					$idPuntajeTrabajo
+				);
 				redirect(base_url() . "valoracion/valoracion_adm");
-
 			} else {
 				$this->session->set_flashdata("error", "No se pudo guardar la informacion");
 				redirect(base_url() . "valoracion/valoracion_adm/add");
 			}
-		}elseif($tipo_validacion == '2'){
+		} elseif ($tipo_validacion == '2') {
 			$data  = array(
 				'total_valoracion' => $promediovaloracion,
 				'estado' => "1",
 				'usuario_id' => $idUsuario,
 				'tipo_valoracion_id	' => $tipo_validacion,
-				'create_at' => $nowFormat,
+				'create_at' => $fechaActual,
 				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 			);
 			if ($this->Valoracion_adm_model->save($data)) {
 				$idvaloracion = $this->Valoracion_adm_model->lastID();
-				$this->save_detalleValoracion($idvaloracion,$inputTrabajo,$inputComunicacion,$inputProactividad,$inputAprendizaje,
-				$idPuntajeComunicaciones, $idPuntajeProactividad, $idPuntajeAprendizaje,$idPuntajeTrabajo);
+				$this->save_detalleValoracion(
+					$idvaloracion,
+					$inputTrabajo,
+					$inputComunicacion,
+					$inputProactividad,
+					$inputAprendizaje,
+					$idPuntajeComunicaciones,
+					$idPuntajeProactividad,
+					$idPuntajeAprendizaje,
+					$idPuntajeTrabajo
+				);
 				redirect(base_url() . "valoracion/valoracion_adm");
-
 			} else {
 				$this->session->set_flashdata("error", "No se pudo guardar la informacion");
 				redirect(base_url() . "valoracion/valoracion_adm/add");
@@ -153,22 +277,23 @@ class Valoracion_adm extends CI_Controller
 
 
 
-	protected function save_detalleValoracion($idvaloracion,$inputTrabajo,$inputComunicacion,$inputProactividad,$inputAprendizaje,
-	$idPuntajeComunicaciones, $idPuntajeProactividad, $idPuntajeAprendizaje,$idPuntajeTrabajo)
-	{
+	protected function save_detalleValoracion(
+		$idvaloracion,
+		$inputTrabajo,
+		$inputComunicacion,
+		$inputProactividad,
+		$inputAprendizaje,
+		$idPuntajeComunicaciones,
+		$idPuntajeProactividad,
+		$idPuntajeAprendizaje,
+		$idPuntajeTrabajo
+	) {
 		$now = time();
 		$nowFormat = date("d-m-Y H:i:s",  $now);
-		for ($i = 0; $i < count($inputTrabajo); $i++) {
-			$data  = array(
-				'puntaje' => $inputTrabajo[$i],
-				'estado' => '1',
-				'valoracion_id' => $idvaloracion,
-				'indicador_id' => $idPuntajeTrabajo[$i],
-				'create_at' => $nowFormat,
-				'create_by' => $this->session->userdata("nombres")." ".$this->session->userdata("apellidos")		
-			);
-			$this->Valoracion_adm_model->save_detalleValoracion($data);
-		}
+
+
+
+
 		for ($i = 0; $i < count($inputComunicacion); $i++) {
 			$data  = array(
 				'puntaje' => $inputComunicacion[$i],
@@ -176,7 +301,18 @@ class Valoracion_adm extends CI_Controller
 				'valoracion_id' => $idvaloracion,
 				'indicador_id' => $idPuntajeComunicaciones[$i],
 				'create_at' => $nowFormat,
-				'create_by' => $this->session->userdata("nombres")." ".$this->session->userdata("apellidos")	
+				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
+			);
+			$this->Valoracion_adm_model->save_detalleValoracion($data);
+		}
+		for ($i = 0; $i < count($inputTrabajo); $i++) {
+			$data  = array(
+				'puntaje' => $inputTrabajo[$i],
+				'estado' => '1',
+				'valoracion_id' => $idvaloracion,
+				'indicador_id' => $idPuntajeTrabajo[$i],
+				'create_at' => $nowFormat,
+				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 			);
 			$this->Valoracion_adm_model->save_detalleValoracion($data);
 		}
@@ -187,7 +323,7 @@ class Valoracion_adm extends CI_Controller
 				'valoracion_id' => $idvaloracion,
 				'indicador_id' => $idPuntajeProactividad[$i],
 				'create_at' => $nowFormat,
-				'create_by' => $this->session->userdata("nombres")." ".$this->session->userdata("apellidos")	
+				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 			);
 			$this->Valoracion_adm_model->save_detalleValoracion($data);
 		}
@@ -198,7 +334,7 @@ class Valoracion_adm extends CI_Controller
 				'valoracion_id' => $idvaloracion,
 				'indicador_id' => $idPuntajeAprendizaje[$i],
 				'create_at' => $nowFormat,
-				'create_by' => $this->session->userdata("nombres")." ".$this->session->userdata("apellidos")	
+				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 			);
 			$this->Valoracion_adm_model->save_detalleValoracion($data);
 		}

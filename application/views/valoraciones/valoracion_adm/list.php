@@ -43,7 +43,15 @@
                           <td><?php echo $hijo->nombres . " " . $hijo->apellidos; ?></td>
                           <td><div class="btn-group">
                               <?php if ($permisovaloracion == "Registrar") : ?>
-                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-edit" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
+                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion1_registro" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
+                              <?php endif; ?>
+                              <?php if ($permisovaloracion == "Leer") : ?>
+                                <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion1_leer" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-search"></span></button>
+                              <?php endif; ?>
+                            </div></td>
+                          <td><div class="btn-group">
+                              <?php if ($permisovaloracion == "Registrar") : ?>
+                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion2_registro" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
                               <?php endif; ?>
                               <?php if ($permisovaloracion == "Leer") : ?>
                                 <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-info" data-toggle="modal" data-target="#modalInfo"><span class="fas fa-search"></span></button>
@@ -51,15 +59,7 @@
                             </div></td>
                           <td><div class="btn-group">
                               <?php if ($permisovaloracion == "Registrar") : ?>
-                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-edit" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
-                              <?php endif; ?>
-                              <?php if ($permisovaloracion == "Leer") : ?>
-                                <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-info" data-toggle="modal" data-target="#modalInfo"><span class="fas fa-search"></span></button>
-                              <?php endif; ?>
-                            </div></td>
-                          <td><div class="btn-group">
-                              <?php if ($permisovaloracion == "Registrar") : ?>
-                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-edit" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
+                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion3_registro" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
                               <?php endif; ?>
                               <?php if ($permisovaloracion == "Leer") : ?>
                                 <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-info" data-toggle="modal" data-target="#modalInfo"><span class="fas fa-search"></span></button>

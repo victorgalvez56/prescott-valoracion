@@ -43,11 +43,8 @@
 <script src="<?php echo BASE_URL(); ?>assets/newtemplate/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
 
-
 <script src="<?php echo BASE_URL(); ?>assets/newtemplate/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-
-
-
+<script src="<?php echo BASE_URL(); ?>assets/js/zappar-js/zappar.js"></script>
 
 <script>
   console.log('Prueba que carga bien el script')
@@ -136,12 +133,12 @@
     }
   })
 
-  /* Modal para agregar valoraciones */
-  $(document).on("click", "#modal-edit", function() {
+  /* Modal para agregar valoracione1 */
+  $(document).on("click", "#modal-valoracion1_registro", function() {
     valor_id = $(this).val();
     console.log(valor_id)
     $.ajax({
-      url: BASE_URL + "valoracion/valoracion_adm/add",
+      url: BASE_URL + "valoracion/valoracion_adm/validacion1_registro",
       type: "POST",
       dataType: "html",
       data: {
@@ -150,20 +147,70 @@
       success: function(data) {
         $("#modalEdit .modal-body").html(data);
         console.log($("#tipo_validacion").val())
-
-        if ($("#tipo_validacion").val() == 1) {
-          $("#titleValoracion").val("Valoración 1");
-        }
-        if ($("#tipo_validacion").val() == 2) {
-          $("#titleValoracion").val("Valoración 2");
-        }
-        if ($("#tipo_validacion").val() == 3) {
-          $("#titleValoracion").val("Valoración por objetivos");
-        }
-
+        $("#titleValoracion").val("Valoración 1");
       }
     });
   });
+
+
+  /* Modal para agregar valoracione2 */
+  $(document).on("click", "#modal-valoracion2_registro", function() {
+    valor_id = $(this).val();
+    console.log(valor_id)
+    $.ajax({
+      url: BASE_URL + "valoracion/valoracion_adm/validacion2_registro",
+      type: "POST",
+      dataType: "html",
+      data: {
+        id: valor_id
+      },
+      success: function(data) {
+        $("#modalEdit .modal-body").html(data);
+        console.log($("#tipo_validacion").val())
+        $("#titleValoracion").val("Valoración 2");
+      }
+    });
+  });
+
+  /* Modal para agregar valoracioneobjetivos */
+  $(document).on("click", "#modal-valoracion3_registro", function() {
+    valor_id = $(this).val();
+    console.log(valor_id)
+    $.ajax({
+      url: BASE_URL + "valoracion/valoracion_adm/validacion3_registro",
+      type: "POST",
+      dataType: "html",
+      data: {
+        id: valor_id
+      },
+      success: function(data) {
+        $("#modalEdit .modal-body").html(data);
+        console.log($("#tipo_validacion").val())
+        $("#titleValoracion").val("Valoración por Objetivos");
+      }
+    });
+  });
+
+  /* Modal para leer valoracion1 */
+  $(document).on("click", "#modal-valoracion1_leer", function() {
+    valor_id = $(this).val();
+    console.log(valor_id)
+    $.ajax({
+      url: BASE_URL + "valoracion/valoracion_adm/validacion1_leer",
+      type: "POST",
+      dataType: "html",
+      data: {
+        id: valor_id
+      },
+      success: function(data) {
+        $("#modalEdit .modal-body").html(data);
+        console.log($("#tipo_validacion").val())
+        $("#titleValoracion").val("Valoración 1");
+      }
+    });
+  });
+
+
 
   /* Calculo valoraciones para agregar valoraciones */
 
@@ -363,6 +410,223 @@
     cacularPromedio();
     pintarPromedio();
   })
+
+
+
+
+
+
+
+
+
+
+
+  function sumaTrabajo2() {
+    const $indicador = $(".indicadorTrabajosequipo2");
+    const $puntaje = $("#puntajeTrabajosequipo2");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarTrabajo2() {
+    const $puntaje = $("#puntajeTrabajosequipo2");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+
+  function sumaComunicacion2() {
+    const $indicador = $(".indicadorComunicacion2");
+    const $puntaje = $("#puntajeComunicacion2");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarComunicacion2() {
+    const $puntaje = $("#puntajeComunicacion2");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+  function sumaProactividad2() {
+    const $indicador = $(".indicadorProactividad2");
+    const $puntaje = $("#puntajeProactividad2");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarProactividad2() {
+    const $puntaje = $("#puntajeProactividad2");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+
+
+  function sumaAprendizaje2() {
+    const $indicador = $(".indicadorAprendizaje2");
+    const $puntaje = $("#puntajeAprendizaje2");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarAprendizaje2() {
+    const $puntaje = $("#puntajeAprendizaje2");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+
+  function cacularPromedio2() {
+    const $indicadorTrabajo = $("#puntajeTrabajosequipo2");
+    const $indicadorComunicacion = $("#puntajeComunicacion2");
+    const $indicadorProactividad = $("#puntajeProactividad2");
+    const $indicadorAprendizaje = $("#puntajeAprendizaje2");
+
+
+    let $sumaIndicadores = Math.round(((
+      Number($indicadorTrabajo.val()) +
+      Number($indicadorComunicacion.val()) +
+      Number($indicadorProactividad.val()) +
+      Number($indicadorAprendizaje.val())
+    ) / 4));
+    const $inputPromedio = $("#promedioValoracion2");
+
+    $inputPromedio.text($sumaIndicadores);
+
+
+  };
+
+  function pintarPromedio2() {
+    const $puntaje = $("#promedioValoracion2");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+
+
+  function pintarPromedioBox2() {
+    const $puntaje = $("#promedioValoracion2").text();
+    const $box = $("#boxPromedio2");
+    const $numberPuntaje = Number($puntaje);
+
+    if ($numberPuntaje > 0 && $numberPuntaje < 6) {
+      $box.addClass("bg-red")
+    } else if ($numberPuntaje > 5 && $numberPuntaje < 13) {
+      $box.addClass("bg-yellow")
+    } else if ($numberPuntaje > 12 && $numberPuntaje < 19) {
+      $box.addClass("bg-green")
+    } else if ($numberPuntaje > 18 && $numberPuntaje < 21) {
+      $box.addClass("bg-blue")
+    }
+  };
+
+  sumaTrabajo2();
+  pintarTrabajo2();
+  cacularPromedio2();
+  pintarPromedio2();
+  sumaComunicacion2();
+  pintarComunicacion2();
+  cacularPromedio2();
+  pintarPromedio2();
+  sumaProactividad2();
+  pintarProactividad2();
+  cacularPromedio2();
+  pintarPromedio2();
+  sumaAprendizaje2();
+  pintarAprendizaje2();
+  cacularPromedio2();
+  pintarPromedioBox2();
+
+
+
   $("#añadirPadre").click(function() {
     $('#registrarValoracion:checked').each(
       function() {
@@ -426,7 +690,7 @@
 
   /* Busca periodo por años list */
   $(document).on("change", "#selectPeriodo", function() {
-    $('#bodytable tr').empty(); 
+    $('#bodytable tr').empty();
     valor_id = $(this).val();
     $.ajax({
       url: BASE_URL + "administrador/periodos/getDetallePeriodo",
@@ -474,6 +738,8 @@
       }
     });
   });
+
+  
 </script>
 <style>
   input {
