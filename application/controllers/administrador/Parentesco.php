@@ -21,7 +21,7 @@ class Parentesco extends CI_Controller
 		);
 
 		$this->load->view("layouts/header");
-		$this->load->view("layouts/aside",);
+		$this->load->view("layouts/aside");
 		$this->load->view("admin/parentesco/list", $data);
 		$this->load->view("layouts/footer");
 	}

@@ -19,7 +19,7 @@ class Areas extends CI_Controller {
 		);
 
 		$this->load->view("layouts/header");
-		$this->load->view("layouts/aside",);
+		$this->load->view("layouts/aside");
 		$this->load->view("mantenimiento/areas/list",$data);
         $this->load->view("layouts/footer");
 	}

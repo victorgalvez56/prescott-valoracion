@@ -20,7 +20,7 @@ class Periodos extends CI_Controller
 		);
 
 		$this->load->view("layouts/header");
-		$this->load->view("layouts/aside",);
+		$this->load->view("layouts/aside");
 		$this->load->view("admin/periodos/list", $data);
 		$this->load->view("layouts/footer");
 	// echo json_encode($data);
