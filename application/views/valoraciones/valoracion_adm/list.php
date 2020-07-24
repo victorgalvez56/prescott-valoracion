@@ -43,26 +43,26 @@
                           <td><?php echo $hijo->nombres . " " . $hijo->apellidos; ?></td>
                           <td><div class="btn-group">
                               <?php if ($permisovaloracion == "Registrar") : ?>
-                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion1_registro" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
+                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion1_registro" data-toggle="modal" data-target="#modal-registro-val"><span class="fas fa-edit"></span></button>
                               <?php endif; ?>
                               <?php if ($permisovaloracion == "Leer") : ?>
-                                <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion1_leer" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-search"></span></button>
+                                <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion1_leer" data-toggle="modal" data-target="#modal-leer-val"><span class="fas fa-search"></span></button>
                               <?php endif; ?>
                             </div></td>
                           <td><div class="btn-group">
                               <?php if ($permisovaloracion == "Registrar") : ?>
-                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion2_registro" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
+                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion2_registro" data-toggle="modal" data-target="#modal-registro-val"><span class="fas fa-edit"></span></button>
                               <?php endif; ?>
                               <?php if ($permisovaloracion == "Leer") : ?>
-                                <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-info" data-toggle="modal" data-target="#modalInfo"><span class="fas fa-search"></span></button>
+                                <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion2_leer" data-toggle="modal" data-target="#modal-leer-val"><span class="fas fa-search"></span></button>
                               <?php endif; ?>
                             </div></td>
                           <td><div class="btn-group">
                               <?php if ($permisovaloracion == "Registrar") : ?>
-                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion3_registro" data-toggle="modal" data-target="#modalEdit"><span class="fas fa-edit"></span></button>
+                                <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion3_leer" data-toggle="modal" data-target="#modal-leer-val"><span class="fas fa-edit"></span></button>
                               <?php endif; ?>
                               <?php if ($permisovaloracion == "Leer") : ?>
-                                <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-info" data-toggle="modal" data-target="#modalInfo"><span class="fas fa-search"></span></button>
+                                <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion3_leer" data-toggle="modal" data-target="#modal-leer-val"><span class="fas fa-search"></span></button>
                               <?php endif; ?>
                             </div></td>
                         </tr>
@@ -106,29 +106,9 @@
   </div>
 
 
-  <div class="modal fade" id="modal-info">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Extra Large Modal</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>One fine body…</p>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-  </div>
+  
 
-
-  <div class="modal fade" id="modalEdit">
+  <div class="modal fade" id="modal-registro-val">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
@@ -150,4 +130,23 @@
   </div>
 
 
- 
+  <div class="modal fade" id="modal-leer-val">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><input type="button" value="" id="titleValoracion" class="btn btn-block bg-gradient-success btn-lg"></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>One fine body…</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <!--<button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+  </div>

@@ -67,7 +67,7 @@ class Competencias extends CI_Controller {
 
 	public function update(){
 		$now = time();
-		$nowFormat = date("d-m-Y H:i:s",  $now);;
+		$nowFormat = date("d-m-Y H:i:s",  $now);
 
 		$idCompetencia = $this->input->post("idCompetencia");
 		$nombre = $this->input->post("nombre");

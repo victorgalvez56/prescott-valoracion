@@ -16,6 +16,8 @@ class Mi_valoracion_adm extends CI_Controller
 	{
 		$now = time();
 		$añoActual = date("Y",  $now);
+		$estado_val_obj = $this->Valoracion_adm_model->getEstadoObj($this->session->userdata("id"),$añoActual);
+
 		$data  = array(
 			'permisos' => $this->permisos,
 
@@ -30,12 +32,13 @@ class Mi_valoracion_adm extends CI_Controller
 			'puntajes2_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"),$añoActual,2,2),
 			'puntajes3_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"),$añoActual,3,2),
 			'puntajes4_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"),$añoActual,4,2),
+
+			'estado'=> $estado_val_obj,
 		);
 
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
 		$this->load->view("valoraciones/valoracion_adm/mi_valoracion",$data);
 		$this->load->view("layouts/footer");
-		// echo json_encode($data);
 	}
 }

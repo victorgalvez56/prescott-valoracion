@@ -145,7 +145,7 @@
         id: valor_id
       },
       success: function(data) {
-        $("#modalEdit .modal-body").html(data);
+        $("#modal-registro-val .modal-body").html(data);
         console.log($("#tipo_validacion").val())
         $("#titleValoracion").val("Valoración 1");
       }
@@ -156,7 +156,6 @@
   /* Modal para agregar valoracione2 */
   $(document).on("click", "#modal-valoracion2_registro", function() {
     valor_id = $(this).val();
-    console.log(valor_id)
     $.ajax({
       url: BASE_URL + "valoracion/valoracion_adm/validacion2_registro",
       type: "POST",
@@ -165,8 +164,7 @@
         id: valor_id
       },
       success: function(data) {
-        $("#modalEdit .modal-body").html(data);
-        console.log($("#tipo_validacion").val())
+        $("#modal-registro-val .modal-body").html(data);
         $("#titleValoracion").val("Valoración 2");
       }
     });
@@ -184,9 +182,8 @@
         id: valor_id
       },
       success: function(data) {
-        $("#modalEdit .modal-body").html(data);
-        console.log($("#tipo_validacion").val())
-        $("#titleValoracion").val("Valoración por Objetivos");
+        $("#modal-registro-val .modal-body").html(data);
+        $("#titleValoracion").val("Valoración de Objetivos");
       }
     });
   });
@@ -203,13 +200,46 @@
         id: valor_id
       },
       success: function(data) {
-        $("#modalEdit .modal-body").html(data);
+        $("#modal-leer-val .modal-body").html(data);
         console.log($("#tipo_validacion").val())
-        $("#titleValoracion").val("Valoración 1");
+        $("#modal-leer-val #titleValoracion").val("Valoración 1");
       }
     });
   });
 
+
+  $(document).on("click", "#modal-valoracion2_leer", function() {
+    valor_id = $(this).val();
+    console.warn('GAADDA')
+    $.ajax({
+      url: BASE_URL + "valoracion/valoracion_adm/validacion2_leer",
+      type: "POST",
+      dataType: "html",
+      data: {
+        id: valor_id
+      },
+      success: function(data) {
+        $("#modal-leer-val .modal-body").html(data);
+        $("#modal-leer-val #titleValoracion").val("Valoración 2");
+      }
+    });
+  });
+
+  $(document).on("click", "#modal-valoracion3_leer", function() {
+    valor_id = $(this).val();
+    $.ajax({
+      url: BASE_URL + "valoracion/valoracion_adm/validacion3_leer",
+      type: "POST",
+      dataType: "html",
+      data: {
+        id: valor_id
+      },
+      success: function(data) {
+        $("#modal-leer-val .modal-body").html(data);
+        $("#modal-leer-val #titleValoracion").val("Valoración de Objetivos");
+      }
+    });
+  });
 
 
   /* Calculo valoraciones para agregar valoraciones */

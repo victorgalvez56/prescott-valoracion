@@ -44,6 +44,21 @@ class Valoracion_adm_model extends CI_Model
 		}	
 	}
 
+	public function getEstadoObj($id,$añoActual)
+	{
+		$this->db->select("*");
+		$this->db->from("objetivos");
+		$this->db->where("usuario_id",$id);
+		$this->db->where("year(create_at)", $añoActual);
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->row();
+		} else {
+			return false;
+		}	
+	}
+
+
 	public function getusuariosHijosRegistrar($idPadre)
 	{
 		$this->db->select("p.*,u.*");
@@ -209,10 +224,13 @@ class Valoracion_adm_model extends CI_Model
 	{
 		return $this->db->insert("valoraciones", $data);
 	}
-
+	public function saveObjetivos($data)
+	{
+		return $this->db->insert("objetivos", $data);
+	}
 	public function update($id, $data)
 	{
 		$this->db->where("id", $id);
-		return $this->db->update("valoraciones", $data);
+		return $this->db->update("objetivos", $data);
 	}
 }

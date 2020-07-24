@@ -8,7 +8,7 @@
                                                       <div class="timeline">
                                                           <!-- timeline item -->
                                                           <div>
-                                                              <i class="fas fa-envelope bg-blue"></i>
+                                                              <i class="fas fa-edit bg-blue"></i>
                                                               <div class="timeline-item">
                                                                   <span class="time"><i class="fas fa-clock"></i> 12:05</span>
                                                                   <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
