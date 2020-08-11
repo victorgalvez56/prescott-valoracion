@@ -162,6 +162,13 @@
               </li>
             </ul>
           </li>
+                    
+          <li class="nav-item">
+                <a href="<?php echo base_url(); ?>administrador/mapa_covid/" class="nav-link">
+                  <i class="far fa-map nav-icon"></i>
+                  <p>Mapa Covid</p>
+                </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

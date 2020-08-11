@@ -1,0 +1,21 @@
+<div>
+    <i class="fas fa-comments bg-yellow"></i>
+    <div class="timeline-item">
+        <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+        <h3 class="timeline-header"><a href="#"><?php echo $colaborador; ?></a> por favor realice su firma en el panel de color celeste si está de acuerdo con su calificación</h3>
+        <form action="<?php echo base_url(); ?>valoracion/mi_valoracion_adm/firma_colab_registro" id="usrform" method="POST">
+            <div class="timeline-body is-valid">
+                <div class="wrapper">
+                    <canvas id="signature-pad" class="signature-pad" width=900 height=200></canvas>
+                    <input type="hidden" id="imagen_firma">
+                </div>
+
+            </div>
+            <div class="timeline-footer">
+                <button type="submit" id="save-png" class="btn btn-success btn-sm">Guardar</button>
+        </form>
+        <button type="reset" id="undo" class="btn btn-warning btn-sm">Regresar</button>
+        <button type="reset" id="clear" class="btn btn-danger btn-sm">Limpiar</button>
+    </div>
+</div>
+</div>

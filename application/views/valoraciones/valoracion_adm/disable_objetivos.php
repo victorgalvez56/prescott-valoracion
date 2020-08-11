@@ -2,7 +2,7 @@
     <div class="card card-widget">
         <div class="card-header">
             <div class="user-block">
-                <span class="username"><a href="#">Su Objetivos fueron aceptados</a></span>
+                <span class="username"><a href="#">Objetivos aceptados</a></span>
                 <span class="description"><?php echo $estado->create_at; ?></span>
             </div>
             <!-- /.user-block -->
@@ -11,8 +11,7 @@
                     <i class="far fa-circle"></i></button>
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                 </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
-                </button>
+            
             </div>
             <!-- /.card-tools -->
         </div>

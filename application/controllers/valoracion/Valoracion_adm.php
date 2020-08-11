@@ -10,6 +10,7 @@ class Valoracion_adm extends CI_Controller
 		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Valoracion_adm_model");
 		$this->load->model("Periodos_model");
+		$this->load->model("Usuarios_model");
 		$this->load->helper('date');
 	}
 
@@ -121,15 +122,59 @@ class Valoracion_adm extends CI_Controller
 		$id = $this->input->post("id");
 
 		$estado_val_obj = $this->Valoracion_adm_model->getEstadoObj($id,$añoActual);
+
+		$estado_entrevista2_colab =  $this->Valoracion_adm_model->getEntrevistaColaborador($id,$añoActual,1);
+
+
+		if ($estado_entrevista2_colab == false) {
+
+
 		$data = array(
 			'id' => $id,
 			'permisos' => $this->permisos,
 			'usuario' => $this->Valoracion_adm_model->getusuario($id),
 			'tipo_validacion' => $validacion,
 			'estado' => $estado_val_obj,
+			'estado_entrevista2_colab'=> $estado_entrevista2_colab,
+
 		);
-		// echo json_encode($data);
 		$this->load->view("valoraciones/valoracion_adm/show_objetivos", $data);
+	}else{
+		if($estado_entrevista2_colab[0]->evaluador_id == null){
+
+			$data = array(
+				'id' => $id,
+				'permisos' => $this->permisos,
+				'usuario' => $this->Valoracion_adm_model->getusuario($id),
+				'tipo_validacion' => $validacion,
+				'estado' => $estado_val_obj,
+				'estado_entrevista2_colab'=> $estado_entrevista2_colab,
+	
+			);
+			$this->load->view("valoraciones/valoracion_adm/show_objetivos", $data);
+
+		}else{
+			$colaboradoraux =  $this->Usuarios_model->getUsuario($estado_entrevista2_colab[0]->colaborador_id);
+			$colaborador = $colaboradoraux->nombres . " " . $colaboradoraux->apellidos;
+			$evaluadoraux =  $this->Usuarios_model->getUsuario($estado_entrevista2_colab[0]->evaluador_id);
+			$evaluador = $evaluadoraux->nombres . " " . $evaluadoraux->apellidos;
+
+			$data = array(
+				'id' => $id,
+				'permisos' => $this->permisos,
+				'usuario' => $this->Valoracion_adm_model->getusuario($id),
+				'tipo_validacion' => $validacion,
+				'estado' => $estado_val_obj,
+				'estado_entrevista2_colab'=> $estado_entrevista2_colab,
+				'colaborador' => $colaborador,
+				'evaluador' => $evaluador,
+			);
+			$this->load->view("valoraciones/valoracion_adm/show_objetivos", $data);
+
+
+		}
+
+	}
 
 	}
 
@@ -146,7 +191,7 @@ class Valoracion_adm extends CI_Controller
 			'estado' => 'aceptado',
 		);
 		$this->Valoracion_adm_model->update($id,$data);
-		redirect(base_url() . "valoracion/mi_valoracion_adm/");
+		redirect(base_url() . "valoracion/valoracion_adm/");
 	}
 
 

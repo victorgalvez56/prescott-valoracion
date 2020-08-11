@@ -390,30 +390,63 @@
       Number($indicadorAprendizaje.val())
     ) / 4));
     const $inputPromedio = $("#promedioValoracion");
+    const $promedioValoracion1 = $("#promedioValoracion1");
 
+    
     $inputPromedio.val($sumaIndicadores);
+    $promedioValoracion1.text($sumaIndicadores);
 
 
   };
 
   function pintarPromedio() {
-    const $puntaje = $("#promedioValoracion");
-    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
-      $puntaje.css("background", "red")
-      $puntaje.css("color", "white")
-    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
-      $puntaje.css("background", "yellow")
-      $puntaje.css("color", "black")
-    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
-      $puntaje.css("background", "green")
-      $puntaje.css("color", "black")
-    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
-      $puntaje.css("background", "blue")
-      $puntaje.css("color", "white")
-    }
+    const $puntaje = $("#promedioValoracion1");
+        if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+            $puntaje.css("background", "red")
+            $puntaje.css("color", "white")
+        } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+            $puntaje.css("background", "yellow")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+            $puntaje.css("background", "green")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+            $puntaje.css("background", "blue")
+            $puntaje.css("color", "white")
+        }
   };
 
+  function pintarPromedioBox1() {
+        const $puntaje = $("#promedioValoracion1").text();
+        const $box = $("#boxPromedio1");
+        const $numberPuntaje = Number($puntaje);
 
+        if ($numberPuntaje > 0 && $numberPuntaje < 6) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-red")
+        } else if ($numberPuntaje > 5 && $numberPuntaje < 13) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-yellow")
+        } else if ($numberPuntaje > 12 && $numberPuntaje < 19) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-green")
+        } else if ($numberPuntaje > 18 && $numberPuntaje < 21) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-blue")
+        }
+    };
 
 
   $(document).on('change', ".indicadorTrabajosequipo", function() {
@@ -421,24 +454,31 @@
     pintarTrabajo();
     cacularPromedio();
     pintarPromedio();
+    pintarPromedioBox1();
   })
   $(document).on('change', ".indicadorComunicacion", function() {
     sumaComunicacion();
     pintarComunicacion();
     cacularPromedio();
     pintarPromedio();
+    pintarPromedioBox1();
+
   })
   $(document).on('change', ".indicadorProactividad", function() {
     sumaProactividad();
     pintarProactividad();
     cacularPromedio();
     pintarPromedio();
+    pintarPromedioBox1();
+
   })
   $(document).on('change', ".indicadorAprendizaje", function() {
     sumaAprendizaje();
     pintarAprendizaje();
     cacularPromedio();
     pintarPromedio();
+    pintarPromedioBox1();
+
   })
 
 

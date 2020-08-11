@@ -1,6 +1,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
       <!-- Content Header (Page header) -->
+
       <section class="content-header">
           <div class="container-fluid">
               <div class="row mb-2">
@@ -25,27 +26,24 @@
                       <div class="card">
                           <div class="card-header d-flex p-0">
                               <?php
-                                if ($padre_registrador == true) {
+                                if ($padre_registrador == false) {
                                 ?>
-
-                                  <h3 class="card-title p-3">Registrado por
-                                      <strong>
-                                      <?php echo $padre_registrador->nombres . " " . $padre_registrador->apellidos;
-                                    } else { ?>
-                                      </strong>
-                                  </h3>
                                   <h3 class="card-title p-3">
                                       <strong>Este usuario no tiene quien lo registre. Contactar a sistemas.
                                       </strong>
                                   </h3>
+                              <?php } else { ?>
 
-                              <?php } ?></h3>
-                              </strong>
-                              <ul class="nav nav-pills ml-auto p-2">
-                                  <li class="nav-item"><a class="nav-link" href="#tab_1" data-toggle="tab">Valoración 1</a></li>
-                                  <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Valoración 2</a></li>
-                                  <li class="nav-item"><a class="nav-link active" href="#tab_3" data-toggle="tab">Valoración por objetivos</a></li>
-                              </ul>
+                                  <h3 class="card-title p-3">Registrado por
+                                      <strong>
+                                          <?php echo $padre_registrador->nombres . " " . $padre_registrador->apellidos; ?>
+                                      </strong>
+                                  </h3>
+                                  <ul class="nav nav-pills ml-auto p-2">
+                                      <li class="nav-item"><a class="nav-link" href="#tab_1" data-toggle="tab">Valoración 1</a></li>
+                                      <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Valoración 2</a></li>
+                                      <li class="nav-item"><a class="nav-link active" href="#tab_3" data-toggle="tab">Valoración por objetivos</a></li>
+                                  </ul>
                           </div>
                           <div class="card-body">
                               <div class="tab-content">
@@ -105,68 +103,79 @@
                                                               <i class="fas fa-edit bg-blue"></i>
                                                               <div class="timeline-item">
                                                                   <span class="time"><i class="fas fa-clock"></i> </span>
-                                                                  <h3 class="timeline-header"><a href="#">Objetivos</a> sent you an email</h3>
+                                                                  <h3 class="timeline-header"><a href="#">Objetivos</a> </h3>
 
                                                                   <?php if ($estado == false) {
-                                                                        include 'application/views/valoraciones/valoracion_adm/add_objetivos.php';?>
+                                                                        include 'application/views/valoraciones/valoracion_adm/add_objetivos.php'; ?>
 
-</div>
+                                                              </div>
                                                           </div>
-                                                                <?php    } else {
+                                                          <?php    } else {
                                                                         if ($estado->estado == 'espera') {
                                                                             include 'application/views/valoraciones/valoracion_adm/edit_objetivos.php'; ?>
 
-</div>
-                                                          </div>
-                                                          <?php
-                                                                        } else {
-                                                                            include 'application/views/valoraciones/valoracion_adm/disable_objetivos.php'; ?>
-                                                              </div>
-                                                          </div>
-                                                          <!-- END timeline item -->
-                                                          <!-- timeline item -->
-                                                          <div>
-                                                              <i class="fas fa-user bg-green"></i>
-                                                              <div class="timeline-item">
-                                                                  <span class="time"><i class="fas fa-clock"></i> <?php echo $estado->create_at ?></span>
-                                                                  <h3 class="timeline-header no-border"><a href="#"><?php echo $estado->update_by ?></a> acepto tus objetivos</h3>
-                                                              </div>
-                                                          </div>
-                                                            <?php }
-                                                                    }  ?>
-
-
-
-
-                                                 
-                                               
-                                                  <!-- END timeline item -->
-                                                  <!-- timeline item -->
-                                                 
-                                                  <!-- END timeline item -->
-
-                                                  <div>
-                                                      <i class="fas fa-clock bg-gray"></i>
-                                                  </div>
                                                       </div>
                                                   </div>
-                                                  <!-- /.col -->
+                                              <?php
+                                                                        } else {
+                                                                            include 'application/views/valoraciones/valoracion_adm/disable_objetivos.php'; ?>
                                               </div>
-
-
-                                              </form>
+                                          </div> 
+                                          <!-- END timeline item -->
+                                          <!-- timeline item -->
+                                          <div>
+                                              <i class="fas fa-user bg-green"></i>
+                                              <div class="timeline-item">
+                                                  <span class="time"><i class="fas fa-clock"></i> <?php echo $estado->create_at ?></span>
+                                                  <h3 class="timeline-header no-border"><a href="#"><?php echo $estado->update_by ?></a> acepto tus objetivos</h3>
+                                              </div>
                                           </div>
-                                          <!-- /.timeline -->
+                                          <?php if ($estado_entrevista2_colab == false) {
+                                                                                include 'application/views/valoraciones/valoracion_adm/add_entrevista2_colab.php';
+                                                                            } else {
 
-                                      </section>
+
+                                                                                if ($estado_entrevista2_colab[0]->coment1_evalu == null) {
+                                                                                    include 'application/views/valoraciones/valoracion_adm/disable_entrevista2_colab.php';
+                                                                                } else {
+                                                                                    include 'application/views/valoraciones/valoracion_adm/disable_entrevista2_evalu.php';
+                                                                                }
+                                                                            }
+                                            ?>
+                                  <?php
+                                                                        }
+                                                                    }  ?>
+
+                                  <!-- END timeline item -->
+                                  <!-- timeline item -->
+
+                                  <!-- END timeline item -->
+
+                                  <div>
+                                      <i class="fas fa-clock bg-gray"></i>
+                                  </div>
                                   </div>
                               </div>
+                              <!-- /.col -->
                           </div>
+
+                      <?php } ?>
+
+
+
+                      </form>
                       </div>
-                  </div>
-              </div>
-          </div>
+                      <!-- /.timeline -->
+
       </section>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </section>
   </div>
   <style>
       .bg-red {
@@ -185,3 +194,52 @@
           background-color: blue !important;
       }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+
+  <script>
+      var canvas = document.getElementById('signature-pad');
+
+      // Adjust canvas coordinate space taking into account pixel ratio,
+      // to make it look crisp on mobile devices.
+      // This also causes canvas to be cleared.
+      function resizeCanvas() {
+          // When zoomed out to less than 100%, for some very strange reason,
+          // some browsers report devicePixelRatio as less than 1
+          // and only part of the canvas is cleared then.
+          var ratio = Math.max(window.devicePixelRatio || 1, 1);
+          canvas.width = canvas.offsetWidth * ratio;
+          canvas.height = canvas.offsetHeight * ratio;
+          canvas.getContext("2d").scale(ratio, ratio);
+      }
+
+      window.onresize = resizeCanvas;
+      resizeCanvas();
+
+      var signaturePad = new SignaturePad(canvas, {
+
+          backgroundColor: '#B9EFF0',
+          penColor: "black",
+          // necessary for saving image as JPEG; can be removed is only saving as PNG or SVG
+      });
+
+      document.getElementById('save-png').addEventListener('click', function() {
+          if (signaturePad.isEmpty()) {
+              return alert("Por favor realice su firma.");
+          }
+
+          var data = signaturePad.toDataURL('image/png');
+          console.log(data);
+          $("#imagen_firma").val(data);
+      });
+      document.getElementById('clear').addEventListener('click', function() {
+          signaturePad.clear();
+      });
+
+      document.getElementById('undo').addEventListener('click', function() {
+          var data = signaturePad.toData();
+          if (data) {
+              data.pop(); // remove the last dot or line
+              signaturePad.fromData(data);
+          }
+      });
+  </script>
