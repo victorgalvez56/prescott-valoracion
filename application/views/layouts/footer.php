@@ -244,6 +244,248 @@
 
   /* Calculo valoraciones para agregar valoraciones */
 
+
+
+
+
+
+  function sumaTrabajo1() {
+    const $indicador = $(".indicadorTrabajosequipo1");
+    const $puntaje = $("#puntajeTrabajosequipo1");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarTrabajo1() {
+    const $puntaje = $("#puntajeTrabajosequipo1");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+  function sumaComunicacion1() {
+    const $indicador = $(".indicadorComunicacion1");
+    const $puntaje = $("#puntajeComunicacion1");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarComunicacion1() {
+    const $puntaje = $("#puntajeComunicacion1");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+
+
+  function sumaProactividad1() {
+    const $indicador = $(".indicadorProactividad1");
+    const $puntaje = $("#puntajeProactividad1");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarProactividad1() {
+    const $puntaje = $("#puntajeProactividad1");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+
+
+  function sumaAprendizaje1() {
+    const $indicador = $(".indicadorAprendizaje1");
+    const $puntaje = $("#puntajeAprendizaje1");
+    var add = 0;
+    $indicador.each(function() {
+      if (!isNaN($(this).val()) && $(this).val() < 5) {
+        add += Number($(this).val());
+      } else {
+        alert('Por favor escriba un número del 1 al 4')
+        $(this).val(' ')
+      }
+    });
+    $puntaje.val(add);
+  };
+
+  function pintarAprendizaje1() {
+    const $puntaje = $("#puntajeAprendizaje1");
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
+  };
+
+
+
+
+  function cacularPromedio1() {
+    const $indicadorTrabajo = $("#puntajeTrabajosequipo1");
+    const $indicadorComunicacion = $("#puntajeComunicacion1");
+    const $indicadorProactividad = $("#puntajeProactividad1");
+    const $indicadorAprendizaje = $("#puntajeAprendizaje1");
+
+
+    let $sumaIndicadores = Math.round(((
+      Number($indicadorTrabajo.val()) +
+      Number($indicadorComunicacion.val()) +
+      Number($indicadorProactividad.val()) +
+      Number($indicadorAprendizaje.val())
+    ) / 4));
+    const $inputPromedio = $("#promedioValoracion1");
+    const $promedioValoracion1 = $("#promedioValoracion1");
+
+    
+    $inputPromedio.val($sumaIndicadores);
+    $promedioValoracion1.text($sumaIndicadores);
+
+
+  };
+
+  function pintarPromedio1() {
+    const $puntaje = $("#promedioValoracion1");
+        if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+            $puntaje.css("background", "red")
+            $puntaje.css("color", "white")
+        } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+            $puntaje.css("background", "yellow")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+            $puntaje.css("background", "green")
+            $puntaje.css("color", "white")
+        } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+            $puntaje.css("background", "blue")
+            $puntaje.css("color", "white")
+        }
+  };
+
+  function pintarPromedioBox1() {
+        const $puntaje = $("#promedioValoracion1").text();
+        const $box = $("#boxPromedio1");
+        const $numberPuntaje = Number($puntaje);
+
+        if ($numberPuntaje > 0 && $numberPuntaje < 6) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-red")
+        } else if ($numberPuntaje > 5 && $numberPuntaje < 13) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-yellow")
+        } else if ($numberPuntaje > 12 && $numberPuntaje < 19) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-green")
+        } else if ($numberPuntaje > 18 && $numberPuntaje < 21) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-blue")
+        }
+    };
+
+
+
+
+
+  sumaTrabajo1();
+
+  pintarTrabajo1();
+
+  sumaComunicacion1();
+
+  pintarComunicacion1();
+
+
+  sumaProactividad1();
+
+  pintarProactividad1();
+
+  sumaAprendizaje1();
+
+  pintarAprendizaje1();
+
+
+
+
+  cacularPromedio1();
+  pintarPromedio1();
+  pintarPromedioBox1();
+
+
+
   function sumaTrabajo() {
     const $indicador = $(".indicadorTrabajosequipo");
     const $puntaje = $("#puntajeTrabajosequipo");
@@ -809,7 +1051,27 @@
     });
   });
 
-  
+  if ($("#calif_1").val() == 1) {
+        $("#customRadio1").prop("checked", true);
+    } else {
+        $("#customRadio2").prop("checked", true);
+    }
+    if ($("#calif_2").val() == 1) {
+        $("#customRadio3").prop("checked", true);
+    } else {
+        $("#customRadio4").prop("checked", true);
+    }
+    if ($("#calif_3").val() == 1) {
+        $("#customRadio5").prop("checked", true);
+    } else {
+        $("#customRadio6").prop("checked", true);
+    }
+
+    $(document).on("click", ".btn-print", function() {
+    $("#modal-leer-val .modal-body").print({
+      title: "Valoración por objetivos"
+    });
+  });
 </script>
 <style>
   input {
@@ -828,3 +1090,5 @@
     font-size: 55px;
   }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/template/jquery-print/jquery.print.js"></script>

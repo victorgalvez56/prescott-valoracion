@@ -120,7 +120,7 @@
                                                                         } else {
                                                                             include 'application/views/valoraciones/valoracion_adm/disable_objetivos.php'; ?>
                                               </div>
-                                          </div> 
+                                          </div>
                                           <!-- END timeline item -->
                                           <!-- timeline item -->
                                           <div>
@@ -128,6 +128,7 @@
                                               <div class="timeline-item">
                                                   <span class="time"><i class="fas fa-clock"></i> <?php echo $estado->create_at ?></span>
                                                   <h3 class="timeline-header no-border"><a href="#"><?php echo $estado->update_by ?></a> acepto tus objetivos</h3>
+                                                  
                                               </div>
                                           </div>
                                           <?php if ($estado_entrevista2_colab == false) {
@@ -139,10 +140,41 @@
                                                                                     include 'application/views/valoraciones/valoracion_adm/disable_entrevista2_colab.php';
                                                                                 } else {
                                                                                     include 'application/views/valoraciones/valoracion_adm/disable_entrevista2_evalu.php';
+                                                                                    if ($estado_entrevista3_evalu == false) {
+                                                                                    } else {
+                                                                                        if ($estado_entrevista3_evalu[0]->coment1_colab == null) {
+                                                                                            include 'application/views/valoraciones/valoracion_adm/add_entrevista3_colab.php';
+                                                                                        } else {
+                                                                                            include 'application/views/valoraciones/valoracion_adm/disable_entrevista3_colab.php';
+
+                                                                                            if ($estado_entrevista3_evalu[0]->ruta_firma_colab == null) {
+                                                                                                include 'application/views/valoraciones/valoracion_adm/add_firma_colab.php';
+                                                                                            } else {
+
+
+                                                                                                if ($estado_entrevista3_evalu[0]->ruta_firma_evalu == null) {
+
+                                                                                                    include 'application/views/valoraciones/valoracion_adm/disable_firma_colab.php';
+                                                                                                } else {
+                                                                                                    include 'application/views/valoraciones/valoracion_adm/disable_firma_evalu.php';
+                                                                                                    include 'application/views/valoraciones/valoracion_adm/disable_firma_colab.php';
+                                                                                                    ?>
+                                                                                                            <div>
+                                                                                                                <i class="fas fa-ban  bg-red "></i>
+                                                                                                                <div class="timeline-item">
+                                                                                                                    <h3 class="timeline-header no-border"><a href="#"> El registro de valoración por objetivos se ha terminado</a></h3>
+                                                                                                                </div>
+                                                                                                            </div>
+
+
+                                                                                               <?php  } ?>
+                                                                                               <?php
+
+                                                                                            }
+                                                                                        }
+                                                                                    }
                                                                                 }
                                                                             }
-                                            ?>
-                                  <?php
                                                                         }
                                                                     }  ?>
 
@@ -151,9 +183,7 @@
 
                                   <!-- END timeline item -->
 
-                                  <div>
-                                      <i class="fas fa-clock bg-gray"></i>
-                                  </div>
+
                                   </div>
                               </div>
                               <!-- /.col -->
@@ -164,6 +194,7 @@
 
 
                       </form>
+
                       </div>
                       <!-- /.timeline -->
 
@@ -217,7 +248,7 @@
 
       var signaturePad = new SignaturePad(canvas, {
 
-          backgroundColor: '#B9EFF0',
+          backgroundColor: '#EEE8F3',
           penColor: "black",
           // necessary for saving image as JPEG; can be removed is only saving as PNG or SVG
       });

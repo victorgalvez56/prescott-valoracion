@@ -17,7 +17,6 @@ class Valoracion_adm extends CI_Controller
 	public function index()
 	{
 
-
 		$data  = array(
 			'permisos' => $this->permisos,
 			'hijos' => $this->Valoracion_adm_model->getusuariosHijosRegistrar($this->session->userdata("id")),
@@ -124,6 +123,7 @@ class Valoracion_adm extends CI_Controller
 		$estado_val_obj = $this->Valoracion_adm_model->getEstadoObj($id,$añoActual);
 
 		$estado_entrevista2_colab =  $this->Valoracion_adm_model->getEntrevistaColaborador($id,$añoActual,1);
+		$estado_entrevista3_evalu =  $this->Valoracion_adm_model->getEntrevistaColaborador($id,$añoActual,2);
 
 
 		if ($estado_entrevista2_colab == false) {
@@ -154,6 +154,7 @@ class Valoracion_adm extends CI_Controller
 			$this->load->view("valoraciones/valoracion_adm/show_objetivos", $data);
 
 		}else{
+
 			$colaboradoraux =  $this->Usuarios_model->getUsuario($estado_entrevista2_colab[0]->colaborador_id);
 			$colaborador = $colaboradoraux->nombres . " " . $colaboradoraux->apellidos;
 			$evaluadoraux =  $this->Usuarios_model->getUsuario($estado_entrevista2_colab[0]->evaluador_id);
@@ -166,9 +167,12 @@ class Valoracion_adm extends CI_Controller
 				'tipo_validacion' => $validacion,
 				'estado' => $estado_val_obj,
 				'estado_entrevista2_colab'=> $estado_entrevista2_colab,
+				'estado_entrevista3_evalu'=> $estado_entrevista3_evalu,
 				'colaborador' => $colaborador,
 				'evaluador' => $evaluador,
 			);
+			// echo json_encode($data);
+			// die();
 			$this->load->view("valoraciones/valoracion_adm/show_objetivos", $data);
 
 
@@ -336,7 +340,29 @@ class Valoracion_adm extends CI_Controller
 		$this->Valoracion_adm_model->saveObjetivos($data);
 		redirect(base_url() . "valoracion/mi_valoracion_adm/");
 
+		$this->send_mail_add_objetivos(1,2,3,$this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"));
 	}
+
+
+public function send_mail_add_objetivos($objetivo1,$objetivo2,$objetivo3,$colaborador){
+
+$this->load->library('email');
+$this->email->from('victor.galvez56@gmail.com','Administrador Sistemas');
+$this->email->to('vgalvez@prescott.edu.pe');
+
+$this->email->subject('Registro de objetivos del colaborador '.$colaborador);
+$this->email->message('El colaborador '.$colaborador."registro sus objetivos. Ingrese al sistema para ver más detalles.");
+
+
+if($this->email->send()){
+	echo "Correo enviado";
+}else{
+	echo "Correo no enviado";
+}
+
+}
+
+
 
 	public function store()
 	{

@@ -34,9 +34,10 @@
         <i class="fas fa-user bg-green"></i>
         <div class="timeline-item">
             <span class="time"><i class="fas fa-clock"></i> <?php echo $estado->create_at ?></span>
-            <h3 class="timeline-header no-border">Aceptaste los objetivos de <a href="#"> <?php echo $colaborador;?></a> </h3>
+            <h3 class="timeline-header no-border">Aceptaste los objetivos</h3>
         </div>
     </div>
+    
     <?php if ($estado_entrevista2_colab == false) {
                                     } else {
 
@@ -44,7 +45,48 @@
                                             include 'application/views/valoraciones/valoracion_adm/add_entrevista2_evalu.php';
                                         } else {
                                             include 'application/views/valoraciones/valoracion_adm/disable_entrevista2_evalu.php';
-                                            include 'application/views/valoraciones/valoracion_adm/add_entrevista3_evalu.php';
+                                            if($estado_entrevista3_evalu == false){
+                                                include 'application/views/valoraciones/valoracion_adm/add_entrevista3_evalu.php';
+
+                                            }else{
+
+                                                if ($estado_entrevista3_evalu[0]->coment1_colab == null) {
+                                                    include 'application/views/valoraciones/valoracion_adm/disable_entrevista3_evalu.php';
+
+                                                
+                                                }else{
+                                                    include 'application/views/valoraciones/valoracion_adm/disable_entrevista3_colab.php';
+                                                    if ($estado_entrevista3_evalu[0]->ruta_firma_evalu == null) {
+                                                        include 'application/views/valoraciones/valoracion_adm/add_firma_evalu.php';
+
+                                                    }else{
+
+                                                        if ($estado_entrevista3_evalu[0]->ruta_firma_colab ==null) {
+
+                                                            include 'application/views/valoraciones/valoracion_adm/disable_firma_evalu.php';
+                                                        }else{
+                                                            include 'application/views/valoraciones/valoracion_adm/disable_firma_evalu.php';
+                                                            include 'application/views/valoraciones/valoracion_adm/disable_firma_colab.php';
+
+                                                            ?>
+<div>
+    <i class="fas fa-ban  bg-red "></i>
+    <div class="timeline-item">
+        <h3 class="timeline-header no-border"><a href="#"> El registro de valoración por objetivos se ha terminado</a></h3>
+    </div>
+</div>
+
+
+
+                                                       <?php  } 
+
+
+
+                                                    }
+
+                                                }
+
+                                            }
                                         }
                                     }
     ?>
@@ -59,11 +101,13 @@
 
 
 
-<div>
-    
-                      <button  class="btn btn-primary ir-arriba"><i class="fas fa-arrow-up"></i></button>
+</div>
 
-    </div>
+<div>
+
+    <button class="btn btn-primary ir-arriba"><i class="fas fa-arrow-up"></i></button>
+
+</div>
 </div>
 </div>
 </div>
@@ -86,7 +130,7 @@
         cursor: pointer;
         position: fixed;
         bottom: 30px;
-        right:455px;
+        right:360px;
     }
 </style>
 
@@ -102,3 +146,4 @@
 
     });
 </script>
+

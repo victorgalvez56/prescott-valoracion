@@ -101,3 +101,225 @@
         </div>
     </section>
 </div>
+
+
+
+
+<!-- <script>
+    function sumaTrabajo1() {
+        console.warn('gaaaaa')
+        const $indicador = $(".indicadorTrabajosequipo1");
+        const $puntaje = $("#puntajeTrabajosequipo1");
+        var add = 0;
+        $indicador.each(function() {
+            if (!isNaN($(this).val()) && $(this).val() < 5) {
+                add += Number($(this).val());
+            } else {
+                alert('Por favor escriba un número del 1 al 4')
+                $(this).val(' ')
+            }
+        });
+        $puntaje.val(add);
+    };
+
+    function pintarTrabajo1() {
+        const $puntaje = $("#puntajeTrabajosequipo1");
+        if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+            $puntaje.css("background", "red")
+            $puntaje.css("color", "white")
+        } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+            $puntaje.css("background", "yellow")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+            $puntaje.css("background", "green")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+            $puntaje.css("background", "blue")
+            $puntaje.css("color", "white")
+        }
+    };
+
+    function sumaComunicacion1() {
+        const $indicador = $(".indicadorComunicacion1");
+        const $puntaje = $("#puntajeComunicacion1");
+        var add = 0;
+        $indicador.each(function() {
+            if (!isNaN($(this).val()) && $(this).val() < 5) {
+                add += Number($(this).val());
+            } else {
+                alert('Por favor escriba un número del 1 al 4')
+                $(this).val(' ')
+            }
+        });
+        $puntaje.val(add);
+    };
+
+    function pintarComunicacion1() {
+        const $puntaje = $("#puntajeComunicacion1");
+        if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+            $puntaje.css("background", "red")
+            $puntaje.css("color", "white")
+        } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+            $puntaje.css("background", "yellow")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+            $puntaje.css("background", "green")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+            $puntaje.css("background", "blue")
+            $puntaje.css("color", "white")
+        }
+    };
+
+    function sumaProactividad1() {
+        const $indicador = $(".indicadorProactividad1");
+        const $puntaje = $("#puntajeProactividad1");
+        var add = 0;
+        $indicador.each(function() {
+            if (!isNaN($(this).val()) && $(this).val() < 5) {
+                add += Number($(this).val());
+            } else {
+                alert('Por favor escriba un número del 1 al 4')
+                $(this).val(' ')
+            }
+        });
+        $puntaje.val(add);
+    };
+
+    function pintarProactividad1() {
+        const $puntaje = $("#puntajeProactividad1");
+        if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+            $puntaje.css("background", "red")
+            $puntaje.css("color", "white")
+        } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+            $puntaje.css("background", "yellow")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+            $puntaje.css("background", "green")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+            $puntaje.css("background", "blue")
+            $puntaje.css("color", "white")
+        }
+    };
+
+    function sumaAprendizaje1() {
+        const $indicador = $(".indicadorAprendizaje1");
+        const $puntaje = $("#puntajeAprendizaje1");
+        var add = 0;
+        $indicador.each(function() {
+            if (!isNaN($(this).val()) && $(this).val() < 5) {
+                add += Number($(this).val());
+            } else {
+                alert('Por favor escriba un número del 1 al 4')
+                $(this).val(' ')
+            }
+        });
+        $puntaje.val(add);
+    };
+
+    function pintarAprendizaje1() {
+        const $puntaje = $("#puntajeAprendizaje1");
+        if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+            $puntaje.css("background", "red")
+            $puntaje.css("color", "white")
+        } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+            $puntaje.css("background", "yellow")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+            $puntaje.css("background", "green")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+            $puntaje.css("background", "blue")
+            $puntaje.css("color", "white")
+        }
+    };
+
+    function cacularPromedio1() {
+        const $indicadorTrabajo = $("#puntajeTrabajosequipo1");
+        const $indicadorComunicacion = $("#puntajeComunicacion1");
+        const $indicadorProactividad = $("#puntajeProactividad1");
+        const $indicadorAprendizaje = $("#puntajeAprendizaje1");
+
+
+        let $sumaIndicadores = Math.round(((
+            Number($indicadorTrabajo.val()) +
+            Number($indicadorComunicacion.val()) +
+            Number($indicadorProactividad.val()) +
+            Number($indicadorAprendizaje.val())
+        ) / 4));
+        const $inputPromedio = $("#promedioValoracion1");
+
+        $inputPromedio.text($sumaIndicadores);
+
+
+    };
+
+    function pintarPromedio1() {
+        const $puntaje = $("#promedioValoracion1");
+        if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+            $puntaje.css("background", "red")
+            $puntaje.css("color", "white")
+        } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+            $puntaje.css("background", "yellow")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+            $puntaje.css("background", "green")
+            $puntaje.css("color", "black")
+        } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+            $puntaje.css("background", "blue")
+            $puntaje.css("color", "white")
+        }
+    };
+
+    function pintarPromedioBox1() {
+        const $puntaje = $("#promedioValoracion1").text();
+        const $box = $("#boxPromedio1");
+        const $numberPuntaje = Number($puntaje);
+
+        if ($numberPuntaje > 0 && $numberPuntaje < 6) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-red")
+        } else if ($numberPuntaje > 5 && $numberPuntaje < 13) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-yellow")
+        } else if ($numberPuntaje > 12 && $numberPuntaje < 19) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-green")
+        } else if ($numberPuntaje > 18 && $numberPuntaje < 21) {
+            $box.removeClass("bg-red")
+            $box.removeClass("bg-yellow")
+            $box.removeClass("bg-green")
+            $box.removeClass("bg-blue")
+            $box.addClass("bg-blue")
+        }
+    };
+
+    sumaTrabajo1();
+    pintarTrabajo1();
+    cacularPromedio1();
+    pintarPromedio1();
+    sumaComunicacion1();
+    pintarComunicacion1();
+    cacularPromedio1();
+    pintarPromedio1();
+    sumaProactividad1();
+    pintarProactividad1();
+    cacularPromedio1();
+    pintarPromedio1();
+    sumaAprendizaje1();
+    pintarAprendizaje1();
+    cacularPromedio1();
+    pintarPromedioBox1();
+
+
+</script> -->

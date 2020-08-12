@@ -34,28 +34,28 @@
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Acciones Objetivo #1</label>
-                                <textarea name="a_obj_1"  class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->a_obj_1; ?></textarea>
+                                <textarea name="a_obj_1"  class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->a_obj_1; ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Plazos para acciones #1</label>
-                                <textarea name="p_obj_1" class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->p_obj_1; ?></textarea>
+                                <textarea name="p_obj_1" class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->p_obj_1; ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Indicadores de desarrollo #1</label>
-                                <textarea name="i_obj_1" class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->i_obj_1; ?></textarea>
+                                <textarea name="i_obj_1" class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->i_obj_1; ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Resultados deseados #1</label>
-                                <textarea name="r_obj_1" class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->r_obj_1; ?></textarea>
+                                <textarea name="r_obj_1" class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->r_obj_1; ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -73,28 +73,28 @@
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Acciones Objetivo #2</label>
-                                <textarea name="a_obj_2" class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->a_obj_2; ?></textarea>
+                                <textarea name="a_obj_2" class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->a_obj_2; ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Plazos para acciones #2</label>
-                                <textarea name="p_obj_2" class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->p_obj_2; ?></textarea>
+                                <textarea name="p_obj_2" class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->p_obj_2; ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Indicadores de desarrollo #2</label>
-                                <textarea name="i_obj_2" class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->i_obj_2; ?></textarea>
+                                <textarea name="i_obj_2" class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->i_obj_2; ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Resultados deseados #2</label>
-                                <textarea name="r_obj_2" class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->r_obj_2; ?></textarea>
+                                <textarea name="r_obj_2" class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->r_obj_2; ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -112,28 +112,28 @@
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Acciones Objetivo #3</label>
-                                <textarea name="a_obj_3" class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->a_obj_3; ?></textarea>
+                                <textarea name="a_obj_3" class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->a_obj_3; ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Plazos para acciones #3</label>
-                                <textarea name="p_obj_3" class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->p_obj_3; ?></textarea>
+                                <textarea name="p_obj_3" class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->p_obj_3; ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Indicadores de desarrollo #3</label>
-                                <textarea name="i_obj_3" class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->i_obj_3; ?></textarea>
+                                <textarea name="i_obj_3" class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->i_obj_3; ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Resultados deseados #3</label>
-                                <textarea name="r_obj_3" class="form-control" rows="3" placeholder="Enter ..." disabled><?php echo  $estado->r_obj_3; ?></textarea>
+                                <textarea name="r_obj_3" class="form-control" rows="2" placeholder="Enter ..." disabled><?php echo  $estado->r_obj_3; ?></textarea>
                             </div>
                         </div>
                     </div>

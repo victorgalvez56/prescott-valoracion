@@ -159,7 +159,21 @@ class Valoracion_adm_model extends CI_Model
 		}
 	}
 
-
+	public function getEntrevistaEvaluador($id_evaluador,$añoActual,$tipo_entrevista)
+	{
+		$this->db->select("*");
+		$this->db->from("entrevistas");
+		$this->db->where("colaborador_id", $id_evaluador);
+		$this->db->where("tipo_entrevista_id", $tipo_entrevista);
+		$this->db->where("estado", '1');
+		$this->db->where("year(create_at)", $añoActual);
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->result();
+		} else {
+			return false;
+		}
+	}
 	
 
 
@@ -254,10 +268,19 @@ class Valoracion_adm_model extends CI_Model
 		return $this->db->update("objetivos", $data);
 	}
 
-	public function updateEntrevista($id_colaborador,$tipo_entrevista, $data)
+	public function updateEntrevista($id_colaborador,$tipo_entrevista, $data,$añoActual)
 	{
 		$this->db->where("colaborador_id", $id_colaborador);
 		$this->db->where("tipo_entrevista_id", $tipo_entrevista);
+		$this->db->where("year(create_at)", $añoActual);
 		return $this->db->update("entrevistas", $data);
 	}
+	public function updateEntrevistaEvalu($id_evaluador,$tipo_entrevista, $data,$añoActual)
+	{
+		$this->db->where("evaluador_id", $id_evaluador);
+		$this->db->where("tipo_entrevista_id", $tipo_entrevista);
+		$this->db->where("year(create_at)", $añoActual);
+		return $this->db->update("entrevistas", $data);
+	}
+
 }
