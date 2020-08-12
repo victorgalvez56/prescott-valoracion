@@ -49,8 +49,7 @@ class Mi_valoracion_adm extends CI_Controller
 				'estado_entrevista2_colab' => $estado_entrevista2_colab,
 			);
 
-			echo json_encode($data);
-			die();
+		
 			$this->load->view("layouts/header");
 			$this->load->view("layouts/aside");
 			$this->load->view("valoraciones/valoracion_adm/mi_valoracion", $data);

@@ -106,6 +106,5 @@ class Periodos extends CI_Controller
 		$data = array(
 			"detallesPeriodo" => $this->Periodos_model->getDetallePeriodo($id)
 		);
-		echo json_encode($data);
 	}
 }
