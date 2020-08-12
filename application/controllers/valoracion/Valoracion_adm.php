@@ -337,16 +337,23 @@ class Valoracion_adm extends CI_Controller
 			'create_at' => $fechaActual,
 			'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 		);
+		$this->send_mail_add_objetivos(1,2,3,$this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"));
+die();
 		$this->Valoracion_adm_model->saveObjetivos($data);
 		redirect(base_url() . "valoracion/mi_valoracion_adm/");
 
-		$this->send_mail_add_objetivos(1,2,3,$this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"));
 	}
 
 
 public function send_mail_add_objetivos($objetivo1,$objetivo2,$objetivo3,$colaborador){
 
 $this->load->library('email');
+
+
+
+
+$this->email->initialize();
+
 $this->email->from('victor.galvez56@gmail.com','Administrador Sistemas');
 $this->email->to('vgalvez@prescott.edu.pe');
 
@@ -356,8 +363,12 @@ $this->email->message('El colaborador '.$colaborador."registro sus objetivos. In
 
 if($this->email->send()){
 	echo "Correo enviado";
+	die();
 }else{
-	echo "Correo no enviado";
+	
+	echo $this->email->print_debugger();
+	die();
+
 }
 
 }
