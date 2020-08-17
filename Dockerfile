@@ -1,6 +1,7 @@
 FROM php:7.3-apache
 COPY . /var/www/html
 RUN apt update -y && apt-get upgrade -y
+RUN docker-php-ext-install mysql mysqli pdo pdo_mysql
 RUN mysql --version
 RUN a2enmod rewrite
 EXPOSE 80
