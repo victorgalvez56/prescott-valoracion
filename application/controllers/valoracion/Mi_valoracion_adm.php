@@ -10,6 +10,8 @@ class Mi_valoracion_adm extends CI_Controller
 		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Valoracion_adm_model");
 		$this->load->model("Usuarios_model");
+		$this->load->model("Periodos_model");
+
 		$this->load->helper('date');
 	}
 
@@ -22,12 +24,17 @@ class Mi_valoracion_adm extends CI_Controller
 
 		// $estado_entrevista2 =  $this->Valoracion_adm_model->getEntrevista2($this->session->userdata("id"),$añoActual,1);
 		$estado_entrevista2_colab =  $this->Valoracion_adm_model->getEntrevistaColaborador($this->session->userdata("id"), $añoActual, 1);
-		$estado_entrevista3_evalu =  $this->Valoracion_adm_model->getEntrevistaColaborador($this->session->userdata("id"),$añoActual,2);
+		$estado_entrevista3_evalu =  $this->Valoracion_adm_model->getEntrevistaColaborador($this->session->userdata("id"), $añoActual, 2);
+		$fechas_valoraciones = $this->Periodos_model->getFechasValidacion($añoActual, $validacion);
+
 
 
 		if ($estado_entrevista2_colab == false) {
+			$valoracion_objetivo = " ";
+
 			$data  = array(
 				'permisos' => $this->permisos,
+
 
 				'padre_registrador' => $this->Valoracion_adm_model->getusuariosPadreRegistrar($this->session->userdata("id"), $añoActual, 1, 1),
 
@@ -44,50 +51,63 @@ class Mi_valoracion_adm extends CI_Controller
 				'puntajes3_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 3, 1),
 				'puntajes4_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 4, 1),
 
+				'total_val_obj'=> $valoracion_objetivo,
 
 				'estado' => $estado_val_obj,
 				'estado_entrevista2_colab' => $estado_entrevista2_colab,
 			);
 
-		
+
 			$this->load->view("layouts/header");
 			$this->load->view("layouts/aside");
 			$this->load->view("valoraciones/valoracion_adm/mi_valoracion", $data);
 			$this->load->view("layouts/footer");
-		}else{
-			if($estado_entrevista2_colab[0]->evaluador_id == null){
+		} else {
+			if ($estado_entrevista2_colab[0]->evaluador_id == null) {
+				$valoracion_objetivo = " ";
+
 				$data  = array(
 					'permisos' => $this->permisos,
-	
+
 					'padre_registrador' => $this->Valoracion_adm_model->getusuariosPadreRegistrar($this->session->userdata("id"), $añoActual, 1, 1),
-	
+
 
 					'puntajes1_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 1, 2),
 					'puntajes2_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 2, 2),
 					'puntajes3_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 3, 2),
 					'puntajes4_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 4, 2),
-	
+
 					'tipo_validacion' => $validacion,
 					'puntajes1_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 1, 1),
 					'puntajes2_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 2, 1),
 					'puntajes3_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 3, 1),
 					'puntajes4_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 4, 1),
-	
+
+					'total_val_obj'=> $valoracion_objetivo,
 
 					'estado' => $estado_val_obj,
 					'estado_entrevista2_colab' => $estado_entrevista2_colab,
 				);
-	
+
 				$this->load->view("layouts/header");
 				$this->load->view("layouts/aside");
 				$this->load->view("valoraciones/valoracion_adm/mi_valoracion", $data);
 				$this->load->view("layouts/footer");
-			}else{
+			} else {
 				$colaboradoraux =  $this->Usuarios_model->getUsuario($estado_entrevista2_colab[0]->colaborador_id);
 				$colaborador = $colaboradoraux->nombres . " " . $colaboradoraux->apellidos;
 				$evaluadoraux =  $this->Usuarios_model->getUsuario($estado_entrevista2_colab[0]->evaluador_id);
 				$evaluador = $evaluadoraux->nombres . " " . $evaluadoraux->apellidos;
 
+
+				$valoracion_objetivo_aux =  $this->Valoracion_adm_model->getValoracionObjetivos($this->session->userdata("id"), $añoActual, 3);
+
+				if($valoracion_objetivo_aux == false){
+					$valoracion_objetivo= " ";
+				}else{
+					$valoracion_objetivo = $valoracion_objetivo_aux[0]->total_valoracion;
+				}
+
 				$data  = array(
 					'permisos' => $this->permisos,
 
@@ -98,30 +118,29 @@ class Mi_valoracion_adm extends CI_Controller
 					'puntajes3_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 3, 2),
 					'puntajes4_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 4, 2),
 
-	
+
 					'tipo_validacion' => $validacion,
 					'puntajes1_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 1, 1),
 					'puntajes2_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 2, 1),
 					'puntajes3_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 3, 1),
 					'puntajes4_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 4, 1),
-	
+
 
 					'estado' => $estado_val_obj,
 					'estado_entrevista2_colab' => $estado_entrevista2_colab,
-					'estado_entrevista3_evalu'=> $estado_entrevista3_evalu,
-					
+					'estado_entrevista3_evalu' => $estado_entrevista3_evalu,
+					'total_val_obj'=> $valoracion_objetivo,
+
 					'colaborador' => $colaborador,
 					'evaluador' => $evaluador,
 				);
-				
+
 				$this->load->view("layouts/header");
 				$this->load->view("layouts/aside");
 				$this->load->view("valoraciones/valoracion_adm/mi_valoracion", $data);
 				$this->load->view("layouts/footer");
-
 			}
 		}
-
 	}
 
 	public function entrevista2_colab_registro()
@@ -176,7 +195,7 @@ class Mi_valoracion_adm extends CI_Controller
 			'update_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 		);
 
-		$this->Valoracion_adm_model->updateEntrevista($id_colaborador, $tipo_entrevista, $data,$añoActual);
+		$this->Valoracion_adm_model->updateEntrevista($id_colaborador, $tipo_entrevista, $data, $añoActual);
 		redirect(base_url() . "valoracion/valoracion_adm/");
 	}
 
@@ -197,7 +216,32 @@ class Mi_valoracion_adm extends CI_Controller
 		$entrevista3_obj_3 = $this->input->post("entrevista3_obj_3");
 
 
-		
+
+		echo  $option1;
+		echo  $option2;
+		echo  $option3;
+
+		$puntaje_val_obj = $option1+$option2+$option3;
+		echo $puntaje_val_obj;
+	
+		if($puntaje_val_obj == 0){
+			$puntaje_final_objetivos = 0;
+		}elseif($puntaje_val_obj == 1){
+			$puntaje_final_objetivos = 7;
+
+		}elseif($puntaje_val_obj == 2){
+			$puntaje_final_objetivos = 14;
+
+		}else{
+			$puntaje_final_objetivos = 20;
+
+		}
+		echo $puntaje_final_objetivos;
+
+
+
+
+
 		$tipo_entrevista = '2';
 		$data = array(
 			'calif_obj1	' => $option1,
@@ -207,7 +251,7 @@ class Mi_valoracion_adm extends CI_Controller
 			'coment1_evalu	' => $entrevista3_obj_1,
 			'coment2_evalu	' => $entrevista3_obj_2,
 			'coment3_evalu	' => $entrevista3_obj_3,
-			
+
 			'tipo_entrevista_id	' => $tipo_entrevista,
 
 			'estado' => '1',
@@ -217,6 +261,17 @@ class Mi_valoracion_adm extends CI_Controller
 			'create_at' => $fechaActual,
 			'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 		);
+
+		$data_promedio_objetivos = array(
+			'total_valoracion' => $puntaje_final_objetivos,
+			'tipo_valoracion_id	' => 3,
+			'estado' => '1',
+			'usuario_id' => $id_colaborador,
+			'create_at' => $fechaActual,
+			'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
+		);
+
+		$this->Valoracion_adm_model->save($data_promedio_objetivos);
 
 		$this->Valoracion_adm_model->saveEntrevista2($data);
 		redirect(base_url() . "valoracion/valoracion_adm/");
@@ -235,18 +290,18 @@ class Mi_valoracion_adm extends CI_Controller
 		$entrevista3_obj_3 = $this->input->post("entrevista3_obj_3");
 
 
-		
+
 		$tipo_entrevista = '2';
 		$data = array(
 			'coment1_colab	' => $entrevista3_obj_1,
 			'coment2_colab	' => $entrevista3_obj_2,
 			'coment3_colab	' => $entrevista3_obj_3,
-			
+
 			'colaborador_id' => $id_colaborador,
 			'create_at' => $fechaActual,
 			'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 		);
-		$this->Valoracion_adm_model->updateEntrevista($id_colaborador, $tipo_entrevista, $data,$añoActual);
+		$this->Valoracion_adm_model->updateEntrevista($id_colaborador, $tipo_entrevista, $data, $añoActual);
 		redirect(base_url() . "valoracion/mi_valoracion_adm/");
 	}
 
@@ -262,22 +317,21 @@ class Mi_valoracion_adm extends CI_Controller
 
 		$data_uri = "data:image/png;base64,iVBORw0K...";
 		$encoded_image = explode(",", $firma_colab)[1];
-		
+
 		$decoded_image = base64_decode($encoded_image);
 
-		$nombre_firma = "firma_".$colaborador."_".$añoActual;
-		$ruta_firma = "assets/img/firmas/".$nombre_firma.".png";
+		$nombre_firma = "firma_" . $colaborador . "_" . $añoActual;
+		$ruta_firma = "assets/img/firmas/" . $nombre_firma . ".png";
 
-		file_put_contents("assets/img/firmas/".$nombre_firma.".png", $decoded_image);
-	
-		
+		file_put_contents("assets/img/firmas/" . $nombre_firma . ".png", $decoded_image);
+
 
 		$tipo_entrevista = '2';
 		$data = array(
 			'ruta_firma_colab' => $ruta_firma,
 			'update_at' => $fechaActual,
 		);
-		$this->Valoracion_adm_model->updateEntrevista($this->session->userdata("id"), $tipo_entrevista, $data,$añoActual);
+		$this->Valoracion_adm_model->updateEntrevista($this->session->userdata("id"), $tipo_entrevista, $data, $añoActual);
 		redirect(base_url() . "valoracion/mi_valoracion_adm/");
 	}
 
@@ -291,23 +345,20 @@ class Mi_valoracion_adm extends CI_Controller
 		$evaluador = $this->input->post("evaluador");
 		$data_uri = "data:image/png;base64,iVBORw0K...";
 		$encoded_image = explode(",", $firma_evalu)[1];
-		
+
 		$decoded_image = base64_decode($encoded_image);
 
-		$nombre_firma = "firma_".$evaluador."_".$añoActual;
-		$ruta_firma = "assets/img/firmas/".$nombre_firma.".png";
+		$nombre_firma = "firma_" . $evaluador . "_" . $añoActual;
+		$ruta_firma = "assets/img/firmas/" . $nombre_firma . ".png";
 
-		file_put_contents("assets/img/firmas/".$nombre_firma.".png", $decoded_image);
-	
+		file_put_contents("assets/img/firmas/" . $nombre_firma . ".png", $decoded_image);
+
 		$tipo_entrevista = '2';
 		$data = array(
 			'ruta_firma_evalu' => $ruta_firma,
 			'update_at' => $fechaActual,
 		);
-		$this->Valoracion_adm_model->updateEntrevistaEvalu($this->session->userdata("id"), $tipo_entrevista, $data,$añoActual);
+		$this->Valoracion_adm_model->updateEntrevistaEvalu($this->session->userdata("id"), $tipo_entrevista, $data, $añoActual);
 		redirect(base_url() . "valoracion/valoracion_adm/");
 	}
-	
-	
-	
 }

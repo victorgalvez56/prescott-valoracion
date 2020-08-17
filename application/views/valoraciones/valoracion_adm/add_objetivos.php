@@ -15,7 +15,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Nombre Objetivo #1</label>
-                                <input type="text" name="n_obj_1" class="form-control is-valid" id="inputSuccess" placeholder="Enter ..." required>
+                                <input type="text" name="n_obj_1" class="form-control is-valid" id="inputSuccess" placeholder="Enter ..." >
                             </div>
                         </div>
                     </div>
@@ -24,28 +24,28 @@
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Acciones Objetivo #1</label>
-                                <textarea name="a_obj_1" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="a_obj_1" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Plazos para acciones #1</label>
-                                <textarea name="p_obj_1" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="p_obj_1" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Indicadores de desarrollo #1</label>
-                                <textarea name="i_obj_1" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="i_obj_1" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Resultados deseados #1</label>
-                                <textarea name="r_obj_1" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="r_obj_1" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Nombre Objetivo #2</label>
-                                <input type="text" name="n_obj_2" class="form-control is-valid" id="inputSuccess" placeholder="Enter ..." required>
+                                <input type="text" name="n_obj_2" class="form-control is-valid" id="inputSuccess" placeholder="Enter ..." >
                             </div>
                         </div>
                     </div>
@@ -63,28 +63,28 @@
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Acciones Objetivo #2</label>
-                                <textarea name="a_obj_2" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="a_obj_2" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Plazos para acciones #2</label>
-                                <textarea name="p_obj_2" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="p_obj_2" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Indicadores de desarrollo #2</label>
-                                <textarea name="i_obj_2" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="i_obj_2" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Resultados deseados #2</label>
-                                <textarea name="r_obj_2" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="r_obj_2" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Nombre Objetivo #3</label>
-                                <input type="text" name="n_obj_3" class="form-control is-valid" id="inputSuccess" placeholder="Enter ..." required>
+                                <input type="text" name="n_obj_3" class="form-control is-valid" id="inputSuccess" placeholder="Enter ..." >
                             </div>
                         </div>
                     </div>
@@ -102,28 +102,28 @@
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Acciones Objetivo #3</label>
-                                <textarea name="a_obj_3" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="a_obj_3" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Plazos para acciones #3</label>
-                                <textarea name="p_obj_3" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="p_obj_3" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Indicadores de desarrollo #3</label>
-                                <textarea name="i_obj_3" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="i_obj_3" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>Resultados deseados #3</label>
-                                <textarea name="r_obj_3" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                <textarea name="r_obj_3" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                             </div>
                         </div>
                     </div>

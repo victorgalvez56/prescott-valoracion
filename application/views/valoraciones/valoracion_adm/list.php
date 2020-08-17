@@ -31,6 +31,7 @@
                   <thead>
                     <tr>
                       <th>Nombres</th>
+                      <th>Promedio General</th>
                       <th>Valoración 1</th>
                       <th>Valoración 2</th>
                       <th>Valoración Objetivos</th>
@@ -40,7 +41,12 @@
                     <?php if (!empty($hijos)) : ?>
                       <?php foreach ($hijos as $hijo) : ?>
                         <tr>
+
                           <td><?php echo $hijo->nombres . " " . $hijo->apellidos; ?></td>
+                          <td>
+                          <button class="btn btn-info btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-promedio_general" data-toggle="modal" data-target="#modal-promedio-general"><span class="fas fa-search"></span></button>
+                          </td>
+              
                           <td><div class="btn-group">
                               <?php if ($permisovaloracion == "Registrar") : ?>
                                 <button class="btn btn-warning btn-lg" value="<?php echo $hijo->hijo_id; ?>" id="modal-valoracion1_registro" data-toggle="modal" data-target="#modal-registro-val"><span class="fas fa-edit"></span></button>
@@ -145,6 +151,26 @@
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary btn-print"><span class="fa fa-print"></span>Imprimir</button>
+          <!--<button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="modal-promedio-general">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Promedio Final</h4>
+
+        </div>
+        <div class="modal-body">
+          <p>Error algo ocurrió</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <!--<button type="button" class="btn btn-primary">Save changes</button> -->
         </div>
       </div>

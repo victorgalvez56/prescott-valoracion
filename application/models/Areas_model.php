@@ -9,7 +9,6 @@ class Areas_model extends CI_Model
 		$this->db->select("g.nombre as nombreGerencia,a.*");
 		$this->db->from("gerencias g");
 		$this->db->join("areas a", "a.gerencia_id = g.id");
-		$this->db->where("a.estado", '1');
 		$this->db->order_by("nombreGerencia", 'asc');
 		$resultados = $this->db->get();
 		return $resultados->result();

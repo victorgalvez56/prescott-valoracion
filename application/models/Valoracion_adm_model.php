@@ -101,6 +101,27 @@ class Valoracion_adm_model extends CI_Model
 		}
 	}
 
+	public function getValoracion($id,$valoracion,$añoActual)
+	{
+		$this->db->select("v.*");
+		$this->db->from("usuarios u");
+		$this->db->join("valoraciones v", "v.usuario_id = u.id");
+		$this->db->join("tipos_valoracion t", "v.tipo_valoracion_id = t.id");
+		$this->db->where("u.estado", "1");
+		$this->db->where("u.id", $id);
+		$this->db->where("v.tipo_valoracion_id", $valoracion);
+		$this->db->where("v.estado", "1");
+		$this->db->where("year(v.create_at)",$añoActual);
+		$this->db->order_by("v.tipo_valoracion_id", "desc");
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->row();
+		} else {
+			return false;
+		}
+	}
+
+
 	public function getDetalleValoracion($id,$añoActual)
 	{
 		$this->db->select("dv.*");
@@ -122,7 +143,7 @@ class Valoracion_adm_model extends CI_Model
 	public function getValoracion1($id,$añoActual,$competencia,$tipo_val)
 	{
 
-		$this->db->select("v.total_valoracion,tv.nombre,u.nombres,u.apellidos,dv.puntaje,i.descripcion,c.nombre,v.create_by");
+		$this->db->select("dv.id,v.total_valoracion,tv.nombre,u.nombres,u.apellidos,dv.puntaje,i.descripcion,c.nombre,v.create_by");
 		$this->db->from("valoraciones v");
 		$this->db->join("tipos_valoracion tv", "v.tipo_valoracion_id = tv.id");
 		$this->db->join("detalles_valoraciones dv", " v.id = dv.valoracion_id");
@@ -142,6 +163,23 @@ class Valoracion_adm_model extends CI_Model
 			return false;
 		}
 	}
+
+	public function getValoracionObjetivos($id,$añoActual,$tipo_val)
+	{
+
+		$this->db->select("*");
+		$this->db->from("valoraciones");
+		$this->db->where("usuario_id", $id);
+		$this->db->where("tipo_valoracion_id", $tipo_val);
+		$this->db->where("year(create_at)", $añoActual);
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->result();
+		} else {
+			return false;
+		}
+	}
+
 
 	public function getEntrevistaColaborador($id_colaborador,$añoActual,$tipo_entrevista)
 	{
@@ -268,6 +306,24 @@ class Valoracion_adm_model extends CI_Model
 		return $this->db->update("objetivos", $data);
 	}
 
+
+	public function updateValoracion($id, $data)
+	{
+		$this->db->where("id", $id);
+		return $this->db->update("valoraciones", $data);
+	}
+
+	public function update_detalleValoracion($id, $data)
+	{
+		$this->db->where("id", $id);
+		return $this->db->update("detalles_valoraciones", $data);
+	}
+
+	public function updateObjetivos($id, $data)
+	{
+		$this->db->where("id", $id);
+		return $this->db->update("objetivos", $data);
+	}
 	public function updateEntrevista($id_colaborador,$tipo_entrevista, $data,$añoActual)
 	{
 		$this->db->where("colaborador_id", $id_colaborador);

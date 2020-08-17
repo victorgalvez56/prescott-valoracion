@@ -2,6 +2,7 @@
     <input type="hidden" id="tipo_validacion" name="tipo_validacion" value=" <?php echo $tipo_validacion; ?>">
     <input type="hidden" id="nameUsuario" name="idUsuario" value=" <?php echo $usuario->nombres . " " . $usuario->apellidos; ?>">
     <input type="hidden" id="idUsuario" name="idUsuario" value=" <?php echo $usuario->id; ?>">
+    <input type="hidden" id="idValoracion" name="idValoracion" value=" <?php echo $previo_registro->id; ?>">
 
     <div class="row">
         <section class="connectedSortable ui-sortable ">
@@ -38,7 +39,8 @@
                     <dl class="row">
                         <?php foreach ($puntajes1_val1 as $puntaje1) : ?>
                             <dd class="col-sm-8"> <?php echo $puntaje1->descripcion; ?></dd>
-                            <dt class="col-sm-4"> <input type="number" name="inputTrabajo[]" class="form-control indicadorComunicacion1" placeholder="Escriba del 1 a 4" min="1" max="4" value="<?php echo $puntaje1->puntaje; ?>">
+                            <input type="hidden" name="idUpdateComunicacion[]" class="form-control" placeholder="Escriba del 1 a 4" min="1" max="4" value="<?php echo $puntaje1->id;  ?>">
+                            <dt class="col-sm-4"> <input type="number" name="inputComunicacion[]" class="form-control indicadorComunicacion1"  min="1" max="4" value="<?php echo $puntaje1->puntaje; ?>">
                             </dt>
                         <?php endforeach; ?>
                     </dl>
@@ -46,7 +48,8 @@
             </div>
             <div class="card card-lightblue">
                 <div class="card-header">
-                    <h3 class="card-title"><?php echo $puntajes2_val1[0]->nombre; ?> </h3>
+                <h3 class="card-title"><?php echo $puntajes2_val1[0]->nombre; ?> </h3>
+
                     <div class="card-tools">
                         <input size="1" name="puntajeTrabajosequipo" id="puntajeTrabajosequipo1" readonly>
                         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
@@ -57,7 +60,8 @@
                     <dl class="row">
                         <?php foreach ($puntajes2_val1 as $puntaje2) : ?>
                             <dd class="col-sm-8"> <?php echo $puntaje2->descripcion; ?></dd>
-                            <dt class="col-sm-4"> <input type="number" class="form-control indicadorTrabajosequipo1" value="<?php echo $puntaje2->puntaje; ?>">
+                            <input type="hidden" name="idUpdateTrabajo[]" class="form-control" placeholder="Escriba del 1 a 4" min="1" max="4" value="<?php echo $puntaje2->id;  ?>">
+                            <dt class="col-sm-4"> <input type="number" name="inputTrabajo[]" class="form-control indicadorTrabajosequipo1" min="1" max="4" value="<?php echo $puntaje2->puntaje; ?>">
                             </dt>
                         <?php endforeach; ?>
                     </dl>
@@ -79,7 +83,8 @@
                     <dl class="row">
                         <?php foreach ($puntajes3_val1 as $puntaje3) : ?>
                             <dd class="col-sm-8"> <?php echo $puntaje3->descripcion; ?></dd>
-                            <dt class="col-sm-4"> <input type="number" class="form-control indicadorProactividad1" value="<?php echo $puntaje3->puntaje; ?>">
+                            <input type="hidden" name="idUpdateProactividad[]" class="form-control" placeholder="Escriba del 1 a 4" min="1" max="4" value="<?php echo $puntaje3->id;  ?>">
+                            <dt class="col-sm-4"> <input type="number" name="inputProactividad[]" class="form-control indicadorProactividad1" min="1" max="4" value="<?php echo $puntaje3->puntaje; ?>">
                             </dt>
                         <?php endforeach; ?>
                     </dl>
@@ -87,7 +92,8 @@
             </div>
             <div class="card card-lightblue">
                 <div class="card-header">
-                    <h3 class="card-title"><?php echo $puntajes4_val1[0]->nombre; ?> </h3>
+                <h3 class="card-title"><?php echo $puntajes4_val1[0]->nombre; ?> </h3>
+
                     <div class="card-tools">
                         <input size="1" name="puntajeAprendizaje" id="puntajeAprendizaje1" readonly>
                         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
@@ -98,7 +104,8 @@
                     <dl class="row">
                         <?php foreach ($puntajes4_val1 as $puntaje4) : ?>
                             <dd class="col-sm-8"> <?php echo $puntaje4->descripcion; ?></dd>
-                            <dt class="col-sm-4"> <input type="number" class="form-control indicadorAprendizaje1" value="<?php echo $puntaje4->puntaje; ?>">
+                            <input type="hidden" name="idUpdateAprendizaje[]" class="form-control" placeholder="Escriba del 1 a 4" min="1" max="4" value="<?php echo $puntaje4->id;  ?>">
+                            <dt class="col-sm-4"> <input type="number" name="inputAprendizaje[]" class="form-control indicadorAprendizaje1" min="1" max="4" value="<?php echo $puntaje4->puntaje; ?>">
                             </dt>
                         <?php endforeach; ?>
                     </dl>

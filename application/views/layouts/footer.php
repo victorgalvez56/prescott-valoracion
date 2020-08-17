@@ -152,6 +152,22 @@
     });
   });
 
+  $(document).on("click", "#modal-promedio_general", function() {
+    valor_id = $(this).val();
+    $.ajax({
+      url: BASE_URL + "valoracion/valoracion_adm/show_promedio_general",
+      type: "POST",
+      dataType: "html",
+      data: {
+        id: valor_id
+      },
+      success: function(data) {
+        $("#modal-promedio-general .modal-body").html(data);
+      }
+    });
+  });
+
+
 
   /* Modal para agregar valoracione2 */
   $(document).on("click", "#modal-valoracion2_registro", function() {
@@ -1012,7 +1028,7 @@
         id: valor_id
       },
       success: function(data) {
-        console.warn(data.detallesPeriodo)
+
         html = "<tr>";
         html += "<td>" + data.detallesPeriodo[0]['nombre'] + "</td>";
         html += "<td>" + data.detallesPeriodo[0]['fecha_inicio'] + "</td>";

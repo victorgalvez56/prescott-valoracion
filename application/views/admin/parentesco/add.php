@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="contraseña">Password</label>
-                                            <input type="password" class="form-control" name="contraseña" id="contraseña" placeholder="Contraseña" required>
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="gerencia">Gerencia:</label>

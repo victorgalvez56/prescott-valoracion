@@ -146,6 +146,7 @@
                                                                                             include 'application/views/valoraciones/valoracion_adm/add_entrevista3_colab.php';
                                                                                         } else {
                                                                                             include 'application/views/valoraciones/valoracion_adm/disable_entrevista3_colab.php';
+                                                                                            include 'application/views/valoraciones/valoracion_adm/puntaje_valoracion_objetivos.php';
 
                                                                                             if ($estado_entrevista3_evalu[0]->ruta_firma_colab == null) {
                                                                                                 include 'application/views/valoraciones/valoracion_adm/add_firma_colab.php';

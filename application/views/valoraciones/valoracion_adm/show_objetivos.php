@@ -13,7 +13,7 @@
                             <h3 class="timeline-header"><a href="#">Objetivos</a> </h3>
 
                             <?php if ($estado == false) {
-                                include 'application/views/valoraciones/valoracion_adm/valoracion_no_registrada.php'; ?>
+                                include 'application/views/valoraciones/valoracion_adm/valoracion_objetivos_no_registrada.php'; ?>
 
                         </div>
                     </div>
@@ -37,7 +37,7 @@
             <h3 class="timeline-header no-border">Aceptaste los objetivos</h3>
         </div>
     </div>
-    
+
     <?php if ($estado_entrevista2_colab == false) {
                                     } else {
 
@@ -45,47 +45,42 @@
                                             include 'application/views/valoraciones/valoracion_adm/add_entrevista2_evalu.php';
                                         } else {
                                             include 'application/views/valoraciones/valoracion_adm/disable_entrevista2_evalu.php';
-                                            if($estado_entrevista3_evalu == false){
+                                            if ($estado_entrevista3_evalu == false) {
                                                 include 'application/views/valoraciones/valoracion_adm/add_entrevista3_evalu.php';
-
-                                            }else{
+                                            } else {
 
                                                 if ($estado_entrevista3_evalu[0]->coment1_colab == null) {
                                                     include 'application/views/valoraciones/valoracion_adm/disable_entrevista3_evalu.php';
+                                                    include 'application/views/valoraciones/valoracion_adm/puntaje_valoracion_objetivos.php';
 
-                                                
-                                                }else{
+                                                } else {
                                                     include 'application/views/valoraciones/valoracion_adm/disable_entrevista3_colab.php';
                                                     if ($estado_entrevista3_evalu[0]->ruta_firma_evalu == null) {
+                                                        include 'application/views/valoraciones/valoracion_adm/puntaje_valoracion_objetivos.php';
                                                         include 'application/views/valoraciones/valoracion_adm/add_firma_evalu.php';
 
-                                                    }else{
+                                                    } else {
 
-                                                        if ($estado_entrevista3_evalu[0]->ruta_firma_colab ==null) {
-
+                                                        if ($estado_entrevista3_evalu[0]->ruta_firma_colab == null) {
                                                             include 'application/views/valoraciones/valoracion_adm/disable_firma_evalu.php';
-                                                        }else{
+                                                        } else {
+                                                            include 'application/views/valoraciones/valoracion_adm/puntaje_valoracion_objetivos.php';
                                                             include 'application/views/valoraciones/valoracion_adm/disable_firma_evalu.php';
                                                             include 'application/views/valoraciones/valoracion_adm/disable_firma_colab.php';
 
-                                                            ?>
-<div>
-    <i class="fas fa-ban  bg-red "></i>
-    <div class="timeline-item">
-        <h3 class="timeline-header no-border"><a href="#"> El registro de valoración por objetivos se ha terminado</a></h3>
-    </div>
-</div>
+    ?>
+                            <div>
+                                <i class="fas fa-ban  bg-red "></i>
+                                <div class="timeline-item">
+                                    <h3 class="timeline-header no-border"><a href="#"> El registro de valoración por objetivos se ha terminado</a></h3>
+                                </div>
+                            </div>
 
 
 
-                                                       <?php  } 
-
-
-
+    <?php  }
                                                     }
-
                                                 }
-
                                             }
                                         }
                                     }
@@ -105,7 +100,7 @@
 
 <div>
 
-    <button class="btn btn-primary ir-arriba"><i class="fas fa-arrow-up"></i></button>
+    <!-- <button class="btn btn-primary ir-arriba"><i class="fas fa-arrow-up"></i></button> -->
 
 </div>
 </div>
@@ -130,7 +125,7 @@
         cursor: pointer;
         position: fixed;
         bottom: 30px;
-        right:360px;
+        right: 360px;
     }
 </style>
 
@@ -146,4 +141,3 @@
 
     });
 </script>
-

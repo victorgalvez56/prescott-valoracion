@@ -90,7 +90,7 @@
                             <dd class="col-sm-8"> <?php echo $aprendizaje->descripcion; ?></dd>
                             <dt class="col-sm-4"> <input type="number" name="inputAprendizaje[]" class="form-control indicadorAprendizaje" placeholder="Escriba del 1 a 4" min="1" max="4" required>
                             </dt>
-                            <input type="hidden" name="idPuntajeProactividad[]" value="<?php echo $aprendizaje->id; ?>">
+                            <input type="hidden" name="idPuntajeAprendizaje[]" value="<?php echo $aprendizaje->id; ?>">
                         <?php endforeach; ?>
                     </dl>
                 </div>
@@ -110,7 +110,7 @@
                             <dd class="col-sm-8"> <?php echo $proactividad->descripcion; ?></dd>
                             <dt class="col-sm-4"> <input type="number" name="inputProactividad[]" class="form-control indicadorProactividad" placeholder="Escriba del 1 a 4" min="1" max="4" required>
                             </dt>
-                            <input type="hidden" name="idPuntajeAprendizaje[]" value="<?php echo $proactividad->id; ?>">
+                            <input type="hidden" name="idPuntajeProactividad[]" value="<?php echo $proactividad->id; ?>">
                         <?php endforeach; ?>
                     </dl>
                 </div>
