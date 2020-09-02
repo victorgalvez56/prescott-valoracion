@@ -100,7 +100,18 @@
 
 <div>
 
-    <!-- <button class="btn btn-primary ir-arriba"><i class="fas fa-arrow-up"></i></button> -->
+	<a class="ir-arriba"  javascript:void(0) title="Volver arriba">
+  <span class="fa-stack">
+    <i class="fa fa-circle fa-stack-2x"></i>
+    <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+  </span>
+	</a>
+	<a class="ir-abajo"  javascript:void(0) title="Volver arriba">
+  <span class="fa-stack">
+    <i class="fa fa-circle fa-stack-2x"></i>
+    <i class="fa fa-arrow-down fa-stack-1x fa-inverse"></i>
+  </span>
+	</a>
 
 </div>
 </div>
@@ -117,16 +128,27 @@
 </section>
 
 <style>
-    .ir-arriba {
-        padding: 20px;
-        background: #024959;
-        font-size: 20px;
-        color: #fff;
-        cursor: pointer;
-        position: fixed;
-        bottom: 30px;
-        right: 360px;
-    }
+	/*Flecha para hacer la pagina hacia arriba*/
+	.ir-arriba{
+		background-repeat:no-repeat;
+		font-size:20px;
+		color:black;
+		cursor:pointer;
+		position:fixed;
+		bottom:500px;
+		right:10px;
+		z-index:2;
+	}
+	.ir-abajo{
+		background-repeat:no-repeat;
+		font-size:20px;
+		color:black;
+		cursor:pointer;
+		position:fixed;
+		bottom:500px;
+		right:50px;
+		z-index:2;
+	}
 </style>
 
 <script>
@@ -137,7 +159,11 @@
                 scrollTop: '0px'
             }, 750);
         });
-
+		$('.ir-abajo').click(function() {
+			$('div').animate({
+				scrollTop: '1000px'
+			}, 750);
+		});
 
     });
 </script>

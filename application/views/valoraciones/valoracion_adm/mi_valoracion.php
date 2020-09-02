@@ -202,6 +202,22 @@
       </section>
   </div>
   </div>
+  <div>
+
+	  <a class="ir-arriba"  javascript:void(0) title="Volver arriba">
+  <span class="fa-stack">
+    <i class="fa fa-circle fa-stack-2x"></i>
+    <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+  </span>
+	  </a>
+	  <a class="ir-abajo"  javascript:void(0) title="Volver arriba">
+  <span class="fa-stack">
+    <i class="fa fa-circle fa-stack-2x"></i>
+    <i class="fa fa-arrow-down fa-stack-1x fa-inverse"></i>
+  </span>
+	  </a>
+
+  </div>
   </div>
   </div>
   </div>
@@ -225,10 +241,46 @@
       .bg-blue {
           background-color: blue !important;
       }
+	  /*Flecha para hacer la pagina hacia arriba*/
+	  .ir-arriba{
+		  background-repeat:no-repeat;
+		  font-size:20px;
+		  color:black;
+		  cursor:pointer;
+		  position:fixed;
+		  bottom:500px;
+		  right:10px;
+		  z-index:2;
+	  }
+	  .ir-abajo{
+		  background-repeat:no-repeat;
+		  font-size:20px;
+		  color:black;
+		  cursor:pointer;
+		  position:fixed;
+		  bottom:500px;
+		  right:50px;
+		  z-index:2;
+	  }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
   <script>
+	  $(document).ready(function() {
+
+		  $('.ir-arriba').click(function() {
+			  $('div').animate({
+				  scrollTop: '0px'
+			  }, 750);
+		  });
+		  $('.ir-abajo').click(function() {
+			  $('div').animate({
+				  scrollTop: '1000px'
+			  }, 750);
+		  });
+
+	  });
+
       var canvas = document.getElementById('signature-pad');
 
       // Adjust canvas coordinate space taking into account pixel ratio,

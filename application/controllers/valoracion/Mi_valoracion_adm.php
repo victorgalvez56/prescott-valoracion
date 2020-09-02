@@ -217,12 +217,8 @@ class Mi_valoracion_adm extends CI_Controller
 
 
 
-		echo  $option1;
-		echo  $option2;
-		echo  $option3;
 
 		$puntaje_val_obj = $option1+$option2+$option3;
-		echo $puntaje_val_obj;
 	
 		if($puntaje_val_obj == 0){
 			$puntaje_final_objetivos = 0;
@@ -236,7 +232,6 @@ class Mi_valoracion_adm extends CI_Controller
 			$puntaje_final_objetivos = 20;
 
 		}
-		echo $puntaje_final_objetivos;
 
 
 

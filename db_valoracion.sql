@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-08-2020 a las 18:19:03
+-- Tiempo de generación: 02-09-2020 a las 17:17:53
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.3.19
 
@@ -24,12 +24,44 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `anecdotarios`
+--
+
+CREATE TABLE `anecdotarios` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(250) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `create_at` date NOT NULL,
+  `create_by` varchar(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `anecdotarios`
+--
+
+INSERT INTO `anecdotarios` (`id`, `descripcion`, `estado`, `usuario_id`, `create_at`, `create_by`) VALUES
+(13, 'Buen trabajo.', 1, 84, '2020-08-30', 'Andrea Alejandra Zegarra Lozada'),
+(14, 'Se porto mal \r\n', 1, 86, '2020-08-30', 'Andrea Alejandra Zegarra Lozada'),
+(15, 'Muy bien ', 1, 85, '2020-08-30', 'Andrea Alejandra Zegarra Lozada'),
+(16, 'MUY BIEN', 1, 76, '2020-08-30', 'Fernando Alberto Salas Heresi'),
+(17, 'No cumplió', 1, 83, '2020-08-30', 'Fernando Alberto Salas Heresi'),
+(18, 'Realizó bien su trabajo', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi'),
+(19, 'assssssssssssssssssssssssssssssssssssssassssssssssssssssssssssssssssssssssssssassssssssssssssssssssssssssssssssssssssassssssssssssssssssssssssssssssssssssssassssssssssssssssssssssssssssssssssssssassssssssssssssssssssssssssssssssssssssasssssssssssssss', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi'),
+(20, 'asddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi'),
+(21, 'asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasssssssssssssss', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi'),
+(22, 'asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasssssssssssssssasdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi'),
+(23, 'No cumplió', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `areas`
 --
 
 CREATE TABLE `areas` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(35) NOT NULL,
+  `nombre` varchar(55) NOT NULL,
   `descripcion` varchar(65) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `gerencia_id` int(11) NOT NULL,
@@ -44,19 +76,20 @@ CREATE TABLE `areas` (
 --
 
 INSERT INTO `areas` (`id`, `nombre`, `descripcion`, `estado`, `gerencia_id`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(1, 'Finanzas', '', 1, 2, '', '', '', ''),
-(2, 'Desarrollo Humano', '', 1, 2, '', '', '', ''),
-(3, 'Sistemas', '', 1, 2, '', '', '', ''),
-(4, 'Seguridad salud', '', 1, 2, '', '', '', ''),
-(5, 'Logística y mantenimiento', '', 1, 2, '', '', '', ''),
-(6, 'Promoción y comunicación', '', 1, 2, '', '', '', ''),
-(7, 'PS', '', 1, 1, '', '', '', ''),
-(8, 'ES', 'x', 1, 1, '', '', '05-06-2020 11:52:45', 'Administrador Sistema'),
-(9, 'MS', '', 1, 1, '', '', '', ''),
-(10, 'HS', '', 1, 1, '', '', '', ''),
-(11, 'No necesita área NO DOCENTES', '', 0, 2, '', '', '', ''),
-(12, 'No necesita área DOCENTES', '', 0, 1, '', '', '', ''),
-(13, 'Prueba', 'Prueba', 1, 2, '05-06-2020 13:32:11', 'Administrador Sistema', '', '');
+(1, 'Finanzas', '', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(2, 'Desarrollo Humano', '', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(3, 'Sistemas', '', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(4, 'Seguridad y Salud Ocupacional', '-', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '17-08-2020 10:59:15', 'Administrador Sistema'),
+(5, 'Logística, Infraestructura y Mantenimiento', '-', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '17-08-2020 11:01:26', 'Administrador Sistema'),
+(6, 'Promoción y comunicación', '', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(7, 'PS', '', 1, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(8, 'ES', 'x', 1, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(9, 'MS', '', 1, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(10, 'HS', '', 1, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(11, 'No necesita área NO DOCENTES', '', 0, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(12, 'No necesita área DOCENTES', '', 0, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(15, 'RRPP', 'RRPP', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(16, 'Programa de Desarrollo Institucional (PDI)', 'PDI', 1, 2, '15-08-2020 23:44:07', 'Administrador Sistema', '17-08-2020 11:01:02', 'Administrador Sistema');
 
 -- --------------------------------------------------------
 
@@ -106,10 +139,10 @@ INSERT INTO `detalles_periodos` (`id`, `fecha_inicio`, `fecha_fin`, `periodo_id`
 (1, '2020-07-01', '2020-08-31', 3, 1),
 (2, '2020-07-01', '2020-07-31', 3, 2),
 (3, '2020-07-01', '2020-07-31', 3, 3),
-(4, '2020-07-01', '2020-07-31', 3, 4),
-(5, '2020-01-16', '2020-12-12', 2, 1),
-(6, '2020-07-01', '2020-12-12', 2, 2),
-(7, '2020-07-01', '2020-07-22', 2, 3),
+(4, '2020-01-01', '2020-08-31', 3, 4),
+(5, '2020-01-01', '2020-08-31', 2, 1),
+(6, '2020-01-01', '2020-08-31', 2, 2),
+(7, '2020-01-01', '2020-08-31', 2, 3),
 (8, '2020-07-01', '2020-07-31', 2, 4),
 (9, '2020-07-01', '2020-07-31', 4, 1),
 (10, '2020-07-01', '2020-07-31', 4, 2),
@@ -143,146 +176,66 @@ CREATE TABLE `detalles_valoraciones` (
 --
 
 INSERT INTO `detalles_valoraciones` (`id`, `puntaje`, `estado`, `valoracion_id`, `indicador_id`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(857, 1, 1, 63, 1, 11, 0, 0, 0),
-(858, 1, 1, 63, 2, 11, 0, 0, 0),
-(859, 1, 1, 63, 3, 11, 0, 0, 0),
-(860, 1, 1, 63, 4, 11, 0, 0, 0),
-(861, 1, 1, 63, 5, 11, 0, 0, 0),
-(862, 4, 1, 63, 6, 11, 0, 0, 0),
-(863, 4, 1, 63, 7, 11, 0, 0, 0),
-(864, 4, 1, 63, 8, 11, 0, 0, 0),
-(865, 4, 1, 63, 9, 11, 0, 0, 0),
-(866, 4, 1, 63, 10, 11, 0, 0, 0),
-(867, 3, 1, 63, 11, 11, 0, 0, 0),
-(868, 3, 1, 63, 12, 11, 0, 0, 0),
-(869, 3, 1, 63, 13, 11, 0, 0, 0),
-(870, 3, 1, 63, 14, 11, 0, 0, 0),
-(871, 3, 1, 63, 15, 11, 0, 0, 0),
-(872, 2, 1, 63, 16, 11, 0, 0, 0),
-(873, 2, 1, 63, 17, 11, 0, 0, 0),
-(874, 2, 1, 63, 18, 11, 0, 0, 0),
-(875, 2, 1, 63, 19, 11, 0, 0, 0),
-(876, 2, 1, 63, 20, 11, 0, 0, 0),
-(877, 1, 1, 64, 1, 11, 0, 0, 0),
-(878, 2, 1, 64, 2, 11, 0, 0, 0),
-(879, 2, 1, 64, 3, 11, 0, 0, 0),
-(880, 2, 1, 64, 4, 11, 0, 0, 0),
-(881, 2, 1, 64, 5, 11, 0, 0, 0),
-(882, 3, 1, 64, 6, 11, 0, 0, 0),
-(883, 3, 1, 64, 7, 11, 0, 0, 0),
-(884, 3, 1, 64, 8, 11, 0, 0, 0),
-(885, 3, 1, 64, 9, 11, 0, 0, 0),
-(886, 3, 1, 64, 10, 11, 0, 0, 0),
-(887, 4, 1, 64, 11, 11, 0, 0, 0),
-(888, 4, 1, 64, 12, 11, 0, 0, 0),
-(889, 4, 1, 64, 13, 11, 0, 0, 0),
-(890, 4, 1, 64, 14, 11, 0, 0, 0),
-(891, 4, 1, 64, 15, 11, 0, 0, 0),
-(892, 2, 1, 64, 16, 11, 0, 0, 0),
-(893, 2, 1, 64, 17, 11, 0, 0, 0),
-(894, 2, 1, 64, 18, 11, 0, 0, 0),
-(895, 3, 1, 64, 19, 11, 0, 0, 0),
-(896, 3, 1, 64, 20, 11, 0, 0, 0),
-(897, 1, 1, 65, 1, 11, 0, 0, 0),
-(898, 1, 1, 65, 2, 11, 0, 0, 0),
-(899, 1, 1, 65, 3, 11, 0, 0, 0),
-(900, 1, 1, 65, 4, 11, 0, 0, 0),
-(901, 1, 1, 65, 5, 11, 0, 0, 0),
-(902, 3, 1, 65, 6, 11, 0, 0, 0),
-(903, 3, 1, 65, 7, 11, 0, 0, 0),
-(904, 3, 1, 65, 8, 11, 0, 0, 0),
-(905, 3, 1, 65, 9, 11, 0, 0, 0),
-(906, 3, 1, 65, 10, 11, 0, 0, 0),
-(907, 3, 1, 65, 11, 11, 0, 0, 0),
-(908, 3, 1, 65, 12, 11, 0, 0, 0),
-(909, 3, 1, 65, 13, 11, 0, 0, 0),
-(910, 3, 1, 65, 14, 11, 0, 0, 0),
-(911, 3, 1, 65, 15, 11, 0, 0, 0),
-(912, 2, 1, 65, 16, 11, 0, 0, 0),
-(913, 2, 1, 65, 17, 11, 0, 0, 0),
-(914, 2, 1, 65, 18, 11, 0, 0, 0),
-(915, 2, 1, 65, 19, 11, 0, 0, 0),
-(916, 2, 1, 65, 20, 11, 0, 0, 0),
-(917, 3, 1, 66, 1, 11, 0, 0, 0),
-(918, 3, 1, 66, 2, 11, 0, 0, 0),
-(919, 3, 1, 66, 3, 11, 0, 0, 0),
-(920, 3, 1, 66, 4, 11, 0, 0, 0),
-(921, 3, 1, 66, 5, 11, 0, 0, 0),
-(922, 3, 1, 66, 6, 11, 0, 0, 0),
-(923, 3, 1, 66, 7, 11, 0, 0, 0),
-(924, 3, 1, 66, 8, 11, 0, 0, 0),
-(925, 3, 1, 66, 9, 11, 0, 0, 0),
-(926, 3, 1, 66, 10, 11, 0, 0, 0),
-(927, 3, 1, 66, 11, 11, 0, 0, 0),
-(928, 3, 1, 66, 12, 11, 0, 0, 0),
-(929, 3, 1, 66, 13, 11, 0, 0, 0),
-(930, 3, 1, 66, 14, 11, 0, 0, 0),
-(931, 3, 1, 66, 15, 11, 0, 0, 0),
-(932, 3, 1, 66, 16, 11, 0, 0, 0),
-(933, 3, 1, 66, 17, 11, 0, 0, 0),
-(934, 3, 1, 66, 18, 11, 0, 0, 0),
-(935, 3, 1, 66, 19, 11, 0, 0, 0),
-(936, 3, 1, 66, 20, 11, 0, 0, 0),
-(937, 2, 1, 67, 1, 11, 0, 0, 0),
-(938, 2, 1, 67, 2, 11, 0, 0, 0),
-(939, 2, 1, 67, 3, 11, 0, 0, 0),
-(940, 2, 1, 67, 4, 11, 0, 0, 0),
-(941, 2, 1, 67, 5, 11, 0, 0, 0),
-(942, 2, 1, 67, 6, 11, 0, 0, 0),
-(943, 2, 1, 67, 7, 11, 0, 0, 0),
-(944, 2, 1, 67, 8, 11, 0, 0, 0),
-(945, 2, 1, 67, 9, 11, 0, 0, 0),
-(946, 2, 1, 67, 10, 11, 0, 0, 0),
-(947, 2, 1, 67, 11, 11, 0, 0, 0),
-(948, 2, 1, 67, 12, 11, 0, 0, 0),
-(949, 2, 1, 67, 13, 11, 0, 0, 0),
-(950, 2, 1, 67, 14, 11, 0, 0, 0),
-(951, 2, 1, 67, 15, 11, 0, 0, 0),
-(952, 2, 1, 67, 16, 11, 0, 0, 0),
-(953, 2, 1, 67, 17, 11, 0, 0, 0),
-(954, 2, 1, 67, 18, 11, 0, 0, 0),
-(955, 2, 1, 67, 19, 11, 0, 0, 0),
-(956, 2, 1, 67, 20, 11, 0, 0, 0),
-(957, 1, 1, 68, 1, 11, 0, 0, 0),
-(958, 1, 1, 68, 2, 11, 0, 0, 0),
-(959, 1, 1, 68, 3, 11, 0, 0, 0),
-(960, 1, 1, 68, 4, 11, 0, 0, 0),
-(961, 1, 1, 68, 5, 11, 0, 0, 0),
-(962, 3, 1, 68, 6, 11, 0, 0, 0),
-(963, 3, 1, 68, 7, 11, 0, 0, 0),
-(964, 3, 1, 68, 8, 11, 0, 0, 0),
-(965, 3, 1, 68, 9, 11, 0, 0, 0),
-(966, 3, 1, 68, 10, 11, 0, 0, 0),
-(967, 4, 1, 68, 11, 11, 0, 0, 0),
-(968, 4, 1, 68, 12, 11, 0, 0, 0),
-(969, 4, 1, 68, 13, 11, 0, 0, 0),
-(970, 4, 1, 68, 14, 11, 0, 0, 0),
-(971, 4, 1, 68, 15, 11, 0, 0, 0),
-(972, 2, 1, 68, 16, 11, 0, 0, 0),
-(973, 2, 1, 68, 17, 11, 0, 0, 0),
-(974, 2, 1, 68, 18, 11, 0, 0, 0),
-(975, 2, 1, 68, 19, 11, 0, 0, 0),
-(976, 2, 1, 68, 20, 11, 0, 0, 0),
-(977, 4, 1, 69, 1, 11, 0, 0, 0),
-(978, 4, 1, 69, 2, 11, 0, 0, 0),
-(979, 4, 1, 69, 3, 11, 0, 0, 0),
-(980, 4, 1, 69, 4, 11, 0, 0, 0),
-(981, 4, 1, 69, 5, 11, 0, 0, 0),
-(982, 2, 1, 69, 6, 11, 0, 0, 0),
-(983, 2, 1, 69, 7, 11, 0, 0, 0),
-(984, 2, 1, 69, 8, 11, 0, 0, 0),
-(985, 2, 1, 69, 9, 11, 0, 0, 0),
-(986, 2, 1, 69, 10, 11, 0, 0, 0),
-(987, 1, 1, 69, 11, 11, 0, 0, 0),
-(988, 1, 1, 69, 12, 11, 0, 0, 0),
-(989, 1, 1, 69, 13, 11, 0, 0, 0),
-(990, 1, 1, 69, 14, 11, 0, 0, 0),
-(991, 1, 1, 69, 15, 11, 0, 0, 0),
-(992, 3, 1, 69, 16, 11, 0, 0, 0),
-(993, 3, 1, 69, 17, 11, 0, 0, 0),
-(994, 3, 1, 69, 18, 11, 0, 0, 0),
-(995, 3, 1, 69, 19, 11, 0, 0, 0),
-(996, 3, 1, 69, 20, 11, 0, 0, 0);
+(1372, 1, 1, 96, 1, 18, 0, 0, 0),
+(1373, 1, 1, 96, 2, 18, 0, 0, 0),
+(1374, 1, 1, 96, 3, 18, 0, 0, 0),
+(1375, 1, 1, 96, 4, 18, 0, 0, 0),
+(1376, 1, 1, 96, 5, 18, 0, 0, 0),
+(1377, 3, 1, 96, 6, 18, 0, 0, 0),
+(1378, 3, 1, 96, 7, 18, 0, 0, 0),
+(1379, 3, 1, 96, 8, 18, 0, 0, 0),
+(1380, 3, 1, 96, 9, 18, 0, 0, 0),
+(1381, 3, 1, 96, 10, 18, 0, 0, 0),
+(1382, 3, 1, 96, 16, 18, 0, 0, 0),
+(1383, 3, 1, 96, 17, 18, 0, 0, 0),
+(1384, 3, 1, 96, 18, 18, 0, 0, 0),
+(1385, 3, 1, 96, 19, 18, 0, 0, 0),
+(1386, 3, 1, 96, 20, 18, 0, 0, 0),
+(1387, 2, 1, 96, 11, 18, 0, 0, 0),
+(1388, 2, 1, 96, 12, 18, 0, 0, 0),
+(1389, 2, 1, 96, 13, 18, 0, 0, 0),
+(1390, 2, 1, 96, 14, 18, 0, 0, 0),
+(1391, 2, 1, 96, 15, 18, 0, 0, 0),
+(1392, 1, 1, 99, 1, 30, 0, 0, 0),
+(1393, 1, 1, 99, 2, 30, 0, 0, 0),
+(1394, 1, 1, 99, 3, 30, 0, 0, 0),
+(1395, 1, 1, 99, 4, 30, 0, 0, 0),
+(1396, 1, 1, 99, 5, 30, 0, 0, 0),
+(1397, 3, 1, 99, 6, 30, 0, 0, 0),
+(1398, 3, 1, 99, 7, 30, 0, 0, 0),
+(1399, 3, 1, 99, 8, 30, 0, 0, 0),
+(1400, 3, 1, 99, 9, 30, 0, 0, 0),
+(1401, 3, 1, 99, 10, 30, 0, 0, 0),
+(1402, 4, 1, 99, 16, 30, 0, 0, 0),
+(1403, 4, 1, 99, 17, 30, 0, 0, 0),
+(1404, 4, 1, 99, 18, 30, 0, 0, 0),
+(1405, 4, 1, 99, 19, 30, 0, 0, 0),
+(1406, 4, 1, 99, 20, 30, 0, 0, 0),
+(1407, 2, 1, 99, 11, 30, 0, 0, 0),
+(1408, 2, 1, 99, 12, 30, 0, 0, 0),
+(1409, 2, 1, 99, 13, 30, 0, 0, 0),
+(1410, 2, 1, 99, 14, 30, 0, 0, 0),
+(1411, 2, 1, 99, 15, 30, 0, 0, 0),
+(1412, 1, 1, 100, 1, 31, 0, 0, 0),
+(1413, 1, 1, 100, 2, 31, 0, 0, 0),
+(1414, 1, 1, 100, 3, 31, 0, 0, 0),
+(1415, 1, 1, 100, 4, 31, 0, 0, 0),
+(1416, 1, 1, 100, 5, 31, 0, 0, 0),
+(1417, 3, 1, 100, 6, 31, 0, 0, 0),
+(1418, 3, 1, 100, 7, 31, 0, 0, 0),
+(1419, 3, 1, 100, 8, 31, 0, 0, 0),
+(1420, 3, 1, 100, 9, 31, 0, 0, 0),
+(1421, 3, 1, 100, 10, 31, 0, 0, 0),
+(1422, 4, 1, 100, 16, 31, 0, 0, 0),
+(1423, 4, 1, 100, 17, 31, 0, 0, 0),
+(1424, 4, 1, 100, 18, 31, 0, 0, 0),
+(1425, 4, 1, 100, 19, 31, 0, 0, 0),
+(1426, 4, 1, 100, 20, 31, 0, 0, 0),
+(1427, 2, 1, 100, 11, 31, 0, 0, 0),
+(1428, 2, 1, 100, 12, 31, 0, 0, 0),
+(1429, 2, 1, 100, 13, 31, 0, 0, 0),
+(1430, 2, 1, 100, 14, 31, 0, 0, 0),
+(1431, 2, 1, 100, 15, 31, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -312,14 +265,6 @@ CREATE TABLE `entrevistas` (
   `update_at` varchar(45) NOT NULL,
   `update_by` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `entrevistas`
---
-
-INSERT INTO `entrevistas` (`id`, `calif_obj1`, `calif_obj2`, `calif_obj3`, `coment1_colab`, `coment2_colab`, `coment3_colab`, `coment1_evalu`, `coment2_evalu`, `coment3_evalu`, `ruta_firma_colab`, `ruta_firma_evalu`, `colaborador_id`, `evaluador_id`, `tipo_entrevista_id`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(38, NULL, NULL, NULL, 'G1', 'G2', 'G3', 'F1', 'F2', 'F3', '', '', 73, 11, 1, '1', '2020-08-11', 'laura pedregal', '2020-08-11', 'Administrador Sistema'),
-(39, 0, 0, 0, 'F1', 'F2', 'F3', 'G1', 'G2', 'G3', 'assets/img/firmas/firma_laura pedregal_2020.png', 'assets/img/firmas/firma_Administrador Sistema_2020.png', 73, 11, 2, '1', '2020-08-11', 'laura pedregal', '2020-08-11', '');
 
 -- --------------------------------------------------------
 
@@ -387,9 +332,7 @@ INSERT INTO `indicadores` (`id`, `descripcion`, `estado`, `competencia_id`, `cre
 (17, 'Mantiene una actitud positiva frente a los cambios.', 1, 4, '', '', '', '0'),
 (18, 'Promueve la formación continua en sus equipos de trabajo.', 1, 4, '', '', '', '0'),
 (19, 'Se mantiene animado ante las dificultades que conllevan el proceso de aprendizaje.', 1, 4, '', '', '', '0'),
-(20, 'Comparte el conocimiento aprendido y lo adapta a través de los planes de acción.', 1, 4, '', '', '', '0'),
-(22, 'Indicador de Pruebas', 0, 1, '01-07-2020 11:36:39', 'Administrador Sistema', '01-07-2020 11:37:18', 'Administrador Sistema'),
-(23, 'gggg', 0, 1, '01-07-2020 11:49:45', 'Administrador Sistema', '', '');
+(20, 'Comparte el conocimiento aprendido y lo adapta a través de los planes de acción.', 1, 4, '', '', '', '0');
 
 -- --------------------------------------------------------
 
@@ -417,7 +360,8 @@ INSERT INTO `menus` (`id`, `nombre`, `link`) VALUES
 (7, 'Indicadores', 'mantenimiento/indicadores'),
 (8, 'Parentesco', 'administrador/parentesco\r\n'),
 (9, 'Periodos', 'administrador/periodos\r\n'),
-(10, 'Mi valoración ', 'valoracion/mi_valoracion_adm');
+(10, 'Mi valoración ', 'valoracion/mi_valoracion_adm'),
+(11, 'Anecdotario', 'valoracion/anecdotario_adm');
 
 -- --------------------------------------------------------
 
@@ -427,21 +371,22 @@ INSERT INTO `menus` (`id`, `nombre`, `link`) VALUES
 
 CREATE TABLE `objetivos` (
   `id` int(11) NOT NULL,
-  `n_obj_1` varchar(255) NOT NULL,
-  `a_obj_1` varchar(255) NOT NULL,
-  `p_obj_1` varchar(255) NOT NULL,
-  `i_obj_1` varchar(255) NOT NULL,
-  `r_obj_1` varchar(255) NOT NULL,
-  `n_obj_2` varchar(255) NOT NULL,
-  `a_obj_2` varchar(255) NOT NULL,
-  `p_obj_2` varchar(255) NOT NULL,
-  `i_obj_2` varchar(255) NOT NULL,
-  `r_obj_2` varchar(255) NOT NULL,
-  `n_obj_3` varchar(255) NOT NULL,
-  `a_obj_3` varchar(255) NOT NULL,
-  `p_obj_3` varchar(255) NOT NULL,
-  `i_obj_3` varchar(255) NOT NULL,
-  `r_obj_3` varchar(255) NOT NULL,
+  `n_obj_1` varchar(255) DEFAULT NULL,
+  `a_obj_1` varchar(255) DEFAULT NULL,
+  `p_obj_1` varchar(255) DEFAULT NULL,
+  `i_obj_1` varchar(255) DEFAULT NULL,
+  `r_obj_1` varchar(255) DEFAULT NULL,
+  `n_obj_2` varchar(255) DEFAULT NULL,
+  `a_obj_2` varchar(255) DEFAULT NULL,
+  `p_obj_2` varchar(255) DEFAULT NULL,
+  `i_obj_2` varchar(255) DEFAULT NULL,
+  `r_obj_2` varchar(255) DEFAULT NULL,
+  `n_obj_3` varchar(255) DEFAULT NULL,
+  `a_obj_3` varchar(255) DEFAULT NULL,
+  `p_obj_3` varchar(255) DEFAULT NULL,
+  `i_obj_3` varchar(255) DEFAULT NULL,
+  `r_obj_3` varchar(255) DEFAULT NULL,
+  `comentario_opcional` varchar(200) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `estado` varchar(15) NOT NULL,
   `create_at` varchar(35) NOT NULL,
@@ -454,8 +399,9 @@ CREATE TABLE `objetivos` (
 -- Volcado de datos para la tabla `objetivos`
 --
 
-INSERT INTO `objetivos` (`id`, `n_obj_1`, `a_obj_1`, `p_obj_1`, `i_obj_1`, `r_obj_1`, `n_obj_2`, `a_obj_2`, `p_obj_2`, `i_obj_2`, `r_obj_2`, `n_obj_3`, `a_obj_3`, `p_obj_3`, `i_obj_3`, `r_obj_3`, `usuario_id`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(24, 'g1', '1', '1', '1', '1', 'g2', '2', '2', '2', '2', 'g3', '3', '3', '3', '3', 73, 'aceptado', '2020-08-11', 'laura pedregal', '11-08-2020 22:49:33', 'Administrador Sistema');
+INSERT INTO `objetivos` (`id`, `n_obj_1`, `a_obj_1`, `p_obj_1`, `i_obj_1`, `r_obj_1`, `n_obj_2`, `a_obj_2`, `p_obj_2`, `i_obj_2`, `r_obj_2`, `n_obj_3`, `a_obj_3`, `p_obj_3`, `i_obj_3`, `r_obj_3`, `comentario_opcional`, `usuario_id`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
+(57, 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', '', 83, 'aceptado', '2020-08-24', 'Andrea Alejandra Zegarra Lozada', '24-08-2020 21:59:08', 'Fernando Alberto Salas Heresi'),
+(58, 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', '', 83, 'espera', '2020-08-24', 'Andrea Alejandra Zegarra Lozada', '', '');
 
 -- --------------------------------------------------------
 
@@ -489,7 +435,21 @@ INSERT INTO `parentesco` (`id`, `hijo_id`, `padre_id`, `registrar`, `leer`, `est
 (229, 70, 12, 1, 0, 0),
 (230, 73, 12, 1, 1, 1),
 (231, 73, 74, 1, 1, 1),
-(232, 73, 11, 1, 1, 1);
+(232, 73, 11, 1, 1, 1),
+(233, 76, 75, 1, 1, 1),
+(234, 77, 75, 1, 1, 0),
+(235, 78, 75, 1, 1, 1),
+(236, 79, 75, 1, 1, 1),
+(237, 80, 75, 1, 1, 0),
+(238, 81, 75, 1, 1, 1),
+(239, 82, 75, 1, 1, 0),
+(240, 83, 75, 1, 1, 1),
+(242, 84, 75, 0, 1, 1),
+(243, 85, 83, 1, 0, 1),
+(244, 85, 75, 0, 1, 1),
+(245, 86, 83, 1, 0, 1),
+(246, 86, 75, 0, 1, 1),
+(247, 84, 83, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -562,7 +522,12 @@ INSERT INTO `permisos` (`id`, `read`, `insert`, `update`, `delete`, `menu_id`, `
 (17, 1, 1, 1, 1, 9, 1, '', '', '', ''),
 (19, 1, 1, 1, 1, 10, 1, '', '', '', ''),
 (20, 1, 1, 1, 1, 10, 3, '', '', '', ''),
-(21, 1, 1, 1, 1, 10, 4, '', '', '', '');
+(21, 1, 1, 1, 1, 10, 4, '', '', '', ''),
+(22, 1, 1, 1, 1, 10, 2, '', '', '', ''),
+(23, 1, 1, 1, 1, 11, 1, '', '', '', ''),
+(24, 1, 1, 1, 1, 11, 3, '', '', '', ''),
+(25, 1, 1, 1, 1, 11, 4, '', '', '', ''),
+(26, 1, 1, 1, 1, 11, 2, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -663,16 +628,19 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `username`, `password`, `rol_id`, `area_id`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(11, 'Administrador', 'Sistema', 'admin@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1, 11, 1, NULL, '', NULL, ''),
-(12, 'Fernando', 'Salas', 'fsalas@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2, 11, 1, NULL, '', NULL, ''),
-(13, 'Javier', 'Butrón', 'jbutron@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3, 3, 1, NULL, '', NULL, ''),
-(14, 'Saul1', 'Llosa1', 'allosa1@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3, 3, 1, NULL, '', NULL, ''),
-(15, 'Victor Edison', 'Gálvez Chávez', 'vgalvez@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 5, 3, 1, NULL, '', NULL, ''),
-(70, 'ppddd1111', 'ppddd11111', '1111111ddd@prescott.edu.pe', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 8, 3, 1, NULL, '', NULL, ''),
-(71, 'responsable', 'responsalbe', '123@prescott.edu.pe', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 8, 8, 1, NULL, '', NULL, ''),
-(72, 'laura', 'p', 'asd', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 4, 2, 0, NULL, '', NULL, ''),
-(73, 'laura', 'pedregal', 'pci@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3, 9, 1, NULL, '', NULL, ''),
-(74, 'andrea', 'zegarra', 'azegarra@prescott.edu.pe', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2, 2, 1, NULL, '', NULL, '');
+(11, 'Administrador', 'Sistemas', 'admin@prescott.edu.pe', 'cb4154596b441ebe8deb40ccaceaf9befc55b0df', 1, 11, 1, NULL, '', NULL, ''),
+(75, 'Fernando Alberto', 'Salas Heresi', 'fsalas@prescott.edu.pe', '2aeeb35329d3d35b572a02230bc51973a0dbe0ec', 2, 11, 1, NULL, '', NULL, ''),
+(76, 'Fernando Eduardo', 'Azálgara Cuadros', 'fazalgara@prescott.edu.pe', '20230bea9daf3d1a52cfacfbeb542529a0eb35c2', 3, 4, 1, NULL, '', NULL, ''),
+(77, 'Susana María Josefa', 'Bustamante de Soto', 'sbustamante@prescott.edu.pe', '3a95719f625632b9a78ccc791fce39cce3f6a208', 3, 6, 1, NULL, '', NULL, ''),
+(78, 'Javier Alonso', 'Butrón Valencia', 'jbutron@prescott.edu.pe', 'a32eebfc07ef1783797de4816159c8ab445dd67e', 3, 3, 1, NULL, '', NULL, ''),
+(79, 'Paola Erika', 'Cárdenas Valdivia de Prevate', 'pcardenas@prescott.edu.pe', '1b2162b408b0337593eb8aacaa2115e22de472cc', 3, 5, 1, NULL, '', NULL, ''),
+(80, 'Vania ', 'López Berrios', 'vlopez@prescott.edu.pe', 'bee367050fdb6496bc465f9002c2e4d946166069', 3, 6, 1, NULL, '', NULL, ''),
+(81, 'Moscoso Aramayo', 'Ana Paola', 'amoscoso@prescott.edu.pe', '0e06bb6fe622c3cec7bfa6b3c8051f9d70907224', 3, 1, 1, NULL, '', NULL, ''),
+(82, 'Marleni', 'Valencia Portugal', 'mvalencia@prescott.edu.pe', '855f49136947d2893b97e9ab609b51d6681a6cc9', 3, 15, 1, NULL, '', NULL, ''),
+(83, 'Andrea Alejandra', 'Zegarra Lozada', 'azegarra@prescott.edu.pe', '6b9e0cfa0d1155fa80b0bd10eeeaaa64a81b87df', 3, 2, 1, NULL, '', NULL, ''),
+(84, 'Katherine Maryori', 'Benites Cucho', 'kbenites@prescott.edu.pe', 'da6b6259ceb0c7f47a0a3db80de7069f91bf36a8', 4, 2, 1, NULL, '', NULL, ''),
+(85, 'Laura Elizabeth', 'Portugal Passiuri', 'lportugal@prescott.edu.pe', 'ba9c52f7a0b74c9a95f530ad62a09fdf6443596a', 4, 2, 1, NULL, '', NULL, ''),
+(86, 'Haydee Liliana', 'Ramos Castillo,', 'hramos@prescott.edu.pe', 'fcd68095083ca5b3ac2affa9e283676224be5582', 4, 2, 1, NULL, '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -682,7 +650,7 @@ INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `username`, `password`, `r
 
 CREATE TABLE `valoraciones` (
   `id` int(11) NOT NULL,
-  `total_valoracion` int(11) NOT NULL,
+  `total_valoracion` varchar(11) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `tipo_valoracion_id` int(11) NOT NULL,
@@ -697,12 +665,22 @@ CREATE TABLE `valoraciones` (
 --
 
 INSERT INTO `valoraciones` (`id`, `total_valoracion`, `estado`, `usuario_id`, `tipo_valoracion_id`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(68, 13, 1, 73, 1, '2020-08-11', 'Administrador Sistema', '', ''),
-(69, 13, 1, 73, 2, '2020-08-11', 'Administrador Sistema', '', '');
+(96, '11.25', 1, 85, 1, '2020-08-18', 'Andrea Alejandra Zegarra Lozada', '', ''),
+(97, '20', 1, 83, 3, '2020-08-18', 'Fernando Alberto Salas Heresi', '', ''),
+(98, '11.25', 1, 83, 1, '2020-08-18', 'Andrea Alejandra Zegarra Lozada', '', ''),
+(99, '12.5', 1, 81, 1, '2020-08-30', 'Fernando Alberto Salas Heresi', '', ''),
+(100, '13', 1, 78, 2, '2020-08-31', 'Fernando Alberto Salas Heresi', '', '');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `anecdotarios`
+--
+ALTER TABLE `anecdotarios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_anecdotario_usuario` (`usuario_id`);
 
 --
 -- Indices de la tabla `areas`
@@ -830,10 +808,16 @@ ALTER TABLE `valoraciones`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `anecdotarios`
+--
+ALTER TABLE `anecdotarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
 -- AUTO_INCREMENT de la tabla `areas`
 --
 ALTER TABLE `areas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `competencias`
@@ -851,13 +835,13 @@ ALTER TABLE `detalles_periodos`
 -- AUTO_INCREMENT de la tabla `detalles_valoraciones`
 --
 ALTER TABLE `detalles_valoraciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=997;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1432;
 
 --
 -- AUTO_INCREMENT de la tabla `entrevistas`
 --
 ALTER TABLE `entrevistas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT de la tabla `gerencias`
@@ -875,19 +859,19 @@ ALTER TABLE `indicadores`
 -- AUTO_INCREMENT de la tabla `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `objetivos`
 --
 ALTER TABLE `objetivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `parentesco`
 --
 ALTER TABLE `parentesco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=248;
 
 --
 -- AUTO_INCREMENT de la tabla `periodos`
@@ -899,7 +883,7 @@ ALTER TABLE `periodos`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -923,17 +907,23 @@ ALTER TABLE `tipos_valoracion`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT de la tabla `valoraciones`
 --
 ALTER TABLE `valoraciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `anecdotarios`
+--
+ALTER TABLE `anecdotarios`
+  ADD CONSTRAINT `fk_anecdotario_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
 
 --
 -- Filtros para la tabla `areas`

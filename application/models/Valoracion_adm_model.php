@@ -30,7 +30,7 @@ class Valoracion_adm_model extends CI_Model
 
 	public function getusuariosPadreRegistrar($idHijo)
 	{
-		$this->db->select("u.nombres,u.apellidos");
+		$this->db->select("u.nombres,u.apellidos,.u.username");
 		$this->db->from("parentesco p");
 		$this->db->join("usuarios u", "u.id = p.padre_id");
 		$this->db->where("p.hijo_id", $idHijo);
@@ -100,6 +100,26 @@ class Valoracion_adm_model extends CI_Model
 			return false;
 		}
 	}
+
+	public function getExistValoracion($id,$valoracion,$añoActual)
+	{
+		$this->db->select("*");
+		$this->db->from("valoraciones");
+		$this->db->where("usuario_id", $id);
+		$this->db->where("tipo_valoracion_id", $valoracion);
+		$this->db->where("estado", "1");
+		$this->db->where("year(create_at)",$añoActual);
+		$this->db->order_by("tipo_valoracion_id", "desc");
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+
 
 	public function getValoracion($id,$valoracion,$añoActual)
 	{

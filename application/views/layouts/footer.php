@@ -44,7 +44,6 @@
 
 
 <script src="<?php echo BASE_URL(); ?>assets/newtemplate/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<script src="<?php echo BASE_URL(); ?>assets/js/zappar-js/zappar.js"></script>
 
 <script>
   console.log('Prueba que carga bien el script')
@@ -52,6 +51,18 @@
 </body>
 
 </html>
+<script>
+$('.tt_large').tooltip({
+    template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large"></div></div>'
+});
+</script>
+
+<style>
+  .large.tooltip-inner {
+    max-width: 900px;
+    width: 800px;
+  }
+</style>
 <script>
   var BASE_URL = "<?php echo BASE_URL(); ?>";
 
@@ -71,6 +82,7 @@
       "autoWidth": false,
       "responsive": true,
     });
+
   });
   /*Confirmación modal*/
   $("button[id='modalConfirmacionGerencia']").click(function() {
@@ -132,6 +144,24 @@
       console.log(error)
     }
   })
+
+
+  /* Modal para agregar anedotario */
+  $(document).on("click", "#modal-anedotario_registro", function() {
+	  valor_id = $(this).val();
+	  $.ajax({
+		  url: BASE_URL + "valoracion/Anecdotario_adm/add_anecdotario",
+		  type: "POST",
+		  dataType: "html",
+		  data: {
+			  id: valor_id
+		  },
+		  success: function(data) {
+			  $("#modal-anecdotario-val .modal-body").html(data);
+		  }
+	  });
+  });
+
 
   /* Modal para agregar valoracione1 */
   $(document).on("click", "#modal-valoracion1_registro", function() {
@@ -416,7 +446,7 @@
     const $inputPromedio = $("#promedioValoracion1");
     const $promedioValoracion1 = $("#promedioValoracion1");
 
-    
+
     $inputPromedio.val($sumaIndicadores);
     $promedioValoracion1.text($sumaIndicadores);
 
@@ -425,52 +455,52 @@
 
   function pintarPromedio1() {
     const $puntaje = $("#promedioValoracion1");
-        if ($puntaje.val() > 0 && $puntaje.val() < 6) {
-            $puntaje.css("background", "red")
-            $puntaje.css("color", "white")
-        } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
-            $puntaje.css("background", "yellow")
-            $puntaje.css("color", "black")
-        } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
-            $puntaje.css("background", "green")
-            $puntaje.css("color", "white")
-        } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
-            $puntaje.css("background", "blue")
-            $puntaje.css("color", "white")
-        }
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
   };
 
   function pintarPromedioBox1() {
-        const $puntaje = $("#promedioValoracion1").text();
-        const $box = $("#boxPromedio1");
-        const $numberPuntaje = Number($puntaje);
+    const $puntaje = $("#promedioValoracion1").text();
+    const $box = $("#boxPromedio1");
+    const $numberPuntaje = Number($puntaje);
 
-        if ($numberPuntaje > 0 && $numberPuntaje < 6) {
-            $box.removeClass("bg-red")
-            $box.removeClass("bg-yellow")
-            $box.removeClass("bg-green")
-            $box.removeClass("bg-blue")
-            $box.addClass("bg-red")
-        } else if ($numberPuntaje > 5 && $numberPuntaje < 13) {
-            $box.removeClass("bg-red")
-            $box.removeClass("bg-yellow")
-            $box.removeClass("bg-green")
-            $box.removeClass("bg-blue")
-            $box.addClass("bg-yellow")
-        } else if ($numberPuntaje > 12 && $numberPuntaje < 19) {
-            $box.removeClass("bg-red")
-            $box.removeClass("bg-yellow")
-            $box.removeClass("bg-green")
-            $box.removeClass("bg-blue")
-            $box.addClass("bg-green")
-        } else if ($numberPuntaje > 18 && $numberPuntaje < 21) {
-            $box.removeClass("bg-red")
-            $box.removeClass("bg-yellow")
-            $box.removeClass("bg-green")
-            $box.removeClass("bg-blue")
-            $box.addClass("bg-blue")
-        }
-    };
+    if ($numberPuntaje > 0 && $numberPuntaje < 6) {
+      $box.removeClass("bg-red")
+      $box.removeClass("bg-yellow")
+      $box.removeClass("bg-green")
+      $box.removeClass("bg-blue")
+      $box.addClass("bg-red")
+    } else if ($numberPuntaje > 5 && $numberPuntaje < 13) {
+      $box.removeClass("bg-red")
+      $box.removeClass("bg-yellow")
+      $box.removeClass("bg-green")
+      $box.removeClass("bg-blue")
+      $box.addClass("bg-yellow")
+    } else if ($numberPuntaje > 12 && $numberPuntaje < 19) {
+      $box.removeClass("bg-red")
+      $box.removeClass("bg-yellow")
+      $box.removeClass("bg-green")
+      $box.removeClass("bg-blue")
+      $box.addClass("bg-green")
+    } else if ($numberPuntaje > 18 && $numberPuntaje < 21) {
+      $box.removeClass("bg-red")
+      $box.removeClass("bg-yellow")
+      $box.removeClass("bg-green")
+      $box.removeClass("bg-blue")
+      $box.addClass("bg-blue")
+    }
+  };
 
 
 
@@ -650,7 +680,7 @@
     const $inputPromedio = $("#promedioValoracion");
     const $promedioValoracion1 = $("#promedioValoracion1");
 
-    
+
     $inputPromedio.val($sumaIndicadores);
     $promedioValoracion1.text($sumaIndicadores);
 
@@ -659,52 +689,52 @@
 
   function pintarPromedio() {
     const $puntaje = $("#promedioValoracion1");
-        if ($puntaje.val() > 0 && $puntaje.val() < 6) {
-            $puntaje.css("background", "red")
-            $puntaje.css("color", "white")
-        } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
-            $puntaje.css("background", "yellow")
-            $puntaje.css("color", "black")
-        } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
-            $puntaje.css("background", "green")
-            $puntaje.css("color", "black")
-        } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
-            $puntaje.css("background", "blue")
-            $puntaje.css("color", "white")
-        }
+    if ($puntaje.val() > 0 && $puntaje.val() < 6) {
+      $puntaje.css("background", "red")
+      $puntaje.css("color", "white")
+    } else if ($puntaje.val() > 5 && $puntaje.val() < 13) {
+      $puntaje.css("background", "yellow")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 12 && $puntaje.val() < 19) {
+      $puntaje.css("background", "green")
+      $puntaje.css("color", "black")
+    } else if ($puntaje.val() > 18 && $puntaje.val() < 21) {
+      $puntaje.css("background", "blue")
+      $puntaje.css("color", "white")
+    }
   };
 
   function pintarPromedioBox1() {
-        const $puntaje = $("#promedioValoracion1").text();
-        const $box = $("#boxPromedio1");
-        const $numberPuntaje = Number($puntaje);
+    const $puntaje = $("#promedioValoracion1").text();
+    const $box = $("#boxPromedio1");
+    const $numberPuntaje = Number($puntaje);
 
-        if ($numberPuntaje > 0 && $numberPuntaje < 6) {
-            $box.removeClass("bg-red")
-            $box.removeClass("bg-yellow")
-            $box.removeClass("bg-green")
-            $box.removeClass("bg-blue")
-            $box.addClass("bg-red")
-        } else if ($numberPuntaje > 5 && $numberPuntaje < 13) {
-            $box.removeClass("bg-red")
-            $box.removeClass("bg-yellow")
-            $box.removeClass("bg-green")
-            $box.removeClass("bg-blue")
-            $box.addClass("bg-yellow")
-        } else if ($numberPuntaje > 12 && $numberPuntaje < 19) {
-            $box.removeClass("bg-red")
-            $box.removeClass("bg-yellow")
-            $box.removeClass("bg-green")
-            $box.removeClass("bg-blue")
-            $box.addClass("bg-green")
-        } else if ($numberPuntaje > 18 && $numberPuntaje < 21) {
-            $box.removeClass("bg-red")
-            $box.removeClass("bg-yellow")
-            $box.removeClass("bg-green")
-            $box.removeClass("bg-blue")
-            $box.addClass("bg-blue")
-        }
-    };
+    if ($numberPuntaje > 0 && $numberPuntaje < 6) {
+      $box.removeClass("bg-red")
+      $box.removeClass("bg-yellow")
+      $box.removeClass("bg-green")
+      $box.removeClass("bg-blue")
+      $box.addClass("bg-red")
+    } else if ($numberPuntaje > 5 && $numberPuntaje < 13) {
+      $box.removeClass("bg-red")
+      $box.removeClass("bg-yellow")
+      $box.removeClass("bg-green")
+      $box.removeClass("bg-blue")
+      $box.addClass("bg-yellow")
+    } else if ($numberPuntaje > 12 && $numberPuntaje < 19) {
+      $box.removeClass("bg-red")
+      $box.removeClass("bg-yellow")
+      $box.removeClass("bg-green")
+      $box.removeClass("bg-blue")
+      $box.addClass("bg-green")
+    } else if ($numberPuntaje > 18 && $numberPuntaje < 21) {
+      $box.removeClass("bg-red")
+      $box.removeClass("bg-yellow")
+      $box.removeClass("bg-green")
+      $box.removeClass("bg-blue")
+      $box.addClass("bg-blue")
+    }
+  };
 
 
   $(document).on('change', ".indicadorTrabajosequipo", function() {
@@ -1068,22 +1098,22 @@
   });
 
   if ($("#calif_1").val() == 1) {
-        $("#customRadio1").prop("checked", true);
-    } else {
-        $("#customRadio2").prop("checked", true);
-    }
-    if ($("#calif_2").val() == 1) {
-        $("#customRadio3").prop("checked", true);
-    } else {
-        $("#customRadio4").prop("checked", true);
-    }
-    if ($("#calif_3").val() == 1) {
-        $("#customRadio5").prop("checked", true);
-    } else {
-        $("#customRadio6").prop("checked", true);
-    }
+    $("#customRadio1").prop("checked", true);
+  } else {
+    $("#customRadio2").prop("checked", true);
+  }
+  if ($("#calif_2").val() == 1) {
+    $("#customRadio3").prop("checked", true);
+  } else {
+    $("#customRadio4").prop("checked", true);
+  }
+  if ($("#calif_3").val() == 1) {
+    $("#customRadio5").prop("checked", true);
+  } else {
+    $("#customRadio6").prop("checked", true);
+  }
 
-    $(document).on("click", ".btn-print", function() {
+  $(document).on("click", ".btn-print", function() {
     $("#modal-leer-val .modal-body").print({
       title: "Valoración por objetivos"
     });

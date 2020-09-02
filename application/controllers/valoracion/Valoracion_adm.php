@@ -16,17 +16,39 @@ class Valoracion_adm extends CI_Controller
 
 	public function index()
 	{
+		$now = time();
+		$añoActual = date("Y",  $now);
+
+		$hijos = $this->Valoracion_adm_model->getusuariosHijosRegistrar($this->session->userdata("id"));
+		for ($i =0; $i<count($hijos);$i++){
+			$hijos[$i]->val1= $this->Valoracion_adm_model->getExistValoracion($hijos[$i]->hijo_id,1,$añoActual);
+			$hijos[$i]->val2= $this->Valoracion_adm_model->getExistValoracion($hijos[$i]->hijo_id,2,$añoActual);
+			$hijos[$i]->val3= $this->Valoracion_adm_model->getExistValoracion($hijos[$i]->hijo_id,3,$añoActual);
+		}
+
+
 
 		$data  = array(
 			'permisos' => $this->permisos,
-			'hijos' => $this->Valoracion_adm_model->getusuariosHijosRegistrar($this->session->userdata("id")),
+			'hijos' => $hijos,
 			'permisovaloracion' => 'Registrar',
 		);
-
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
 		$this->load->view("valoraciones/valoracion_adm/list", $data);
 		$this->load->view("layouts/footer");
+
+
+//		$data  = array(
+//			'permisos' => $this->permisos,
+//			'hijos' => $this->Valoracion_adm_model->getusuariosHijosRegistrar($this->session->userdata("id")),
+//			'permisovaloracion' => 'Registrar',
+//		);
+//
+//		$this->load->view("layouts/header");
+//		$this->load->view("layouts/aside");
+//		$this->load->view("valoraciones/valoracion_adm/list", $data);
+//		$this->load->view("layouts/footer");
 	}
 	public function show()
 	{
@@ -300,6 +322,10 @@ class Valoracion_adm extends CI_Controller
 		$añoActual = date("Y",  $now);
 		$fechaActual = date("Y-m-d",  $now);
 
+		$evaluador = $this->Valoracion_adm_model->getusuariosPadreRegistrar($this->session->userdata("id"));
+		$username_evaluador = $evaluador->username;
+
+
 		$n_obj_1 = $this->input->post("n_obj_1");
 		$a_obj_1 = $this->input->post("a_obj_1");
 		$p_obj_1 = $this->input->post("p_obj_1");
@@ -343,24 +369,32 @@ class Valoracion_adm extends CI_Controller
 			'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 		);
 		$this->Valoracion_adm_model->saveObjetivos($data);
-		$this->send_mail_add_objetivos(1, 2, 3, $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"));
+		$this->send_mail_add_objetivos($username_evaluador, $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"));
 		redirect(base_url() . "valoracion/mi_valoracion_adm/");
 	}
 
 
-	public function send_mail_add_objetivos($objetivo1, $objetivo2, $objetivo3, $colaborador)
+	public function send_mail_add_objetivos( $username_evaluador, $colaborador)
 	{
-	
 			$this->load->library('email');
-			$this->email->from('victor.galvez56@gmail.com', 'Administrador Sistemas XYZ');
-			$this->email->to('vgalvez@prescott.edu.pe');
+			$this->email->from('sistemapdp@prescott.edu.pe', 'Sistema Valoración Prescott');
+			$this->email->to($username_evaluador);
 	
-			$this->email->subject('Registro de objetivos del colaborador ' . $colaborador);
-			$this->email->message('El colaborador ' . $colaborador . "registro sus objetivos. Ingrese al sistema para ver más detalles.");
+			$this->email->subject('Registro de objetivos - colaborador(a) ' . $colaborador);
+			$this->email->message('El colaborador ' . $colaborador . " registro sus objetivos. Ingrese al sistema para ver más detalles. https://colegioprescott.edu.pe/prescott-valoracion");
 			$this->email->send();
 	}
 
-
+	public function send_mail_update_objetivos($username_evaluador, $colaborador)
+	{
+			$this->load->library('email');
+			$this->email->from('sistemapdp@prescott.edu.pe', 'Sistema Valoración Prescott');
+			$this->email->to($username_evaluador);
+	
+			$this->email->subject('Actualización de objetivos - colaborador(a) ' . $colaborador);
+			$this->email->message('El colaborador ' . $colaborador . " actualizó sus objetivos. Ingrese al sistema para ver más detalles. https://colegioprescott.edu.pe/prescott-valoracion");
+			$this->email->send();
+	}
 
 	public function store()
 	{
@@ -597,24 +631,6 @@ class Valoracion_adm extends CI_Controller
 		$idUpdateAprendizaje = $this->input->post("idUpdateAprendizaje");
 
 
-		// echo json_encode($idUpdateComunicacion);
-		// echo json_encode($idUpdateTrabajo);
-		// echo json_encode($idUpdateProactividad);
-		// echo json_encode($idUpdateAprendizaje);
-
-		// echo json_encode($puntajeTrabajosequipo);
-		// echo json_encode($puntajeComunicacion);
-		// echo json_encode($puntajeProactividad);
-		// echo json_encode($puntajeAprendizaje);
-
-		// echo json_encode($inputComunicacion);
-		// echo json_encode($inputTrabajo);
-		// echo json_encode($inputProactividad);
-		// echo json_encode($inputAprendizaje);
-		// die();
-
-
-
 
 		$suma1 = 0;
 		$suma2 = 0;
@@ -682,6 +698,9 @@ class Valoracion_adm extends CI_Controller
 
 	public function validacion3_update()
 	{
+		$evaluador = $this->Valoracion_adm_model->getusuariosPadreRegistrar($this->session->userdata("id"));
+		$username_evaluador = $evaluador->username;
+		
 		$now = time();
 		$añoActual = date("Y",  $now);
 		$fechaActual = date("Y-m-d",  $now);
@@ -729,6 +748,7 @@ class Valoracion_adm extends CI_Controller
 			'update_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 		);
 		$this->Valoracion_adm_model->updateObjetivos($idObjetivos,$data);
+		$this->send_mail_update_objetivos($username_evaluador, $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"));
 		redirect(base_url() . "valoracion/mi_valoracion_adm/");
 	}
 
