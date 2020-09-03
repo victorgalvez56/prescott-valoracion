@@ -72,7 +72,7 @@ $('.tt_large').tooltip({
       "responsive": true,
       "autoWidth": false,
       "ordering": false,
-    });
+	});
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": true,
@@ -84,6 +84,21 @@ $('.tt_large').tooltip({
     });
 
   });
+  $(document).ready(function() {
+	  $('.ir-arriba').click(function() {
+	  	console.warn('ga')
+		  $('#arriba').animate({
+			  scrollTop: '0px'
+		  }, 750);
+	  });
+	  $('.ir-abajo').click(function() {
+		  $('#arriba').animate({
+			  scrollTop: '1000px'
+		  }, 750);
+	  });
+
+  });
+
   /*Confirmación modal*/
   $("button[id='modalConfirmacionGerencia']").click(function() {
     url = BASE_URL + "mantenimiento/gerencias/delete/" + $(this).val();
@@ -285,6 +300,23 @@ $('.tt_large').tooltip({
         $("#modal-leer-val #titleValoracion").val("Valoración de Objetivos");
       }
     });
+  });
+
+  $(document).on("click", "#modal-valoracion3_final", function() {
+  	console.warn('ga')
+	  valor_id = $(this).val();
+	  $.ajax({
+		  url: BASE_URL + "valoracion/valoracion_adm/validacion3_leer_final",
+		  type: "POST",
+		  dataType: "html",
+		  data: {
+			  id: valor_id
+		  },
+		  success: function(data) {
+			  $("#modal-leer-val .modal-body").html(data);
+			  $("#modal-leer-val #titleValoracion").val("Valoración de Objetivos");
+		  }
+	  });
   });
 
 

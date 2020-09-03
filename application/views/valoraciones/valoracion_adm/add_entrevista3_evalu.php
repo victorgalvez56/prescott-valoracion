@@ -3,7 +3,7 @@
     <div class="timeline-item">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Entrevista 3</h3>
+                <h3 class="card-title">Entrevista 3 - Por favor registre sus comentario marcando además si el colaborador cumplió o no con los objetivos planteados. ¡Gracias!</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->

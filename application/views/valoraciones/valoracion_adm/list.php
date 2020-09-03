@@ -35,7 +35,9 @@
 									<th>Valoración 1</th>
 									<th>Valoración 2</th>
 									<th>Valoración Objetivos</th>
-									<th>Anecdotario</th>
+									<?php if ($permisovaloracion == "Registrar") : ?>
+										<th>Anecdotario</th>
+									<?php endif; ?>
 								</tr>
 								</thead>
 								<tbody>
@@ -139,7 +141,7 @@
 													<?php if ($permisovaloracion == "Leer") : ?>
 														<button class="btn btn-info btn-lg"
 																value="<?php echo $hijo->hijo_id; ?>"
-																id="modal-valoracion3_leer" data-toggle="modal"
+																id="modal-valoracion3_final" data-toggle="modal"
 																data-target="#modal-leer-val"><span
 																	class="fas fa-search"></span></button>
 													<?php endif; ?>

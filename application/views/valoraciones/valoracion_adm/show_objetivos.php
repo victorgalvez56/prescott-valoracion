@@ -161,7 +161,7 @@
         });
 		$('.ir-abajo').click(function() {
 			$('div').animate({
-				scrollTop: '1000px'
+				scrollTop: '5000px'
 			}, 750);
 		});
 

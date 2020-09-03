@@ -141,7 +141,7 @@
                         <div class="col-sm-12">
                             <!-- text input -->
                             <div class="form-group">
-                                <label class="col-form-label" for=""><i class="fas fa-check"></i> Comentario opcional</label>
+                                <label class="col-form-label" for=""><i class="fas fa-check"></i> Si desea realizar algún comentario adicional sobre los objetivos propuestos puede hacerlo aquí.</label>
                                 <textarea name="comentario_opcional" class="form-control" rows="2" placeholder="Enter ..." id="comentario_opcional" disabled><?php echo  $estado->comentario_opcional; ?></textarea>
                             </div>
                         </div>

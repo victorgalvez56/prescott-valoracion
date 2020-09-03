@@ -2,7 +2,7 @@
     <i class="fas fa-comments bg-yellow"></i>
     <div class="timeline-item">
         <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-        <h3 class="timeline-header"><a href="#"><?php echo $evaluador; ?></a> por favor realice su firma en el panel de color celeste si está de acuerdo con su calificación</h3>
+        <h3 class="timeline-header"><a href="#"><?php echo $evaluador; ?></a> por favor registre su firma en el siguiente panel. ¡Gracias! </h3>
         <form action="<?php echo base_url(); ?>valoracion/mi_valoracion_adm/firma_evalu_registro" id="usrform" method="POST">
             <div class="timeline-body is-valid">
                 <div class="wrapper-pad">

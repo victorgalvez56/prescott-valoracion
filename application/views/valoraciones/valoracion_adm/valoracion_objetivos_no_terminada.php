@@ -13,9 +13,11 @@
 
                 <div class="alert alert-danger alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <h5><i class="icon fas fa-ban"></i>  ¡Importante!</h5>
-                  La valoración no está habilitada, considerando las fechas establecidas para su ejecución. 
-                                  </div>
+                  <h5><i class="icon fas fa-ban"></i> ¡Importante!</h5>
+                  
+Pese a estar en la fecha establecida, aún no se cuenta completo el registro de los objetivos del colaborador.
+
+                </div>
             </div>
         </div>
     </div>

@@ -20,8 +20,8 @@
 
             <div class="alert alert-warning alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
-                  Puedes editar tus objetivos hasta que tu evaluador los acepte. Una vez aceptados, no podrán modificar. 
+                  <h5><i class="icon fas fa-exclamation-triangle"></i>¡Importante!</h5>
+                  Puedes editar tus objetivos hasta que tu evaluador los acepte. Una vez aceptados, no se podrán modificar. 
                 </div>
 
             <!-- /.card-header -->

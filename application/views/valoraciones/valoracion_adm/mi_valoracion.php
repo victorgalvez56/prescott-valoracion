@@ -204,18 +204,18 @@
   </div>
   <div>
 
-	  <a class="ir-arriba"  javascript:void(0) title="Volver arriba">
-  <span class="fa-stack">
-    <i class="fa fa-circle fa-stack-2x"></i>
-    <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
-  </span>
-	  </a>
-	  <a class="ir-abajo"  javascript:void(0) title="Volver arriba">
-  <span class="fa-stack">
-    <i class="fa fa-circle fa-stack-2x"></i>
-    <i class="fa fa-arrow-down fa-stack-1x fa-inverse"></i>
-  </span>
-	  </a>
+<!--	  <a class="ir-arriba" title="Volver arriba">-->
+<!--  <span class="fa-stack">-->
+<!--    <i class="fa fa-circle fa-stack-2x"></i>-->
+<!--    <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>-->
+<!--  </span>-->
+<!--	  </a>-->
+<!--	  <a class="ir-abajo"  title="Volver arriba">-->
+<!--  <span class="fa-stack">-->
+<!--    <i class="fa fa-circle fa-stack-2x"></i>-->
+<!--    <i class="fa fa-arrow-down fa-stack-1x fa-inverse"></i>-->
+<!--  </span>-->
+<!--	  </a>-->
 
   </div>
   </div>
@@ -266,20 +266,6 @@
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
   <script>
-	  $(document).ready(function() {
-
-		  $('.ir-arriba').click(function() {
-			  $('div').animate({
-				  scrollTop: '0px'
-			  }, 750);
-		  });
-		  $('.ir-abajo').click(function() {
-			  $('div').animate({
-				  scrollTop: '1000px'
-			  }, 750);
-		  });
-
-	  });
 
       var canvas = document.getElementById('signature-pad');
 

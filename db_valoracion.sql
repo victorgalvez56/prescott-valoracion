@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-09-2020 a las 17:17:53
+-- Tiempo de generación: 02-09-2020 a las 21:40:10
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.3.19
 
@@ -79,17 +79,17 @@ INSERT INTO `areas` (`id`, `nombre`, `descripcion`, `estado`, `gerencia_id`, `cr
 (1, 'Finanzas', '', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
 (2, 'Desarrollo Humano', '', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
 (3, 'Sistemas', '', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
-(4, 'Seguridad y Salud Ocupacional', '-', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '17-08-2020 10:59:15', 'Administrador Sistema'),
-(5, 'Logística, Infraestructura y Mantenimiento', '-', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '17-08-2020 11:01:26', 'Administrador Sistema'),
+(4, 'Seguridad y Salud Ocupacional', '', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '17-08-2020 10:59:15', 'Administrador Sistema'),
+(5, 'Logística, Infraestructura y Mantenimiento', '', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '17-08-2020 11:01:26', 'Administrador Sistema'),
 (6, 'Promoción y comunicación', '', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
 (7, 'PS', '', 1, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
-(8, 'ES', 'x', 1, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(8, 'ES', '', 1, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
 (9, 'MS', '', 1, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
 (10, 'HS', '', 1, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
-(11, 'No necesita área NO DOCENTES', '', 0, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
-(12, 'No necesita área DOCENTES', '', 0, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
-(15, 'RRPP', 'RRPP', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
-(16, 'Programa de Desarrollo Institucional (PDI)', 'PDI', 1, 2, '15-08-2020 23:44:07', 'Administrador Sistema', '17-08-2020 11:01:02', 'Administrador Sistema');
+(11, 'Programa de Desarrollo Institucional (PDI)', '', 1, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(12, 'RRPP', '', 1, 1, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(15, 'No necesita área DOCENTES', '', 0, 2, '15-08-2020 23:40:09', 'Administrador Sistema', '', ''),
+(16, 'No necesita área NO DOCENTES', '', 0, 2, '15-08-2020 23:44:07', 'Administrador Sistema', '17-08-2020 11:01:02', 'Administrador Sistema');
 
 -- --------------------------------------------------------
 
@@ -337,6 +337,88 @@ INSERT INTO `indicadores` (`id`, `descripcion`, `estado`, `competencia_id`, `cre
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `items`
+--
+
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `estado` int(11) NOT NULL,
+  `id_tipo_profesor` int(11) NOT NULL,
+  `id_tipo_item` int(11) NOT NULL,
+  `create_at` varchar(35) NOT NULL,
+  `create_by` varchar(35) NOT NULL,
+  `update_at` varchar(35) NOT NULL,
+  `update_by` varchar(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `items`
+--
+
+INSERT INTO `items` (`id`, `nombre`, `estado`, `id_tipo_profesor`, `id_tipo_item`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
+(1, 'Recoge los saberes previos utilizando diferentes estrategias y los confrontan con información nueva. (Debe ser evidenciable)', 1, 8, 1, '', '', '', ''),
+(2, 'Los alumnos conocen el por qué y para qué son importantes los conocimientos que están desarrollando.', 1, 8, 1, '', '', '', ''),
+(3, 'Promueve espacios de diálogo, discusión y/o debate entre los alumnos para que expresen sus ideas, opiniones, formulen preguntas o consultas, expongan y presenten nuevas ideas, planteamientos, hipótesis y/o conclusiones como parte de la construcción de su ', 1, 8, 1, '', '', '', ''),
+(4, 'Se evidencian enfoques creativos y constructivistas de enseñanza con estrategias variadas y motivadoras basadas en el juego.', 1, 8, 1, '', '', '', ''),
+(5, 'Las actividades propuestas por el profesor son diferenciadas de acuerdo a las necesidades de los alumnos y teniendo en cuenta los estilos y ritmos de aprendizaje. ', 1, 8, 1, '', '', '', ''),
+(6, 'Se hace uso de una variedad de materiales para interesar a los alumnos y lograr que participen en las actividades propuestas.', 1, 8, 1, '', '', '', ''),
+(7, 'El profesor demuestra dominio del contenido, haciendo uso frecuente de un vocabulario apropiado al área y evidencia una estructura ordenada, lógica y clara en el desarrollo de la sesión.', 1, 8, 1, '', '', '', ''),
+(8, 'Los alumnos expresan respuestas y/o resultados en un ambiente de confianza, recibiendo una reflexión por parte del profesor.', 1, 8, 1, '', '', '', ''),
+(9, 'Se planifica actividades y/o experiencias significativas, las dosifica, las explica y las revisa haciendo una valoración cualitativa.', 1, 8, 1, '', '', '', ''),
+(10, 'Los alumnos son motivados a cumplir con los acuerdos esenciales, atributos, actitudes y habilidades en todo momento.', 1, 8, 1, '', '', '', ''),
+(11, 'El profesor pone en práctica los lineamientos específicos, consignados para su School, de acuerdo a la Política de Probidad Académica.', 1, 8, 1, '', '', '', ''),
+(12, 'El profesor cita y refiere todos sus documentos según se establece en la Política de Probidad Académica.', 1, 8, 1, '', '', '', ''),
+(13, 'El profesor promueve una ambientación de clase ordenada, que refleja la participación activa y el desarrollo del pensamiento de los alumnos, evidenciando el desarrollo de la unidad.', 1, 8, 1, '', '', '', ''),
+(14, 'Ejecuta las estrategias de aprendizaje según lo planificado.', 1, 8, 1, '', '', '', ''),
+(15, 'El profesor se preocupa en planificar y ejecutar visitas de estudio, valiéndose de las oportunidades que le brinda la comunidad, el colegio y los miembros de nuestra comunidad educativa, permitiendo ampliar el conocimiento de los alumnos.', 1, 8, 1, '', '', '', ''),
+(16, 'Los alumnos demuestran conocimiento y comprensión sobre el conocimiento que están desarrollando.', 1, 8, 2, '', '', '', ''),
+(17, 'El profesor registra los cuestionamientos y conocimientos resaltantes de los alumnos para organizar el desarrollo de su unidad.', 1, 8, 2, '', '', '', ''),
+(18, 'Genera un ambiente positivo, de respeto y confianza. Corrige asertivamente a los alumnos y favorece el aprendizaje. ', 1, 8, 3, '', '', '', ''),
+(19, 'Se evidencian muchas demostraciones de emociones positivas entre el maestro y los alumnos.', 1, 8, 3, '', '', '', ''),
+(20, 'El profesor nota e interviene cuando un alumno necesita apoyo adicional, ayuda o atención.', 1, 8, 3, '', '', '', ''),
+(21, 'El profesor usa estrategias proactivas y orienta la conducta de los alumnos de manera eficaz antes que ocurran problemas.', 1, 8, 3, '', '', '', ''),
+(22, 'Las transiciones de una actividad a otra son fluidas y eficaces.', 1, 8, 3, '', '', '', ''),
+(23, 'El profesor redirige la conducta inapropiada enfocándose en aspectos positivos y haciendo indicaciones sutiles.', 1, 8, 3, '', '', '', ''),
+(24, 'Los planificadores, planes de clase, evaluaciones y fichas de trabajo son elaborados respetando el desarrollo del pensamiento crítico, la construcción del aprendizaje, la transdisciplinariedad, la mentalidad internacional y las necesidades de los alumnos.', 1, 8, 4, '', '', '', ''),
+(25, 'El profesor participa activamente en las reuniones de planificación y reflexiona sobre sus estrategias de enseñanza haciendo los ajustes necesarios. ', 1, 8, 4, '', '', '', ''),
+(26, 'El profesor participa activamente en las reuniones de planificación del grado y con los profesores de áreas especiales. (Equipo educador) ', 1, 8, 4, '', '', '', ''),
+(27, 'Recoge los saberes previos utilizando diferentes estrategias y los confrontan con información nueva. (Debe ser evidenciable)', 1, 7, 1, '', '', '', ''),
+(28, 'Los alumnos conocen el por qué y para qué son importantes los conocimientos que están desarrollando.', 1, 7, 1, '', '', '', ''),
+(29, 'Promueve espacios de diálogo, discusión y/o debate entre los alumnos para que expresen sus ideas, opiniones, formulen preguntas o consultas, expongan y presenten nuevas ideas, planteamientos, hipótesis y/o conclusiones como parte de la construcción de su ', 1, 7, 1, '', '', '', ''),
+(30, 'Se evidencian enfoques creativos y constructivistas de enseñanza con estrategias variadas y motivadoras basadas en el juego.', 1, 7, 1, '', '', '', ''),
+(31, 'Las actividades propuestas por el profesor son diferenciadas de acuerdo a las necesidades de los alumnos y teniendo en cuenta los estilos y ritmos de aprendizaje. ', 1, 7, 1, '', '', '', ''),
+(32, 'Se hace uso de una variedad de materiales para interesar a los alumnos y lograr que participen en las actividades propuestas.', 1, 7, 1, '', '', '', ''),
+(33, 'El profesor demuestra dominio del contenido, haciendo uso frecuente de un vocabulario apropiado al área y evidencia una estructura ordenada, lógica y clara en el desarrollo de la sesión.', 1, 7, 1, '', '', '', ''),
+(34, 'Los alumnos expresan respuestas y/o resultados en un ambiente de confianza, recibiendo una reflexión por parte del profesor.', 1, 7, 1, '', '', '', ''),
+(35, 'Se planifica actividades y/o experiencias significativas, las dosifica, las explica y las revisa haciendo una valoración cualitativa.', 1, 7, 1, '', '', '', ''),
+(36, 'Los alumnos son motivados a cumplir con los acuerdos esenciales, atributos, actitudes y habilidades en todo momento.', 1, 7, 1, '', '', '', ''),
+(37, 'El profesor pone en práctica los lineamientos específicos, consignados para su School, de acuerdo a la Política de Probidad Académica.', 1, 7, 1, '', '', '', ''),
+(38, 'El profesor cita y refiere todos sus documentos según se establece en la Política de Probidad Académica.', 1, 7, 1, '', '', '', ''),
+(39, 'El profesor promueve una ambientación de clase ordenada, que refleja la participación activa y el desarrollo del pensamiento de los alumnos, evidenciando el desarrollo de la unidad.', 1, 7, 1, '', '', '', ''),
+(40, 'Ejecuta las estrategias de aprendizaje según lo planificado.', 1, 7, 1, '', '', '', ''),
+(41, 'El profesor se preocupa en planificar y ejecutar visitas de estudio, valiéndose de las oportunidades que le brinda la comunidad, el colegio y los miembros de nuestra comunidad educativa, permitiendo ampliar el conocimiento de los alumnos.', 1, 7, 1, '', '', '', ''),
+(42, 'Los alumnos demuestran conocimiento y comprensión sobre el conocimiento que están desarrollando.', 1, 7, 2, '', '', '', ''),
+(43, 'El profesor registra los cuestionamientos y conocimientos resaltantes de los alumnos para organizar el desarrollo de su unidad.', 1, 7, 2, '', '', '', ''),
+(44, 'El profesor evalúa oportunamente el aprendizaje de sus alumnos para asegurarse si comprendieron lo trabajado,  y/o reprogramar o reforzar si fuera necesario.												', 1, 7, 2, '', '', '', ''),
+(45, 'Se evidencia el uso de diversas herramientas de evaluación, las cuales permiten que los alumnos conozcan los criterios sobre los cuales serán valorados, tanto en sus evaluaciones formativas como sumativas.												', 1, 7, 2, '', '', '', ''),
+(46, 'Se evidencia el uso de diversas estrategias para la evaluación formativa y sumativa, considerando actividades diferenciadas y su respectivo feedback .												', 1, 7, 2, '', '', '', ''),
+(47, 'Se evidencia oportunidades de retroalimentación/reflexión, por parte del profesor en las evaluaciones formativas y sumativas. (Portafolio Virtual)												', 1, 7, 2, '', '', '', ''),
+(48, 'Genera un ambiente positivo, de respeto y confianza. Corrige asertivamente a los alumnos y favorece el aprendizaje. ', 1, 7, 3, '', '', '', ''),
+(49, 'Se evidencian muchas demostraciones de emociones positivas entre el maestro y los alumnos.', 1, 7, 3, '', '', '', ''),
+(50, 'El profesor nota e interviene cuando un alumno necesita apoyo adicional, ayuda o atención.', 1, 7, 3, '', '', '', ''),
+(51, 'El profesor usa estrategias proactivas y orienta la conducta de los alumnos de manera eficaz antes que ocurran problemas.', 1, 7, 3, '', '', '', ''),
+(52, 'Las transiciones de una actividad a otra son fluidas y eficaces.', 1, 7, 3, '', '', '', ''),
+(53, 'El profesor redirige la conducta inapropiada enfocándose en aspectos positivos y haciendo indicaciones sutiles.', 1, 7, 3, '', '', '', ''),
+(54, 'Los planificadores, planes de clase, evaluaciones y fichas de trabajo son elaborados respetando el desarrollo del pensamiento crítico, la construcción del aprendizaje, la transdisciplinariedad, la mentalidad internacional y las necesidades de los alumnos.', 1, 7, 4, '', '', '', ''),
+(55, 'Su registro auxiliar considera los desempeños de evaluación planificados, se encuentra actualizado y lo presenta a coordinación en las fechas indicadas.', 1, 7, 4, '', '', '', ''),
+(56, 'Implementa  y actualiza oportunamente el aula virtual para cada unidad considerando actividades que desarrollen el pensamiento crítico y habilidades.', 1, 7, 4, '', '', '', ''),
+(57, 'El profesor participa activamente en las reuniones de planificación y reflexiona sobre sus estrategias de enseñanza haciendo los ajustes necesarios. ', 1, 7, 4, '', '', '', ''),
+(58, 'El profesor participa activamente en las reuniones de planificación del grado y con los profesores de áreas especiales. (Equipo educador) ', 1, 7, 4, '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `menus`
 --
 
@@ -579,6 +661,59 @@ INSERT INTO `tipos_entrevista` (`id`, `nombre`, `estado`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tipos_items`
+--
+
+CREATE TABLE `tipos_items` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `create_at` varchar(35) NOT NULL,
+  `create_by` varchar(35) NOT NULL,
+  `update_at` varchar(35) NOT NULL,
+  `update_by` varchar(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tipos_items`
+--
+
+INSERT INTO `tipos_items` (`id`, `nombre`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
+(1, 'ESTRATEGIAS DE APRENDIZAJE - ENSEÑANZA', 1, '', '', '', ''),
+(2, 'PROCESO DE EVALUACIÓN', 1, '', '', '', ''),
+(3, 'MANEJO DE GRUPO/CLIMA POSITIVO', 1, '', '', '', ''),
+(4, 'DOCUMENTOS Y AULA VIRTUAL', 1, '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipos_profesores`
+--
+
+CREATE TABLE `tipos_profesores` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(35) NOT NULL,
+  `area_id` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `create_at` varchar(35) NOT NULL,
+  `create_by` varchar(35) NOT NULL,
+  `update_at` varchar(35) NOT NULL,
+  `update_by` varchar(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tipos_profesores`
+--
+
+INSERT INTO `tipos_profesores` (`id`, `nombre`, `area_id`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
+(5, 'Arte', 7, 1, '', '', '', ''),
+(6, 'Inglés', 7, 1, '', '', '', ''),
+(7, 'Español', 7, 1, '', '', '', ''),
+(8, 'Asistente', 7, 1, '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tipos_valoracion`
 --
 
@@ -634,9 +769,9 @@ INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `username`, `password`, `r
 (77, 'Susana María Josefa', 'Bustamante de Soto', 'sbustamante@prescott.edu.pe', '3a95719f625632b9a78ccc791fce39cce3f6a208', 3, 6, 1, NULL, '', NULL, ''),
 (78, 'Javier Alonso', 'Butrón Valencia', 'jbutron@prescott.edu.pe', 'a32eebfc07ef1783797de4816159c8ab445dd67e', 3, 3, 1, NULL, '', NULL, ''),
 (79, 'Paola Erika', 'Cárdenas Valdivia de Prevate', 'pcardenas@prescott.edu.pe', '1b2162b408b0337593eb8aacaa2115e22de472cc', 3, 5, 1, NULL, '', NULL, ''),
-(80, 'Vania ', 'López Berrios', 'vlopez@prescott.edu.pe', 'bee367050fdb6496bc465f9002c2e4d946166069', 3, 6, 1, NULL, '', NULL, ''),
+(80, 'Vania', 'López Berrios', 'vlopez@prescott.edu.pe', 'bee367050fdb6496bc465f9002c2e4d946166069', 3, 6, 1, NULL, '', NULL, ''),
 (81, 'Moscoso Aramayo', 'Ana Paola', 'amoscoso@prescott.edu.pe', '0e06bb6fe622c3cec7bfa6b3c8051f9d70907224', 3, 1, 1, NULL, '', NULL, ''),
-(82, 'Marleni', 'Valencia Portugal', 'mvalencia@prescott.edu.pe', '855f49136947d2893b97e9ab609b51d6681a6cc9', 3, 15, 1, NULL, '', NULL, ''),
+(82, 'Marleni', 'Valencia Portugal', 'mvalencia@prescott.edu.pe', '855f49136947d2893b97e9ab609b51d6681a6cc9', 3, 12, 1, NULL, '', NULL, ''),
 (83, 'Andrea Alejandra', 'Zegarra Lozada', 'azegarra@prescott.edu.pe', '6b9e0cfa0d1155fa80b0bd10eeeaaa64a81b87df', 3, 2, 1, NULL, '', NULL, ''),
 (84, 'Katherine Maryori', 'Benites Cucho', 'kbenites@prescott.edu.pe', 'da6b6259ceb0c7f47a0a3db80de7069f91bf36a8', 4, 2, 1, NULL, '', NULL, ''),
 (85, 'Laura Elizabeth', 'Portugal Passiuri', 'lportugal@prescott.edu.pe', 'ba9c52f7a0b74c9a95f530ad62a09fdf6443596a', 4, 2, 1, NULL, '', NULL, ''),
@@ -734,6 +869,14 @@ ALTER TABLE `indicadores`
   ADD KEY `fk_competencias_indicador` (`competencia_id`);
 
 --
+-- Indices de la tabla `items`
+--
+ALTER TABLE `items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_tipo_profesor_items` (`id_tipo_profesor`),
+  ADD KEY `fk_tipo_items` (`id_tipo_item`);
+
+--
 -- Indices de la tabla `menus`
 --
 ALTER TABLE `menus`
@@ -780,6 +923,19 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `tipos_entrevista`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipos_items`
+--
+ALTER TABLE `tipos_items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipos_profesores`
+--
+ALTER TABLE `tipos_profesores`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_profesor_area` (`area_id`);
 
 --
 -- Indices de la tabla `tipos_valoracion`
@@ -856,6 +1012,12 @@ ALTER TABLE `indicadores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
+-- AUTO_INCREMENT de la tabla `items`
+--
+ALTER TABLE `items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+
+--
 -- AUTO_INCREMENT de la tabla `menus`
 --
 ALTER TABLE `menus`
@@ -896,6 +1058,18 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `tipos_entrevista`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `tipos_items`
+--
+ALTER TABLE `tipos_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `tipos_profesores`
+--
+ALTER TABLE `tipos_profesores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_valoracion`
@@ -960,6 +1134,13 @@ ALTER TABLE `indicadores`
   ADD CONSTRAINT `fk_competencias_indicador` FOREIGN KEY (`competencia_id`) REFERENCES `competencias` (`id`);
 
 --
+-- Filtros para la tabla `items`
+--
+ALTER TABLE `items`
+  ADD CONSTRAINT `fk_tipo_items` FOREIGN KEY (`id_tipo_item`) REFERENCES `tipos_items` (`id`),
+  ADD CONSTRAINT `fk_tipo_profesor_items` FOREIGN KEY (`id_tipo_profesor`) REFERENCES `tipos_profesores` (`id`);
+
+--
 -- Filtros para la tabla `objetivos`
 --
 ALTER TABLE `objetivos`
@@ -984,6 +1165,12 @@ ALTER TABLE `permisos`
 --
 ALTER TABLE `roles`
   ADD CONSTRAINT `fk_gerencia_roles` FOREIGN KEY (`gerencia_id`) REFERENCES `gerencias` (`id`);
+
+--
+-- Filtros para la tabla `tipos_profesores`
+--
+ALTER TABLE `tipos_profesores`
+  ADD CONSTRAINT `fk_profesor_area` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`);
 
 --
 -- Filtros para la tabla `usuarios`

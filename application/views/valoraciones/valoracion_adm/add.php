@@ -15,16 +15,18 @@
 
                     <div class="alert alert-warning alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
-                        Está valoración ya se ha registrado, si presiona guardar se sobreescribirán los datos.
+                        <h5><i class="icon fas fa-exclamation-triangle"></i> ¡Importante!</h5>
+                        Recuerde que esta valoración es importante para medir el desempeño del colaborador a lo largo del año. 
+                Una vez guardada y solo se podrá modificar hasta el tiempo establecido. Quedan <?php echo $dias_faltantes; ?> días.
                     </div>
                     <?php include 'application/views/valoraciones/valoracion_adm/edit.php'; ?>
                 <?php } else {  ?>
 
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-exclamation-triangle"></i> Atención!</h5>
-                        Califique con veracidad los datos, una vez guardados solo se podrá modificar hasta el tiempo establecido.
+                        <h5><i class="icon fas fa-exclamation-triangle"></i> ¡Importante!</h5>
+                        Recuerde que esta valoración es importante para medir el desempeño del colaborador a lo largo del año. 
+                Una vez guardada y solo se podrá modificar hasta el tiempo establecido. Quedan <?php echo $dias_faltantes; ?> días.
                     </div>
                     <?php include 'application/views/valoraciones/valoracion_adm/registro_valoracion.php'; ?>
                 <?php }  ?>

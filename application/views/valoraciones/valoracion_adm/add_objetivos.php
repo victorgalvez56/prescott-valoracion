@@ -4,8 +4,9 @@
         <div class="card card-warning">
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h5><i class="icon fas fa-exclamation-triangle"></i> Atención!</h5>
-                Registre sus objetivos para que pueda revisar su evaluador.
+                <h5><i class="icon fas fa-exclamation-triangle"></i> ¡Importante!</h5>
+                
+Recuerde registrar sus objetivos para que puedan ser revisados y aceptados por su evaluador. ¡Muchas Gracias!
             </div>
             <!-- /.card-header -->
             <div class="card-body">

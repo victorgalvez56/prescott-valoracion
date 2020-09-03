@@ -71,18 +71,19 @@ class Valoracion_adm extends CI_Controller
 		$añoActual = date("Y",  $now);
 		$id = $this->input->post("id");
 
+
 		$validacion = "1";
+
 		$data = array(
-			'permisos' => $this->permisos,
 			'detalle_valoraciones' => $this->Valoracion_adm_model->getDetalleValoracion($id, $añoActual),
-			'tipo_validacion' => $validacion,
+			'previo_registro' => $this->Valoracion_adm_model->getValoracion($id, $validacion,$añoActual),
+			'permisos' => $this->permisos,
 			'usuario' => $this->Valoracion_adm_model->getusuario($id),
-			'competencias' => $this->Valoracion_adm_model->getCompetencias(),
-			'comunicaciones' => $this->Valoracion_adm_model->getindicadorComunicacion(),
-			'trabajosequipo' => $this->Valoracion_adm_model->getindicadorTrabajos(),
-			'aprendizajes' => $this->Valoracion_adm_model->getindicadorAprendizajes(),
-			'proactividades' => $this->Valoracion_adm_model->getindicadorProactividades(),
-			'permisovaloracion' => 'Leer'
+			'tipo_validacion' => $validacion,
+			'puntajes1_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 1, 1),
+			'puntajes2_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 2, 1),
+			'puntajes3_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 3, 1),
+			'puntajes4_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 4, 1),
 		);
 
 
@@ -103,16 +104,15 @@ class Valoracion_adm extends CI_Controller
 
 		$validacion = "2";
 		$data = array(
-			'permisos' => $this->permisos,
 			'detalle_valoraciones' => $this->Valoracion_adm_model->getDetalleValoracion($id, $añoActual),
-			'tipo_validacion' => $validacion,
+			'previo_registro' => $this->Valoracion_adm_model->getValoracion($id, $validacion,$añoActual),
+			'permisos' => $this->permisos,
 			'usuario' => $this->Valoracion_adm_model->getusuario($id),
-			'competencias' => $this->Valoracion_adm_model->getCompetencias(),
-			'comunicaciones' => $this->Valoracion_adm_model->getindicadorComunicacion(),
-			'trabajosequipo' => $this->Valoracion_adm_model->getindicadorTrabajos(),
-			'aprendizajes' => $this->Valoracion_adm_model->getindicadorAprendizajes(),
-			'proactividades' => $this->Valoracion_adm_model->getindicadorProactividades(),
-			'permisovaloracion' => 'Leer'
+			'tipo_validacion' => $validacion,
+			'puntajes1_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 1, 1),
+			'puntajes2_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 2, 1),
+			'puntajes3_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 3, 1),
+			'puntajes4_val1' => $this->Valoracion_adm_model->getvaloracion1($id, $añoActual, 4, 1),
 		);
 
 
@@ -205,6 +205,93 @@ class Valoracion_adm extends CI_Controller
 		}
 	}
 
+
+	public function validacion3_leer_final()
+	{
+		$now = time();
+		$añoActual = date("Y",  $now);
+		$fechaActual = date("Y-m-d",  $now);
+
+		$validacion = "3";
+		$fechas_valoraciones = $this->Periodos_model->getFechasValidacion($añoActual, $validacion);
+		$fecha_inicio_val1 = $fechas_valoraciones->fecha_inicio;
+		$fecha_fin_val1 = $fechas_valoraciones->fecha_fin;
+		$id = $this->input->post("id");
+
+		$estado_val_obj = $this->Valoracion_adm_model->getEstadoObj($id, $añoActual);
+
+		$estado_entrevista2_colab =  $this->Valoracion_adm_model->getEntrevistaColaborador($id, $añoActual, 1);
+		$estado_entrevista3_evalu =  $this->Valoracion_adm_model->getEntrevistaColaborador($id, $añoActual, 2);
+
+
+		if ($estado_entrevista2_colab == false) {
+
+			$valoracion_objetivo =  " ";
+
+			$data = array(
+				'id' => $id,
+				'permisos' => $this->permisos,
+				'usuario' => $this->Valoracion_adm_model->getusuario($id),
+				'tipo_validacion' => $validacion,
+				'estado' => $estado_val_obj,
+				'estado_entrevista2_colab' => $estado_entrevista2_colab,
+				'total_val_obj' => $valoracion_objetivo,
+
+			);
+			$this->load->view("valoraciones/valoracion_adm/valoracion_objetivos_no_terminada", $data);
+		} else {
+			if ($estado_entrevista2_colab[0]->evaluador_id == null) {
+				$valoracion_objetivo =  " ";
+
+				$data = array(
+					'id' => $id,
+					'permisos' => $this->permisos,
+					'usuario' => $this->Valoracion_adm_model->getusuario($id),
+					'tipo_validacion' => $validacion,
+					'estado' => $estado_val_obj,
+					'estado_entrevista2_colab' => $estado_entrevista2_colab,
+					'total_val_obj' => $valoracion_objetivo,
+
+				);
+				$this->load->view("valoraciones/valoracion_adm/valoracion_objetivos_no_terminada", $data);
+			} else {
+
+				$colaboradoraux =  $this->Usuarios_model->getUsuario($estado_entrevista2_colab[0]->colaborador_id);
+				$colaborador = $colaboradoraux->nombres . " " . $colaboradoraux->apellidos;
+				$evaluadoraux =  $this->Usuarios_model->getUsuario($estado_entrevista2_colab[0]->evaluador_id);
+				$evaluador = $evaluadoraux->nombres . " " . $evaluadoraux->apellidos;
+
+				$valoracion_objetivo_aux =  $this->Valoracion_adm_model->getValoracionObjetivos($id, $añoActual, 3);
+
+				if ($valoracion_objetivo_aux == false) {
+					$valoracion_objetivo = " ";
+				} else {
+					$valoracion_objetivo = $valoracion_objetivo_aux[0]->total_valoracion;
+				}
+
+				$data = array(
+					'id' => $id,
+					'permisos' => $this->permisos,
+					'usuario' => $this->Valoracion_adm_model->getusuario($id),
+					'tipo_validacion' => $validacion,
+					'estado' => $estado_val_obj,
+					'estado_entrevista2_colab' => $estado_entrevista2_colab,
+					'estado_entrevista3_evalu' => $estado_entrevista3_evalu,
+					'colaborador' => $colaborador,
+					'evaluador' => $evaluador,
+					'total_val_obj' => $valoracion_objetivo,
+				);
+
+				if($estado_entrevista3_evalu[0]->ruta_firma_colab == "" || $estado_entrevista3_evalu[0]->ruta_firma_evalu == ""){
+					$this->load->view("valoraciones/valoracion_adm/valoracion_objetivos_no_terminada", $data);
+
+				}else{
+					$this->load->view("valoraciones/valoracion_adm/show_objetivos", $data);
+				}
+			}
+		}
+	}
+
 	public function success_objetivos()
 	{
 		$now = time();
@@ -234,15 +321,27 @@ class Valoracion_adm extends CI_Controller
 		$añoActual = date("Y",  $now);
 		$fechaActual = date("Y-m-d",  $now);
 
+
+
+
+
 		$validacion = "1";
 		$fechas_valoraciones = $this->Periodos_model->getFechasValidacion($añoActual, $validacion);
 		$fecha_inicio_val1 = $fechas_valoraciones->fecha_inicio;
 		$fecha_fin_val1 = $fechas_valoraciones->fecha_fin;
 		$id = $this->input->post("id");
 
+
+
+
+		$your_date = strtotime($fecha_fin_val1);
+		$datediff =  $your_date - $now;
+
+		$dias_faltantes =   round($datediff / (60 * 60 * 24));
 		$previo_registro = $this->Valoracion_adm_model->validacionValoracion($id, $validacion);
 		if ($previo_registro == true) {
 			$data = array(
+				'dias_faltantes' => $dias_faltantes,
 				'previo_registro' => $this->Valoracion_adm_model->getValoracion($id, $validacion,$añoActual),
 				'permisos' => $this->permisos,
 				'usuario' => $this->Valoracion_adm_model->getusuario($id),
@@ -254,6 +353,7 @@ class Valoracion_adm extends CI_Controller
 			);
 		} else {
 			$data = array(
+				'dias_faltantes' => $dias_faltantes,
 				'previo_registro' => $this->Valoracion_adm_model->getValoracion($id, $validacion,$añoActual),
 				'permisos' => $this->permisos,
 				'usuario' => $this->Valoracion_adm_model->getusuario($id),
@@ -285,8 +385,15 @@ class Valoracion_adm extends CI_Controller
 		$id = $this->input->post("id");
 
 		$previo_registro = $this->Valoracion_adm_model->validacionValoracion($id, $validacion);
+
+		$your_date = strtotime($fecha_fin_val1);
+		$datediff =  $your_date - $now;
+
+		$dias_faltantes =   round($datediff / (60 * 60 * 24));
+
 		if ($previo_registro == true) {
 			$data = array(
+				'dias_faltantes' => $dias_faltantes,
 				'previo_registro' => $this->Valoracion_adm_model->getValoracion($id, $validacion, $añoActual),
 				'permisos' => $this->permisos,
 				'usuario' => $this->Valoracion_adm_model->getusuario($id),
@@ -298,6 +405,7 @@ class Valoracion_adm extends CI_Controller
 			);
 		} else {
 			$data = array(
+				'dias_faltantes' => $dias_faltantes,
 				'previo_registro' => $this->Valoracion_adm_model->getValoracion($id, $validacion, $añoActual),
 				'permisos' => $this->permisos,
 				'usuario' => $this->Valoracion_adm_model->getusuario($id),
