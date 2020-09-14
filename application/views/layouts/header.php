@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/newtemplate/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/newtemplate/plugins/select2/css/select2.min.css">
 
-    
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

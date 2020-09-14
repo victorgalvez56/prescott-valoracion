@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Mi_valoracion_adm extends CI_Controller
+class Mi_valoracion_docentes extends CI_Controller
 {
 	private $permisos;
 	public function __construct()

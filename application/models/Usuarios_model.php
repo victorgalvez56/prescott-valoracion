@@ -62,6 +62,39 @@ class Usuarios_model extends CI_Model
 		$resultado = $this->db->get();
 		return $resultado->result();
 	}
+
+	public function get_if_hijos($idPadre)
+	{
+		$this->db->select("*");
+		$this->db->from("parentesco");
+		$this->db->where("padre_id", $idPadre);
+		$this->db->where("estado", "1");
+		$this->db->where("registrar", "1");
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function get_if_padre_registrar($idHijo)
+	{
+		$this->db->select("*");
+		$this->db->from("parentesco");
+		$this->db->where("hijo_id", $idHijo);
+		$this->db->where("estado", "1");
+		$this->db->where("registrar", "1");
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+
 	// CRUD // 
 	public function save($data)
 	{

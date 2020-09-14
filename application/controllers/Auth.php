@@ -8,6 +8,7 @@ class Auth extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model("Usuarios_model");
+		$this->load->model("Valoracion_adm_model");
 	}
 	public function index()
 	{
@@ -24,7 +25,14 @@ class Auth extends CI_Controller
 		$password = $this->input->post("password");
 		$res = $this->Usuarios_model->login($username, sha1($password));
 
-	
+		$hijos = $this->Usuarios_model->get_if_hijos($res->id);
+		$padre = $this->Usuarios_model->get_if_padre_registrar($res->id);
+
+
+//		echo json_encode($hijos);
+//		echo json_encode($padre);
+//
+//		die();
 		if (!$res) {
 			$this->session->set_flashdata("error", "El usuario y/o contraseña son incorrectos");
 			redirect(base_url());
@@ -37,6 +45,8 @@ class Auth extends CI_Controller
 				'nombreRol' => $res->nombreRol,
 				'area' => $res->nombreArea,
 				'gerencia' => $res->nombreGerencia,
+				'tiene_hijo' => $hijos,
+				'tiene_padre' => $padre,
 				'login' => TRUE
 			);
 			$this->session->set_userdata($data);

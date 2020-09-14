@@ -32,7 +32,7 @@
 					<!-- Add icons to the links using the .nav-icon class
 						 with font-awesome or any other icon font library -->
 					<li class="nav-item has-treeview menu-open">
-						<a href="<?php echo base_url(); ?>" class="nav-link active">
+						<a href="<?php echo base_url(); ?>" class="nav-link">
 							<i class="nav-icon fas fa-tachometer-alt"></i>
 							<p>
 								Dashboard
@@ -40,6 +40,8 @@
 							</p>
 						</a>
 					</li>
+					<?php if ($this->session->userdata("tiene_padre") == 'true') { ?>
+
 					<li class="nav-item">
 						<a href="<?php echo base_url(); ?>valoracion/mi_valoracion_adm/" class="nav-link">
 							<i class="nav-icon fas fa-th"></i>
@@ -48,6 +50,9 @@
 							</p>
 						</a>
 					</li>
+					<?php } ?>
+					<?php if ($this->session->userdata("tiene_hijo") == 'true') { ?>
+
 					<li class="nav-item">
 						<a href="<?php echo base_url(); ?>valoracion/valoracion_adm/" class="nav-link">
 							<i class="nav-icon fas fa-th"></i>
@@ -56,6 +61,8 @@
 							</p>
 						</a>
 					</li>
+					<?php } ?>
+
 					<li class="nav-item">
 						<a href="<?php echo base_url(); ?>valoracion/valoracion_adm/show" class="nav-link">
 							<i class="nav-icon fas fa-th"></i>
@@ -139,12 +146,7 @@
 					<?php } ?>
 
 
-					<li class="nav-item">
-						<a href="<?php echo base_url(); ?>administrador/mapa_covid/" class="nav-link">
-							<i class="far fa-map nav-icon"></i>
-							<p>Mapa Covid</p>
-						</a>
-					</li>
+
 				</ul>
 			</nav>
 			<?php
@@ -164,6 +166,7 @@
 							</p>
 						</a>
 					</li>
+					<?php if ($this->session->userdata("tiene_padre") == 'true') { ?>
 					<li class="nav-item">
 						<a href="<?php echo base_url(); ?>valoracion/mi_valoracion_docentes/" class="nav-link">
 							<i class="nav-icon fas fa-th"></i>
@@ -172,6 +175,10 @@
 							</p>
 						</a>
 					</li>
+					<?php } ?>
+
+					<?php if ($this->session->userdata("tiene_hijo") == 'true') { ?>
+
 					<li class="nav-item">
 						<a href="<?php echo base_url(); ?>valoracion/valoracion_docentes/" class="nav-link">
 							<i class="nav-icon fas fa-th"></i>
@@ -180,8 +187,10 @@
 							</p>
 						</a>
 					</li>
+					<?php } ?>
+
 					<li class="nav-item">
-						<a href="<?php echo base_url(); ?>valoracion/valoracion_docentes	/show" class="nav-link">
+						<a href="<?php echo base_url(); ?>valoracion/valoracion_docentes/show" class="nav-link">
 							<i class="nav-icon fas fa-th"></i>
 							<p>
 								Valoraciones
@@ -263,12 +272,7 @@
 					<?php } ?>
 
 
-					<li class="nav-item">
-						<a href="<?php echo base_url(); ?>administrador/mapa_covid/" class="nav-link">
-							<i class="far fa-map nav-icon"></i>
-							<p>Mapa Covid</p>
-						</a>
-					</li>
+
 				</ul>
 			</nav>
 			<?php

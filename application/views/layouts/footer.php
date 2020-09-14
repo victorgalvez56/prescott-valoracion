@@ -44,7 +44,7 @@
 
 
 <script src="<?php echo BASE_URL(); ?>assets/newtemplate/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
 <script>
   console.log('Prueba que carga bien el script')
 </script>
@@ -271,7 +271,6 @@ $('.tt_large').tooltip({
 
   $(document).on("click", "#modal-valoracion2_leer", function() {
     valor_id = $(this).val();
-    console.warn('GAADDA')
     $.ajax({
       url: BASE_URL + "valoracion/valoracion_adm/validacion2_leer",
       type: "POST",
@@ -303,7 +302,6 @@ $('.tt_large').tooltip({
   });
 
   $(document).on("click", "#modal-valoracion3_final", function() {
-  	console.warn('ga')
 	  valor_id = $(this).val();
 	  $.ajax({
 		  url: BASE_URL + "valoracion/valoracion_adm/validacion3_leer_final",
@@ -318,14 +316,29 @@ $('.tt_large').tooltip({
 		  }
 	  });
   });
+  /* Modalos registro valoración profesores */
+
+
+  $(document).on("click", "#modal-registro_visita", function() {
+	  valor_id = $(this).val();
+	  $.ajax({
+		  url: BASE_URL + "valoracion/valoracion_docentes/view_registro_ficha_pedagogica",
+		  type: "POST",
+		  dataType: "html",
+		  data: {
+			  id: valor_id
+		  },
+		  success: function(data) {
+			  $("#modal-registrar-visita .modal-body").html(data);
+			  $("#modal-registrar-visita #titleValoracion").val("Valoración Pedagógica");
+		  }
+	  });
+  });
+
+
 
 
   /* Calculo valoraciones para agregar valoraciones */
-
-
-
-
-
 
   function sumaTrabajo1() {
     const $indicador = $(".indicadorTrabajosequipo1");

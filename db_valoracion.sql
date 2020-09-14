@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-09-2020 a las 21:40:10
+-- Tiempo de generación: 10-09-2020 a las 00:12:47
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.3.19
 
@@ -41,17 +41,10 @@ CREATE TABLE `anecdotarios` (
 --
 
 INSERT INTO `anecdotarios` (`id`, `descripcion`, `estado`, `usuario_id`, `create_at`, `create_by`) VALUES
-(13, 'Buen trabajo.', 1, 84, '2020-08-30', 'Andrea Alejandra Zegarra Lozada'),
-(14, 'Se porto mal \r\n', 1, 86, '2020-08-30', 'Andrea Alejandra Zegarra Lozada'),
-(15, 'Muy bien ', 1, 85, '2020-08-30', 'Andrea Alejandra Zegarra Lozada'),
-(16, 'MUY BIEN', 1, 76, '2020-08-30', 'Fernando Alberto Salas Heresi'),
-(17, 'No cumplió', 1, 83, '2020-08-30', 'Fernando Alberto Salas Heresi'),
-(18, 'Realizó bien su trabajo', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi'),
-(19, 'assssssssssssssssssssssssssssssssssssssassssssssssssssssssssssssssssssssssssssassssssssssssssssssssssssssssssssssssssassssssssssssssssssssssssssssssssssssssassssssssssssssssssssssssssssssssssssssassssssssssssssssssssssssssssssssssssssasssssssssssssss', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi'),
-(20, 'asddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi'),
-(21, 'asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasssssssssssssss', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi'),
-(22, 'asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasssssssssssssssasdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi'),
-(23, 'No cumplió', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi');
+(24, 'Hola', 1, 83, '2020-09-02', 'Fernando Alberto Salas Heresi'),
+(25, 'No', 1, 83, '2020-09-03', 'Fernando Alberto Salas Heresi'),
+(26, 'KKKKK', 1, 76, '2020-09-08', 'Fernando Alberto Salas Heresi'),
+(27, 'ASDASD', 1, 76, '2020-09-08', 'Fernando Alberto Salas Heresi');
 
 -- --------------------------------------------------------
 
@@ -112,7 +105,7 @@ CREATE TABLE `competencias` (
 --
 
 INSERT INTO `competencias` (`id`, `nombre`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(1, 'COMUNICACIÓN DE PROFESORES', 1, '', '', '02-07-2020 18:44:35', 'Administrador Sistema'),
+(1, 'COMUNICACIÓN DE PROFESORES', 1, '', '', '08-09-2020 16:24:09', 'Administrador Sistemas'),
 (2, 'TRABAJO EN EQUIPO', 1, '', '', '02-07-2020 17:36:02', 'Administrador Sistema'),
 (3, 'PROACTIVIDAD', 1, '', '', '02-07-2020 17:36:06', 'Administrador Sistema'),
 (4, 'APRENDIZAJE', 1, '', '', '02-07-2020 17:36:10', 'Administrador Sistema');
@@ -140,8 +133,8 @@ INSERT INTO `detalles_periodos` (`id`, `fecha_inicio`, `fecha_fin`, `periodo_id`
 (2, '2020-07-01', '2020-07-31', 3, 2),
 (3, '2020-07-01', '2020-07-31', 3, 3),
 (4, '2020-01-01', '2020-08-31', 3, 4),
-(5, '2020-01-01', '2020-08-31', 2, 1),
-(6, '2020-01-01', '2020-08-31', 2, 2),
+(5, '2020-01-01', '2020-12-31', 2, 1),
+(6, '2020-01-01', '2020-12-31', 2, 2),
 (7, '2020-01-01', '2020-08-31', 2, 3),
 (8, '2020-07-01', '2020-07-31', 2, 4),
 (9, '2020-07-01', '2020-07-31', 4, 1),
@@ -176,66 +169,66 @@ CREATE TABLE `detalles_valoraciones` (
 --
 
 INSERT INTO `detalles_valoraciones` (`id`, `puntaje`, `estado`, `valoracion_id`, `indicador_id`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(1372, 1, 1, 96, 1, 18, 0, 0, 0),
-(1373, 1, 1, 96, 2, 18, 0, 0, 0),
-(1374, 1, 1, 96, 3, 18, 0, 0, 0),
-(1375, 1, 1, 96, 4, 18, 0, 0, 0),
-(1376, 1, 1, 96, 5, 18, 0, 0, 0),
-(1377, 3, 1, 96, 6, 18, 0, 0, 0),
-(1378, 3, 1, 96, 7, 18, 0, 0, 0),
-(1379, 3, 1, 96, 8, 18, 0, 0, 0),
-(1380, 3, 1, 96, 9, 18, 0, 0, 0),
-(1381, 3, 1, 96, 10, 18, 0, 0, 0),
-(1382, 3, 1, 96, 16, 18, 0, 0, 0),
-(1383, 3, 1, 96, 17, 18, 0, 0, 0),
-(1384, 3, 1, 96, 18, 18, 0, 0, 0),
-(1385, 3, 1, 96, 19, 18, 0, 0, 0),
-(1386, 3, 1, 96, 20, 18, 0, 0, 0),
-(1387, 2, 1, 96, 11, 18, 0, 0, 0),
-(1388, 2, 1, 96, 12, 18, 0, 0, 0),
-(1389, 2, 1, 96, 13, 18, 0, 0, 0),
-(1390, 2, 1, 96, 14, 18, 0, 0, 0),
-(1391, 2, 1, 96, 15, 18, 0, 0, 0),
-(1392, 1, 1, 99, 1, 30, 0, 0, 0),
-(1393, 1, 1, 99, 2, 30, 0, 0, 0),
-(1394, 1, 1, 99, 3, 30, 0, 0, 0),
-(1395, 1, 1, 99, 4, 30, 0, 0, 0),
-(1396, 1, 1, 99, 5, 30, 0, 0, 0),
-(1397, 3, 1, 99, 6, 30, 0, 0, 0),
-(1398, 3, 1, 99, 7, 30, 0, 0, 0),
-(1399, 3, 1, 99, 8, 30, 0, 0, 0),
-(1400, 3, 1, 99, 9, 30, 0, 0, 0),
-(1401, 3, 1, 99, 10, 30, 0, 0, 0),
-(1402, 4, 1, 99, 16, 30, 0, 0, 0),
-(1403, 4, 1, 99, 17, 30, 0, 0, 0),
-(1404, 4, 1, 99, 18, 30, 0, 0, 0),
-(1405, 4, 1, 99, 19, 30, 0, 0, 0),
-(1406, 4, 1, 99, 20, 30, 0, 0, 0),
-(1407, 2, 1, 99, 11, 30, 0, 0, 0),
-(1408, 2, 1, 99, 12, 30, 0, 0, 0),
-(1409, 2, 1, 99, 13, 30, 0, 0, 0),
-(1410, 2, 1, 99, 14, 30, 0, 0, 0),
-(1411, 2, 1, 99, 15, 30, 0, 0, 0),
-(1412, 1, 1, 100, 1, 31, 0, 0, 0),
-(1413, 1, 1, 100, 2, 31, 0, 0, 0),
-(1414, 1, 1, 100, 3, 31, 0, 0, 0),
-(1415, 1, 1, 100, 4, 31, 0, 0, 0),
-(1416, 1, 1, 100, 5, 31, 0, 0, 0),
-(1417, 3, 1, 100, 6, 31, 0, 0, 0),
-(1418, 3, 1, 100, 7, 31, 0, 0, 0),
-(1419, 3, 1, 100, 8, 31, 0, 0, 0),
-(1420, 3, 1, 100, 9, 31, 0, 0, 0),
-(1421, 3, 1, 100, 10, 31, 0, 0, 0),
-(1422, 4, 1, 100, 16, 31, 0, 0, 0),
-(1423, 4, 1, 100, 17, 31, 0, 0, 0),
-(1424, 4, 1, 100, 18, 31, 0, 0, 0),
-(1425, 4, 1, 100, 19, 31, 0, 0, 0),
-(1426, 4, 1, 100, 20, 31, 0, 0, 0),
-(1427, 2, 1, 100, 11, 31, 0, 0, 0),
-(1428, 2, 1, 100, 12, 31, 0, 0, 0),
-(1429, 2, 1, 100, 13, 31, 0, 0, 0),
-(1430, 2, 1, 100, 14, 31, 0, 0, 0),
-(1431, 2, 1, 100, 15, 31, 0, 0, 0);
+(1512, 1, 1, 106, 1, 3, 0, 0, 0),
+(1513, 1, 1, 106, 2, 3, 0, 0, 0),
+(1514, 1, 1, 106, 3, 3, 0, 0, 0),
+(1515, 1, 1, 106, 4, 3, 0, 0, 0),
+(1516, 1, 1, 106, 5, 3, 0, 0, 0),
+(1517, 1, 1, 106, 6, 3, 0, 0, 0),
+(1518, 1, 1, 106, 7, 3, 0, 0, 0),
+(1519, 1, 1, 106, 8, 3, 0, 0, 0),
+(1520, 1, 1, 106, 9, 3, 0, 0, 0),
+(1521, 1, 1, 106, 10, 3, 0, 0, 0),
+(1522, 1, 1, 106, 16, 3, 0, 0, 0),
+(1523, 1, 1, 106, 17, 3, 0, 0, 0),
+(1524, 1, 1, 106, 18, 3, 0, 0, 0),
+(1525, 1, 1, 106, 19, 3, 0, 0, 0),
+(1526, 1, 1, 106, 20, 3, 0, 0, 0),
+(1527, 1, 1, 106, 11, 3, 0, 0, 0),
+(1528, 1, 1, 106, 12, 3, 0, 0, 0),
+(1529, 1, 1, 106, 13, 3, 0, 0, 0),
+(1530, 1, 1, 106, 14, 3, 0, 0, 0),
+(1531, 1, 1, 106, 15, 3, 0, 0, 0),
+(1532, 2, 1, 107, 1, 3, 0, 0, 0),
+(1533, 2, 1, 107, 2, 3, 0, 0, 0),
+(1534, 2, 1, 107, 3, 3, 0, 0, 0),
+(1535, 2, 1, 107, 4, 3, 0, 0, 0),
+(1536, 2, 1, 107, 5, 3, 0, 0, 0),
+(1537, 2, 1, 107, 6, 3, 0, 0, 0),
+(1538, 2, 1, 107, 7, 3, 0, 0, 0),
+(1539, 2, 1, 107, 8, 3, 0, 0, 0),
+(1540, 2, 1, 107, 9, 3, 0, 0, 0),
+(1541, 2, 1, 107, 10, 3, 0, 0, 0),
+(1542, 2, 1, 107, 16, 3, 0, 0, 0),
+(1543, 2, 1, 107, 17, 3, 0, 0, 0),
+(1544, 2, 1, 107, 18, 3, 0, 0, 0),
+(1545, 2, 1, 107, 19, 3, 0, 0, 0),
+(1546, 2, 1, 107, 20, 3, 0, 0, 0),
+(1547, 2, 1, 107, 11, 3, 0, 0, 0),
+(1548, 2, 1, 107, 12, 3, 0, 0, 0),
+(1549, 2, 1, 107, 13, 3, 0, 0, 0),
+(1550, 2, 1, 107, 14, 3, 0, 0, 0),
+(1551, 2, 1, 107, 15, 3, 0, 0, 0),
+(1552, 1, 1, 109, 1, 5, 0, 0, 0),
+(1553, 1, 1, 109, 2, 5, 0, 0, 0),
+(1554, 1, 1, 109, 3, 5, 0, 0, 0),
+(1555, 1, 1, 109, 4, 5, 0, 0, 0),
+(1556, 1, 1, 109, 5, 5, 0, 0, 0),
+(1557, 4, 1, 109, 6, 5, 0, 0, 0),
+(1558, 4, 1, 109, 7, 5, 0, 0, 0),
+(1559, 4, 1, 109, 8, 5, 0, 0, 0),
+(1560, 4, 1, 109, 9, 5, 0, 0, 0),
+(1561, 4, 1, 109, 10, 5, 0, 0, 0),
+(1562, 3, 1, 109, 16, 5, 0, 0, 0),
+(1563, 3, 1, 109, 17, 5, 0, 0, 0),
+(1564, 3, 1, 109, 18, 5, 0, 0, 0),
+(1565, 3, 1, 109, 19, 5, 0, 0, 0),
+(1566, 3, 1, 109, 20, 5, 0, 0, 0),
+(1567, 2, 1, 109, 11, 5, 0, 0, 0),
+(1568, 2, 1, 109, 12, 5, 0, 0, 0),
+(1569, 2, 1, 109, 13, 5, 0, 0, 0),
+(1570, 2, 1, 109, 14, 5, 0, 0, 0),
+(1571, 2, 1, 109, 15, 5, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -265,6 +258,14 @@ CREATE TABLE `entrevistas` (
   `update_at` varchar(45) NOT NULL,
   `update_by` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `entrevistas`
+--
+
+INSERT INTO `entrevistas` (`id`, `calif_obj1`, `calif_obj2`, `calif_obj3`, `coment1_colab`, `coment2_colab`, `coment3_colab`, `coment1_evalu`, `coment2_evalu`, `coment3_evalu`, `ruta_firma_colab`, `ruta_firma_evalu`, `colaborador_id`, `evaluador_id`, `tipo_entrevista_id`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
+(59, NULL, NULL, NULL, 'asd', 'asd', 'asd', 'asdasd', 'asd', 'asd', '', '', 83, 75, 1, '1', '2020-09-03', 'Andrea Alejandra Zegarra Lozada', '2020-09-03', 'Fernando Alberto Salas Heresi'),
+(60, 1, 1, 1, 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', 'assets/img/firmas/firma_Andrea Alejandra Zegarra Lozada_2020.png', 'assets/img/firmas/firma_Fernando Alberto Salas Heresi_2020.png', 83, 75, 2, '1', '2020-09-03', 'Andrea Alejandra Zegarra Lozada', '2020-09-03', '');
 
 -- --------------------------------------------------------
 
@@ -329,9 +330,9 @@ INSERT INTO `indicadores` (`id`, `descripcion`, `estado`, `competencia_id`, `cre
 (14, 'Actua con iniciativa creativa en el ejercicio de su función.', 1, 3, '', '', '', '0'),
 (15, 'Se esfuerza por la mejora continua en su desempeño personal y profesional.', 1, 3, '', '', '', '0'),
 (16, 'Mantiene un nivel adecuado de conocimiento a través de la formación continua.', 1, 4, '', '', '29-06-2020 18:36:21', 'Administrador Sistema'),
-(17, 'Mantiene una actitud positiva frente a los cambios.', 1, 4, '', '', '', '0'),
-(18, 'Promueve la formación continua en sus equipos de trabajo.', 1, 4, '', '', '', '0'),
-(19, 'Se mantiene animado ante las dificultades que conllevan el proceso de aprendizaje.', 1, 4, '', '', '', '0'),
+(17, 'Mantiene una actitud positiva frente a los cambios.', 1, 4, '', '', '08-09-2020 16:23:45', 'Administrador Sistemas'),
+(18, 'Promueve la formación continua en sus equipos de trabajo.', 1, 4, '', '', '08-09-2020 16:23:48', 'Administrador Sistemas'),
+(19, 'Se mantiene animado ante las dificultades que conllevan el proceso de aprendizaje..', 1, 4, '', '', '08-09-2020 16:24:36', 'Administrador Sistemas'),
 (20, 'Comparte el conocimiento aprendido y lo adapta a través de los planes de acción.', 1, 4, '', '', '', '0');
 
 -- --------------------------------------------------------
@@ -443,7 +444,9 @@ INSERT INTO `menus` (`id`, `nombre`, `link`) VALUES
 (8, 'Parentesco', 'administrador/parentesco\r\n'),
 (9, 'Periodos', 'administrador/periodos\r\n'),
 (10, 'Mi valoración ', 'valoracion/mi_valoracion_adm'),
-(11, 'Anecdotario', 'valoracion/anecdotario_adm');
+(11, 'Anecdotario', 'valoracion/anecdotario_adm'),
+(12, 'Valoración Docentes', 'valoracion/valoracion_docentes'),
+(13, 'Mi valoración Docentes', 'valoracion/mi_valoracion_docentes');
 
 -- --------------------------------------------------------
 
@@ -482,8 +485,7 @@ CREATE TABLE `objetivos` (
 --
 
 INSERT INTO `objetivos` (`id`, `n_obj_1`, `a_obj_1`, `p_obj_1`, `i_obj_1`, `r_obj_1`, `n_obj_2`, `a_obj_2`, `p_obj_2`, `i_obj_2`, `r_obj_2`, `n_obj_3`, `a_obj_3`, `p_obj_3`, `i_obj_3`, `r_obj_3`, `comentario_opcional`, `usuario_id`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(57, 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', '', 83, 'aceptado', '2020-08-24', 'Andrea Alejandra Zegarra Lozada', '24-08-2020 21:59:08', 'Fernando Alberto Salas Heresi'),
-(58, 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', '', 83, 'espera', '2020-08-24', 'Andrea Alejandra Zegarra Lozada', '', '');
+(63, 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'G', 'asd', 83, 'aceptado', '2020-09-03', 'Andrea Alejandra Zegarra Lozada', '03-09-2020 15:10:41', 'Fernando Alberto Salas Heresi');
 
 -- --------------------------------------------------------
 
@@ -531,7 +533,11 @@ INSERT INTO `parentesco` (`id`, `hijo_id`, `padre_id`, `registrar`, `leer`, `est
 (244, 85, 75, 0, 1, 1),
 (245, 86, 83, 1, 0, 1),
 (246, 86, 75, 0, 1, 1),
-(247, 84, 83, 1, 0, 1);
+(247, 84, 83, 1, 0, 1),
+(248, 87, 88, 1, 1, 1),
+(249, 89, 88, 1, 1, 1),
+(250, 89, 87, 1, 0, 1),
+(251, 88, 90, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -609,7 +615,47 @@ INSERT INTO `permisos` (`id`, `read`, `insert`, `update`, `delete`, `menu_id`, `
 (23, 1, 1, 1, 1, 11, 1, '', '', '', ''),
 (24, 1, 1, 1, 1, 11, 3, '', '', '', ''),
 (25, 1, 1, 1, 1, 11, 4, '', '', '', ''),
-(26, 1, 1, 1, 1, 11, 2, '', '', '', '');
+(26, 1, 1, 1, 1, 11, 2, '', '', '', ''),
+(27, 1, 1, 1, 1, 5, 8, '', '', '', ''),
+(28, 1, 1, 1, 1, 10, 8, '', '', '', ''),
+(29, 1, 1, 1, 1, 12, 8, '', '', '', ''),
+(30, 1, 1, 1, 1, 13, 8, '', '', '', ''),
+(31, 1, 1, 1, 1, 5, 9, '', '', '', ''),
+(32, 1, 1, 1, 1, 10, 9, '', '', '', ''),
+(33, 1, 1, 1, 1, 12, 9, '', '', '', ''),
+(34, 1, 1, 1, 1, 13, 9, '', '', '', ''),
+(35, 1, 1, 1, 1, 5, 10, '', '', '', ''),
+(36, 1, 1, 1, 1, 10, 10, '', '', '', ''),
+(37, 1, 1, 1, 1, 12, 10, '', '', '', ''),
+(38, 1, 1, 1, 1, 13, 10, '', '', '', ''),
+(39, 1, 1, 1, 1, 5, 11, '', '', '', ''),
+(40, 1, 1, 1, 1, 10, 11, '', '', '', ''),
+(41, 1, 1, 1, 1, 12, 11, '', '', '', ''),
+(42, 1, 1, 1, 1, 13, 11, '', '', '', ''),
+(43, 1, 1, 1, 1, 5, 12, '', '', '', ''),
+(44, 1, 1, 1, 1, 10, 12, '', '', '', ''),
+(45, 1, 1, 1, 1, 12, 12, '', '', '', ''),
+(46, 1, 1, 1, 1, 13, 12, '', '', '', ''),
+(47, 1, 1, 1, 1, 5, 13, '', '', '', ''),
+(48, 1, 1, 1, 1, 10, 13, '', '', '', ''),
+(49, 1, 1, 1, 1, 12, 13, '', '', '', ''),
+(50, 1, 1, 1, 1, 13, 13, '', '', '', ''),
+(51, 1, 1, 1, 1, 5, 14, '', '', '', ''),
+(52, 1, 1, 1, 1, 10, 14, '', '', '', ''),
+(53, 1, 1, 1, 1, 12, 14, '', '', '', ''),
+(54, 1, 1, 1, 1, 13, 14, '', '', '', ''),
+(55, 1, 1, 1, 1, 5, 7, '', '', '', ''),
+(56, 1, 1, 1, 1, 10, 7, '', '', '', ''),
+(57, 1, 1, 1, 1, 12, 7, '', '', '', ''),
+(58, 1, 1, 1, 1, 13, 7, '', '', '', ''),
+(59, 1, 1, 1, 1, 11, 8, '', '', '', ''),
+(60, 1, 1, 1, 1, 11, 9, '', '', '', ''),
+(61, 1, 1, 1, 1, 11, 10, '', '', '', ''),
+(62, 1, 1, 1, 1, 11, 11, '', '', '', ''),
+(63, 1, 1, 1, 1, 11, 12, '', '', '', ''),
+(64, 1, 1, 1, 1, 11, 13, '', '', '', ''),
+(65, 1, 1, 1, 1, 11, 14, '', '', '', ''),
+(66, 1, 1, 1, 1, 11, 7, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -636,7 +682,14 @@ INSERT INTO `roles` (`id`, `nombre`, `descripcion`, `gerencia_id`, `estado`) VAL
 (4, 'Asistente área', NULL, 2, 1),
 (5, 'Auxiliar área', NULL, 2, 1),
 (6, 'Personal Mantenimiento', NULL, 2, 1),
-(8, 'Profesor', NULL, 1, 1);
+(7, 'Directora ', NULL, 1, 1),
+(8, 'Head of School PS', NULL, 1, 1),
+(9, 'Psicólog(a) PS', NULL, 1, 1),
+(10, 'Cordinador(a) PS', NULL, 1, 1),
+(11, 'Profesor(a) Arte PS', NULL, 1, 1),
+(12, 'Profesor(a) Español PS', NULL, 1, 1),
+(13, 'Profesor(a) Asistente PS', NULL, 1, 1),
+(14, 'Profesor(a) Inglés PS', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -683,33 +736,6 @@ INSERT INTO `tipos_items` (`id`, `nombre`, `estado`, `create_at`, `create_by`, `
 (2, 'PROCESO DE EVALUACIÓN', 1, '', '', '', ''),
 (3, 'MANEJO DE GRUPO/CLIMA POSITIVO', 1, '', '', '', ''),
 (4, 'DOCUMENTOS Y AULA VIRTUAL', 1, '', '', '', '');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tipos_profesores`
---
-
-CREATE TABLE `tipos_profesores` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(35) NOT NULL,
-  `area_id` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
-  `create_at` varchar(35) NOT NULL,
-  `create_by` varchar(35) NOT NULL,
-  `update_at` varchar(35) NOT NULL,
-  `update_by` varchar(35) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `tipos_profesores`
---
-
-INSERT INTO `tipos_profesores` (`id`, `nombre`, `area_id`, `estado`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(5, 'Arte', 7, 1, '', '', '', ''),
-(6, 'Inglés', 7, 1, '', '', '', ''),
-(7, 'Español', 7, 1, '', '', '', ''),
-(8, 'Asistente', 7, 1, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -768,14 +794,18 @@ INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `username`, `password`, `r
 (76, 'Fernando Eduardo', 'Azálgara Cuadros', 'fazalgara@prescott.edu.pe', '20230bea9daf3d1a52cfacfbeb542529a0eb35c2', 3, 4, 1, NULL, '', NULL, ''),
 (77, 'Susana María Josefa', 'Bustamante de Soto', 'sbustamante@prescott.edu.pe', '3a95719f625632b9a78ccc791fce39cce3f6a208', 3, 6, 1, NULL, '', NULL, ''),
 (78, 'Javier Alonso', 'Butrón Valencia', 'jbutron@prescott.edu.pe', 'a32eebfc07ef1783797de4816159c8ab445dd67e', 3, 3, 1, NULL, '', NULL, ''),
-(79, 'Paola Erika', 'Cárdenas Valdivia de Prevate', 'pcardenas@prescott.edu.pe', '1b2162b408b0337593eb8aacaa2115e22de472cc', 3, 5, 1, NULL, '', NULL, ''),
+(79, 'Paola Erika', 'Cárdenas Valdivia de Prevate', 'pcardenas@prescott.edu.pe', 'cb4154596b441ebe8deb40ccaceaf9befc55b0df', 3, 5, 1, NULL, '', NULL, ''),
 (80, 'Vania', 'López Berrios', 'vlopez@prescott.edu.pe', 'bee367050fdb6496bc465f9002c2e4d946166069', 3, 6, 1, NULL, '', NULL, ''),
 (81, 'Moscoso Aramayo', 'Ana Paola', 'amoscoso@prescott.edu.pe', '0e06bb6fe622c3cec7bfa6b3c8051f9d70907224', 3, 1, 1, NULL, '', NULL, ''),
 (82, 'Marleni', 'Valencia Portugal', 'mvalencia@prescott.edu.pe', '855f49136947d2893b97e9ab609b51d6681a6cc9', 3, 12, 1, NULL, '', NULL, ''),
 (83, 'Andrea Alejandra', 'Zegarra Lozada', 'azegarra@prescott.edu.pe', '6b9e0cfa0d1155fa80b0bd10eeeaaa64a81b87df', 3, 2, 1, NULL, '', NULL, ''),
 (84, 'Katherine Maryori', 'Benites Cucho', 'kbenites@prescott.edu.pe', 'da6b6259ceb0c7f47a0a3db80de7069f91bf36a8', 4, 2, 1, NULL, '', NULL, ''),
 (85, 'Laura Elizabeth', 'Portugal Passiuri', 'lportugal@prescott.edu.pe', 'ba9c52f7a0b74c9a95f530ad62a09fdf6443596a', 4, 2, 1, NULL, '', NULL, ''),
-(86, 'Haydee Liliana', 'Ramos Castillo,', 'hramos@prescott.edu.pe', 'fcd68095083ca5b3ac2affa9e283676224be5582', 4, 2, 1, NULL, '', NULL, '');
+(86, 'Haydee Liliana', 'Ramos Castillo', 'hramos@prescott.edu.pe', 'fcd68095083ca5b3ac2affa9e283676224be5582', 4, 2, 1, NULL, '', NULL, ''),
+(87, 'Andrea Alejandra\r\n', 'Alpaca Nina', 'aalpaca@prescott.edu.pe', 'cb4154596b441ebe8deb40ccaceaf9befc55b0df', 11, 7, 1, NULL, '', NULL, ''),
+(88, 'Arlette Katherine', 'Rondón Carreón', 'arondo@prescott.edu.pe', 'cb4154596b441ebe8deb40ccaceaf9befc55b0df', 8, 7, 1, NULL, '', NULL, ''),
+(89, 'Claudia\r\n', 'Arrarte Cornejo', 'carrarte@prescott.edu.pe', 'cb4154596b441ebe8deb40ccaceaf9befc55b0df', 10, 7, 1, NULL, '', NULL, ''),
+(90, 'Carmén ', 'García', 'cgarcia@prescott.edu.pe', 'cb4154596b441ebe8deb40ccaceaf9befc55b0df', 7, 15, 1, NULL, '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -800,11 +830,10 @@ CREATE TABLE `valoraciones` (
 --
 
 INSERT INTO `valoraciones` (`id`, `total_valoracion`, `estado`, `usuario_id`, `tipo_valoracion_id`, `create_at`, `create_by`, `update_at`, `update_by`) VALUES
-(96, '11.25', 1, 85, 1, '2020-08-18', 'Andrea Alejandra Zegarra Lozada', '', ''),
-(97, '20', 1, 83, 3, '2020-08-18', 'Fernando Alberto Salas Heresi', '', ''),
-(98, '11.25', 1, 83, 1, '2020-08-18', 'Andrea Alejandra Zegarra Lozada', '', ''),
-(99, '12.5', 1, 81, 1, '2020-08-30', 'Fernando Alberto Salas Heresi', '', ''),
-(100, '13', 1, 78, 2, '2020-08-31', 'Fernando Alberto Salas Heresi', '', '');
+(106, '19', 1, 83, 1, '2020-09-03', 'Fernando Alberto Salas Heresi', '', ''),
+(107, '18', 1, 83, 2, '2020-09-03', 'Fernando Alberto Salas Heresi', '', ''),
+(108, '20', 1, 83, 3, '2020-09-03', 'Fernando Alberto Salas Heresi', '', ''),
+(109, '12.5', 1, 87, 1, '2020-09-05', 'Arlette Katherine Rondón Carreón', '', '');
 
 --
 -- Índices para tablas volcadas
@@ -873,8 +902,8 @@ ALTER TABLE `indicadores`
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_tipo_profesor_items` (`id_tipo_profesor`),
-  ADD KEY `fk_tipo_items` (`id_tipo_item`);
+  ADD KEY `fk_tipo_items` (`id_tipo_item`),
+  ADD KEY `fk_tipo_profesor_items` (`id_tipo_profesor`);
 
 --
 -- Indices de la tabla `menus`
@@ -931,13 +960,6 @@ ALTER TABLE `tipos_items`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `tipos_profesores`
---
-ALTER TABLE `tipos_profesores`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_profesor_area` (`area_id`);
-
---
 -- Indices de la tabla `tipos_valoracion`
 --
 ALTER TABLE `tipos_valoracion`
@@ -967,7 +989,7 @@ ALTER TABLE `valoraciones`
 -- AUTO_INCREMENT de la tabla `anecdotarios`
 --
 ALTER TABLE `anecdotarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `areas`
@@ -991,13 +1013,13 @@ ALTER TABLE `detalles_periodos`
 -- AUTO_INCREMENT de la tabla `detalles_valoraciones`
 --
 ALTER TABLE `detalles_valoraciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1432;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1572;
 
 --
 -- AUTO_INCREMENT de la tabla `entrevistas`
 --
 ALTER TABLE `entrevistas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `gerencias`
@@ -1021,19 +1043,19 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT de la tabla `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `objetivos`
 --
 ALTER TABLE `objetivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `parentesco`
 --
 ALTER TABLE `parentesco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=248;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 
 --
 -- AUTO_INCREMENT de la tabla `periodos`
@@ -1045,13 +1067,13 @@ ALTER TABLE `periodos`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_entrevista`
@@ -1066,12 +1088,6 @@ ALTER TABLE `tipos_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `tipos_profesores`
---
-ALTER TABLE `tipos_profesores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
 -- AUTO_INCREMENT de la tabla `tipos_valoracion`
 --
 ALTER TABLE `tipos_valoracion`
@@ -1081,13 +1097,13 @@ ALTER TABLE `tipos_valoracion`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT de la tabla `valoraciones`
 --
 ALTER TABLE `valoraciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- Restricciones para tablas volcadas
@@ -1138,7 +1154,7 @@ ALTER TABLE `indicadores`
 --
 ALTER TABLE `items`
   ADD CONSTRAINT `fk_tipo_items` FOREIGN KEY (`id_tipo_item`) REFERENCES `tipos_items` (`id`),
-  ADD CONSTRAINT `fk_tipo_profesor_items` FOREIGN KEY (`id_tipo_profesor`) REFERENCES `tipos_profesores` (`id`);
+  ADD CONSTRAINT `fk_tipo_profesor_items` FOREIGN KEY (`id_tipo_profesor`) REFERENCES `roles` (`id`);
 
 --
 -- Filtros para la tabla `objetivos`
@@ -1165,12 +1181,6 @@ ALTER TABLE `permisos`
 --
 ALTER TABLE `roles`
   ADD CONSTRAINT `fk_gerencia_roles` FOREIGN KEY (`gerencia_id`) REFERENCES `gerencias` (`id`);
-
---
--- Filtros para la tabla `tipos_profesores`
---
-ALTER TABLE `tipos_profesores`
-  ADD CONSTRAINT `fk_profesor_area` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`);
 
 --
 -- Filtros para la tabla `usuarios`
