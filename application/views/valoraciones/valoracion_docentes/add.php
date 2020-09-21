@@ -13,6 +13,7 @@
 			<tr>
 				<th style="text-align: center">
 					<?php echo $bimestre->nombre; ?>
+					<input type="text" name="id_bimestre" value="<?php echo $bimestre->id?>">
 				</th>
 				<th style="text-align: center">
 					Fecha Actual
@@ -33,7 +34,7 @@
 							<?php echo $enseñanza->nombre;?>
 						</td>
 						<td style="text-align: center">
-							<input name="enseñanzas[]" value="<?php echo $enseñanza->id;?>" type="checkbox">
+							<input name="items[]" value="<?php echo $enseñanza->id;?>" type="checkbox">
 						</td>
 					</tr>
 					<?php endforeach; ?>
@@ -49,7 +50,7 @@
 							</td>
 							<td style="text-align: center">
 
-								<input  name="procesos[]" value="<?php echo $proceso->id;?>" type="checkbox">
+								<input  name="items[]" value="<?php echo $proceso->id;?>" type="checkbox">
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -65,7 +66,7 @@
 								<?php echo $manejo->nombre?>
 							</td>
 							<td style="text-align: center">
-								<input name="manejos[]" value="<?php echo $manejo->id;?>" type="checkbox">
+								<input name="items[]" value="<?php echo $manejo->id;?>" type="checkbox">
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -81,7 +82,7 @@
 								<?php echo $documento->nombre?>
 							</td>
 							<td style="text-align: center">
-								<input name="documentos[]" value="<?php echo $documento->id;?>" type="checkbox">
+								<input name="items[]" value="<?php echo $documento->id;?>" type="checkbox">
 							</td>
 						</tr>
 					<?php endforeach; ?>

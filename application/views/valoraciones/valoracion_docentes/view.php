@@ -28,9 +28,10 @@
 								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
 								</button>
 								<p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
-
 							</div>
 						<?php endif; ?>
+						<input type="text" id="id_profesor" value="<?php echo $id_profesor; ?>">
+
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
@@ -38,105 +39,14 @@
 								</div>
 								<!-- /.card-header -->
 								<div class="card-body">
-									<table id="example1" class="table table-bordered table-striped table-sm ">
+									<table id="mostrar_visitas_bimestre1" class="table table-bordered text-center">
 										<thead>
 										<tr>
-											<th style="text-align: center">
-											</th>
-											<?php foreach ($ficha_pedagogica as $ficha) : ?>
-
-												<th style="text-align: center">
-													<?php echo $ficha["nombre"]; ?>
-												</th>
-											<?php endforeach; ?>
 										</tr>
-
 										</thead>
 										<tbody>
-										<tr class="bg-primary">
-											<td colspan="2">
-												<?php echo $enseñanzas[0]->nombre_tipo_item; ?>
-											</td>
-										</tr>
-										<?php foreach ($enseñanzas as $enseñanza) : ?>
-											<tr class="table-success">
-												<td>
-													<?php echo $enseñanza->nombre ?>
-												</td>
-												<td style="text-align: center">
 
-																				<input  name="procesos[]" value="
-													<?php echo $enseñanza->id;?>" type="checkbox">
-												</td>
-											</tr>
-
-										<?php endforeach; ?>
-
-										<?php for ($x = 0; $x < count($ficha_pedagogica); $x++) { ?>
-											<?php for ($i = 0; $i < count($ficha_pedagogica[$x]["visitas"]); $i++) { ?>
-												<?php for ($j = 0; $j < count($ficha_pedagogica[$x]["visitas"][$i]["data"]["item_id"]); $j++) { ?>
-													<tr class="table-primary">
-														<td>
-															<?php echo json_encode($ficha_pedagogica[$x]["visitas"][$i]["data"]["item_id"][$j]); ?>
-														</td>
-													</tr>
-												<?php }
-											}
-										} ?>
-										<tr class="bg-success">
-											<td colspan="2">
-												<!--						--><?php //echo $procesos[0]->nombre_tipo_item;?>
-											</td>
-										</tr>
-										<!--				--><?php //foreach ($procesos as $proceso) : ?>
-										<tr class="table-success">
-											<td>
-												<!--							--><?php //echo $proceso->nombre?>
-											</td>
-											<td style="text-align: center">
-
-												<!--							<input  name="procesos[]" value="-->
-												<?php //echo $proceso->id;?><!--" type="checkbox">-->
-											</td>
-										</tr>
-										<!--				--><?php //endforeach; ?>
-										<tr class="bg-warning">
-											<td colspan="2">
-												<!--						--><?php //echo $manejos[0]->nombre_tipo_item;?>
-											</td>
-										</tr>
-										<!--				--><?php //foreach ($manejos as $manejo) : ?>
-										<tr class="table-warning">
-
-											<td>
-												<!--							--><?php //echo $manejo->nombre?>
-											</td>
-											<td style="text-align: center">
-												<!--							<input name="manejos[]" value="-->
-												<?php //echo $manejo->id;?><!--" type="checkbox">-->
-											</td>
-										</tr>
-										<!--				--><?php //endforeach; ?>
-
-										<tr class="bg-info">
-											<td colspan="2">
-												<!--						--><?php //echo $documentos[0]->nombre_tipo_item;?>
-											</td>
-										</tr>
-										<!--				--><?php //foreach ($documentos as $documento) : ?>
-										<tr class="table-info">
-											<td>
-												<!--							--><?php //echo $documento->nombre?>
-											</td>
-											<td style="text-align: center">
-												<!--							<input name="documentos[]" value="-->
-												<?php //echo $documento->id;?><!--" type="checkbox">-->
-											</td>
-										</tr>
-										<!--				--><?php //endforeach; ?>
 										</tbody>
-										<tfoot>
-										</tfoot>
 									</table>
 								</div>
 								<div class="card-footer">
@@ -183,3 +93,6 @@
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+
+

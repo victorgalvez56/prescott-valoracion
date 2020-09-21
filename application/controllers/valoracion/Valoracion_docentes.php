@@ -75,149 +75,23 @@ class Valoracion_docentes extends CI_Controller
 
 	public function ver_ficha_pedagogica($id)
 	{
-
+//
 		$docente = $this->Valoracion_docentes_model->get_tipo_docente($id);
 		$tipo_docente = $docente[0]->id_tipo_docente;
-
-		$visitas_bimestre1 = $this->Valoracion_docentes_model->get_ficha_visitas($id, $this->año_actual, 1);
-		$visitas_bimestre2 = $this->Valoracion_docentes_model->get_ficha_visitas($id, $this->año_actual, 2);
-		$visitas_bimestre3 = $this->Valoracion_docentes_model->get_ficha_visitas($id, $this->año_actual, 3);
-		$visitas_bimestre4 = $this->Valoracion_docentes_model->get_ficha_visitas($id, $this->año_actual, 4);
-
-
 		$bimestre = $this->Valoracion_docentes_model->get_bimestre($this->fecha_actual);
 
-		$enseñanzas = $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 1);
-		$procesos = $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 2);
-		$manejos = $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 3);
-		$documentos = $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 4);
-
-		$ficha = array();
-		if ($visitas_bimestre1 != false) {
-			$visits1 = json_decode(json_encode($visitas_bimestre1), true);
-			$unique1 = $this->unique_multidim_array($visits1, 'visita_id');
-
-
-			$i1 = 0;
-			$j1 = 0;
-
-			$ficha[0]["nombre"] = "BIMESTRE I";
-
-			foreach ($unique1 as $index => $item) {
-				$ficha[0]["visitas"][$i1]["data"] = array("id" => $item["visita_id"]);
-				$i1++;
-			}
-
-			for ($x = 0; $x < count($ficha[0]["visitas"]); $x++) {
-				for ($z = 0; $z < count($visits1); $z++) {
-
-					if ($ficha[0]["visitas"][$x]["data"]["id"] == $visits1[$z]["visita_id"]) {
-
-						$ficha[0]["visitas"][$x]["data"]["item_id"][] = $visits1[$z]["item_id"];
-					}
-
-				}
-			}
-		}
-
-		if ($visitas_bimestre2 != false) {
-			$visits2 = json_decode(json_encode($visitas_bimestre2), true);
-			$unique2 = $this->unique_multidim_array($visits2, 'visita_id');
-
-
-			$i2 = 0;
-			$j2 = 0;
-
-			$ficha[1]["nombre"] = "BIMESTRE II";
-
-			foreach ($unique2 as $index => $item) {
-				$ficha[1]["visitas"][$i2]["data"] = array("id" => $item["visita_id"]);
-				$i2++;
-			}
-
-			for ($x = 0; $x < count($ficha[1]["visitas"]); $x++) {
-				for ($z = 0; $z < count($visits2); $z++) {
-
-					if ($ficha[1]["visitas"][$x]["data"]["id"] == $visits2[$z]["visita_id"]) {
-
-						$ficha[1]["visitas"][$x]["data"]["item_id"][] = $visits2[$z]["item_id"];
-					}
-
-				}
-			}
-		}
-
-
-		if ($visitas_bimestre3 != false) {
-			$visits3 = json_decode(json_encode($visitas_bimestre3), true);
-			$unique3 = $this->unique_multidim_array($visits3, 'visita_id');
-
-
-			$i3 = 0;
-			$j3 = 0;
-
-			$ficha[2]["nombre"] = "BIMESTRE III";
-
-			foreach ($unique3 as $index => $item) {
-				$ficha[2]["visitas"][$i3]["data"] = array("id" => $item["visita_id"]);
-				$i3++;
-			}
-
-			for ($x = 0; $x < count($ficha[2]["visitas"]); $x++) {
-				for ($z = 0; $z < count($visits3); $z++) {
-
-					if ($ficha[2]["visitas"][$x]["data"]["id"] == $visits3[$z]["visita_id"]) {
-
-						$ficha[2]["visitas"][$x]["data"]["item_id"][] = $visits3[$z]["item_id"];
-					}
-
-				}
-			}
-		}
-
-		if ($visitas_bimestre4 != false) {
-			$visits4 = json_decode(json_encode($visitas_bimestre4), true);
-			$unique4 = $this->unique_multidim_array($visits4, 'visita_id');
-
-
-			$i4 = 0;
-			$j4 = 0;
-
-			$ficha[3]["nombre"] = "BIMESTRE VI";
-
-			foreach ($unique4 as $index => $item) {
-				$ficha[3]["visitas"][$i4]["data"] = array("id" => $item["visita_id"]);
-				$i4++;
-			}
-
-			for ($x = 0; $x < count($ficha[3]["visitas"]); $x++) {
-				for ($z = 0; $z < count($visits4); $z++) {
-
-					if ($ficha[3]["visitas"][$x]["data"]["id"] == $visits4[$z]["visita_id"]) {
-
-						$ficha[3]["visitas"][$x]["data"]["item_id"][] = $visits4[$z]["item_id"];
-					}
-
-				}
-			}
-		}
-		echo json_encode($ficha);
-		die();
 
 		$data = array(
-			'ficha_pedagogica' => $ficha,
+			'id_profesor' => $id,
+//			'ficha_pedagogica' => $ficha,
 			'bimestre' => $bimestre,
-			'enseñanzas' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 1),
-			'procesos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 2),
-			'manejos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 3),
-			'documentos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 4),
+			'items' => $this->Valoracion_docentes_model->get_id_items($tipo_docente),
 		);
-//		echo json_encode($data);
-//		die();
+
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
-		$this->load->view("valoraciones/valoracion_docentes/view", $data);
-		$this->load->view("layouts/footer");
+		$this->load->view("valoraciones/valoracion_docentes/view",$data);
+		$this->load->view("layouts/footer",$data);
 	}
 
 	function unique_multidim_array($array, $key)
@@ -255,8 +129,7 @@ class Valoracion_docentes extends CI_Controller
 			'manejos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 3),
 			'documentos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 4),
 		);
-//		echo json_encode($data);
-//		die();
+
 		$this->load->view("valoraciones/valoracion_docentes/add", $data);
 	}
 
@@ -264,11 +137,9 @@ class Valoracion_docentes extends CI_Controller
 	public function registro_ficha_pedagogica()
 	{
 		$id_profesor = $this->input->post("id_profesor");
-
-		$enseñanzas = $this->input->post("enseñanzas");
-		$procesos = $this->input->post("procesos");
-		$manejos = $this->input->post("manejos");
-		$documentos = $this->input->post("documentos");
+		$docente = $this->Valoracion_docentes_model->get_tipo_docente($id_profesor);
+		$tipo_docente = $docente[0]->id_tipo_docente;
+		$items_by_tipo_docente = $this->Valoracion_docentes_model->get_id_items($tipo_docente);
 
 
 		$describo = $this->input->post("describo");
@@ -276,9 +147,15 @@ class Valoracion_docentes extends CI_Controller
 		$pregunto = $this->input->post("pregunto");
 		$sugiero = $this->input->post("sugiero");
 
+		$bimestre = $this->input->post("id_bimestre");
+
+		$items_si_marked = $this->input->post("items");
+
+
 
 		$ficha_pedagógica = $this->Valoracion_docentes_model->existe_ficha($id_profesor, $this->año_actual);
-		$puntaje_visita = count($enseñanzas) + count($procesos) + count($manejos) + count($documentos);
+
+		$puntaje_visita = count($items_si_marked);
 
 		if ($ficha_pedagógica == false) {
 			$array_ficha = array(
@@ -288,6 +165,7 @@ class Valoracion_docentes extends CI_Controller
 				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"),
 			);
 			$this->Valoracion_docentes_model->save_new_ficha_pedagogica($array_ficha);
+
 			$ultimo_registro_ficha = $this->Valoracion_docentes_model->lastID();
 			$array_visita = array(
 				'puntaje' => $puntaje_visita,
@@ -296,15 +174,14 @@ class Valoracion_docentes extends CI_Controller
 				'pregunto_eval' => $pregunto,
 				'sugiero_eval' => $sugiero,
 				'ficha_pedagogica_id' => $ultimo_registro_ficha,
+				'bimestre_id' => $bimestre,
 				'create_at' => $this->fecha_actual,
 				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"),
-
 			);
 			$this->Valoracion_docentes_model->save_new_visita($array_visita);
 			$ultimo_registro_visita = $this->Valoracion_docentes_model->lastID();
-			$this->save_detalle_visita($ultimo_registro_visita, $enseñanzas, $procesos, $manejos, $documentos);
+			$this->save_detalle_visita($ultimo_registro_visita, $items_si_marked,$items_by_tipo_docente);
 			$this->index();
-
 		} else {
 
 			$array_visita = array(
@@ -312,8 +189,9 @@ class Valoracion_docentes extends CI_Controller
 				'describo_eval' => $describo,
 				'valoro_eval' => $valoro,
 				'pregunto_eval' => $pregunto,
-				'ficha_pedagogica_id' => $ficha_pedagógica->id,
 				'sugiero_eval' => $sugiero,
+				'ficha_pedagogica_id' => $ficha_pedagógica->id,
+				'bimestre_id' => $bimestre,
 				'create_at' => $this->fecha_actual,
 				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"),
 
@@ -326,7 +204,8 @@ class Valoracion_docentes extends CI_Controller
 			$this->Valoracion_docentes_model->update_ficha_pedagogica($id_profesor, $array_ficha, $this->año_actual);
 			$this->Valoracion_docentes_model->save_new_visita($array_visita);
 			$ultimo_registro_visita = $this->Valoracion_docentes_model->lastID();
-			$this->save_detalle_visita($ultimo_registro_visita, $enseñanzas, $procesos, $manejos, $documentos);
+			$this->save_detalle_visita($ultimo_registro_visita, $items_si_marked,$items_by_tipo_docente);
+
 			$this->index();
 
 		}
@@ -335,52 +214,65 @@ class Valoracion_docentes extends CI_Controller
 
 	protected function save_detalle_visita(
 		$id_visita,
-		$enseñanzas,
-		$procesos,
-		$manejos,
-		$documentos
+		$items_si_marked,
+		$items_by_tipo_docente
 	)
 	{
 
-		for ($i = 0; $i < count($enseñanzas); $i++) {
+		for ($i = 0; $i < count($items_by_tipo_docente); $i++) {
+			$items_array[] = 	$items_by_tipo_docente[$i]->id;
+		}
+		$resultado = array_diff($items_array, $items_si_marked);
+
+		$items_no_marked = array_values($resultado);
+
+
+		for ($i = 0; $i < count($items_si_marked); $i++) {
 			$data = array(
 				'visita_id' => $id_visita,
-				'item_id' => $enseñanzas[$i],
+				'item_id' => $items_si_marked[$i],
+				'marked' => "si",
 				'create_at' => $this->fecha_actual,
 				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 			);
 			$this->Valoracion_docentes_model->save_detalle_visita($data);
+
+		}
+		for ($i = 0; $i < count($items_no_marked); $i++) {
+			$data = array(
+				'visita_id' => $id_visita,
+				'item_id' => $items_no_marked[$i],
+				'marked' => "no",
+				'create_at' => $this->fecha_actual,
+				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
+			);
+			$this->Valoracion_docentes_model->save_detalle_visita($data);
+
 		}
 
-		for ($i = 0; $i < count($procesos); $i++) {
-			$data = array(
-				'visita_id' => $id_visita,
-				'item_id' => $procesos[$i],
-				'create_at' => $this->fecha_actual,
-				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
-			);
-			$this->Valoracion_docentes_model->save_detalle_visita($data);
 		}
 
-		for ($i = 0; $i < count($manejos); $i++) {
-			$data = array(
-				'visita_id' => $id_visita,
-				'item_id' => $manejos[$i],
-				'create_at' => $this->fecha_actual,
-				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
-			);
-			$this->Valoracion_docentes_model->save_detalle_visita($data);
-		}
+public function get_detalle_visitas_bimestre1(){
 
-		for ($i = 0; $i < count($documentos); $i++) {
-			$data = array(
-				'visita_id' => $id_visita,
-				'item_id' => $documentos[$i],
-				'create_at' => $this->fecha_actual,
-				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
-			);
-			$this->Valoracion_docentes_model->save_detalle_visita($data);
-		}
+	$id_profesor = $this->input->post("id");
+
+	$data = $this->Valoracion_docentes_model->get_items_by_profesor($id_profesor,$this->año_actual,1);
+
+	echo  json_encode($data);
+}
+
+	public function get_id_items(){
+
+		$id_profesor = $this->input->post("id");
+		$docente = $this->Valoracion_docentes_model->get_tipo_docente($id_profesor);
+		$tipo_docente = $docente[0]->id_tipo_docente;
+
+
+		$data = $this->Valoracion_docentes_model->get_id_items($tipo_docente);
+
+		echo  json_encode($data);
 	}
+
+
 
 }

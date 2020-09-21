@@ -37,6 +37,32 @@ class Valoracion_docentes_model extends CI_Model
 		return $resultados->result();
 	}
 
+
+	public function get_id_items($tipo_profesor)
+	{
+		$this->db->select("t.nombre as nombre_tipo_item,i.*");
+		$this->db->from("tipos_items t");
+		$this->db->join("items i", "i.id_tipo_item = t.id");
+		$this->db->where("i.id_tipo_profesor", $tipo_profesor);
+		$resultados = $this->db->get();
+		return $resultados->result();
+	}
+
+	public function get_items_by_profesor($id_profesor,$año_actual,$id_bimestre)
+	{
+		$this->db->select("i.nombre, dv.item_id,dv.marked");
+		$this->db->from("fichas_pedagogicas f");
+		$this->db->join("visitas v", "v.ficha_pedagogica_id = f.id");
+		$this->db->join("detalles_visitas dv", "v.id = dv.visita_id");
+		$this->db->join("items i", "i.id = dv.item_id");
+		$this->db->where("f.usuario_id", $id_profesor);
+		$this->db->where("v.bimestre_id", $id_bimestre);
+		$this->db->where("year(f.create_at)", $año_actual);
+		$this->db->order_by("i.id", "ASC");
+		$resultados = $this->db->get();
+		return $resultados->result();
+	}
+
 	public function get_bimestre($fecha_actual)
 	{
 		$this->db->select("*");
@@ -63,14 +89,15 @@ class Valoracion_docentes_model extends CI_Model
 
 	public function get_ficha_visitas($id,$añoActual,$bimestre)
 	{
-		$this->db->select("v.puntaje,dv.visita_id,dv.item_id");
+		$this->db->select("f.promedio,f.create_at,f.update_by, v.*,dv.*");
 		$this->db->from("fichas_pedagogicas f");
 		$this->db->join("visitas v", "v.ficha_pedagogica_id = f.id");
 		$this->db->join("detalles_visitas dv", "dv.visita_id = v.id");
+		$this->db->join("items i", "dv.item_id = i.id");
+		$this->db->join("tipos_items ti", "i.id_tipo_item = ti.id");
 		$this->db->where("f.usuario_id", $id);
 		$this->db->where("year(f.create_at)", $añoActual);
-			$this->db->where("v.bimestre_id", $bimestre);
-//		$this->db->order_by("dv.indicador_id", "asc");
+		$this->db->where("v.bimestre_id", $bimestre);
 		$resultados = $this->db->get();
 		if ($resultados->num_rows() > 0) {
 			return $resultados->result();
@@ -78,6 +105,16 @@ class Valoracion_docentes_model extends CI_Model
 			return false;
 		}
 	}
+
+
+
+//SELECT
+//from fichas_pedagogicas f join visitas v
+//on f.id = v.ficha_pedagogica_id join detalles_visitas dv
+//on dv.visita_id = v.id join items i
+//on dv.item_id = i.id;
+
+
 
 	public function lastID(){
 		return $this->db->insert_id();
