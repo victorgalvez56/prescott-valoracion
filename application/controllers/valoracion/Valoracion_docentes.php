@@ -41,7 +41,7 @@ class Valoracion_docentes extends CI_Controller
 
 			$this->load->view("layouts/header");
 			$this->load->view("layouts/aside");
-			$this->load->view("valoraciones/valoracion_docentes/list_head", $data);
+			$this->load->view("valoraciones/valoracion_docentes/PS/list_head", $data);
 			$this->load->view("layouts/footer");
 			/* Coordinadora */
 		} elseif ($tipo_docente[0]->id_tipo_docente == 10) {
@@ -51,7 +51,7 @@ class Valoracion_docentes extends CI_Controller
 			);
 			$this->load->view("layouts/header");
 			$this->load->view("layouts/aside");
-			$this->load->view("valoraciones/valoracion_docentes/list_coordinadora", $data);
+			$this->load->view("valoraciones/valoracion_docentes/PS/list_coordinadora", $data);
 			$this->load->view("layouts/footer");
 		}
 
@@ -67,7 +67,7 @@ class Valoracion_docentes extends CI_Controller
 //
 //		$this->load->view("layouts/header");
 //		$this->load->view("layouts/aside");
-//		$this->load->view("valoraciones/valoracion_adm/list", $data);
+//		$this->load->view("valoraciones/valoracion_docentes/list", $data);
 //		$this->load->view("layouts/footer");
 //	}
 //
@@ -86,12 +86,15 @@ class Valoracion_docentes extends CI_Controller
 //			'ficha_pedagogica' => $ficha,
 			'bimestre' => $bimestre,
 			'items' => $this->Valoracion_docentes_model->get_id_items($tipo_docente),
+			'observaciones' => $this->Valoracion_docentes_model->get_observaciones($id,$this->fecha_actual),
 		);
-
+//
+//		echo json_encode($this->Valoracion_docentes_model->get_observaciones($id,$this->fecha_actual));
+//die();
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
-		$this->load->view("valoraciones/valoracion_docentes/view",$data);
-		$this->load->view("layouts/footer",$data);
+		$this->load->view("valoraciones/valoracion_docentes/view", $data);
+		$this->load->view("layouts/footer", $data);
 	}
 
 	function unique_multidim_array($array, $key)
@@ -152,12 +155,12 @@ class Valoracion_docentes extends CI_Controller
 		$items_si_marked = $this->input->post("items");
 
 
-
 		$ficha_pedagógica = $this->Valoracion_docentes_model->existe_ficha($id_profesor, $this->año_actual);
 
 		$puntaje_visita = count($items_si_marked);
 
 		if ($ficha_pedagógica == false) {
+
 			$array_ficha = array(
 				'estado' => "EN PROCESO",
 				'usuario_id' => $id_profesor,
@@ -178,10 +181,11 @@ class Valoracion_docentes extends CI_Controller
 				'create_at' => $this->fecha_actual,
 				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"),
 			);
+
 			$this->Valoracion_docentes_model->save_new_visita($array_visita);
 			$ultimo_registro_visita = $this->Valoracion_docentes_model->lastID();
-			$this->save_detalle_visita($ultimo_registro_visita, $items_si_marked,$items_by_tipo_docente);
-			$this->index();
+			$this->save_detalle_visita($ultimo_registro_visita, $items_si_marked, $items_by_tipo_docente);
+			redirect('/valoracion/valoracion_docentes/', 'refresh');
 		} else {
 
 			$array_visita = array(
@@ -204,9 +208,8 @@ class Valoracion_docentes extends CI_Controller
 			$this->Valoracion_docentes_model->update_ficha_pedagogica($id_profesor, $array_ficha, $this->año_actual);
 			$this->Valoracion_docentes_model->save_new_visita($array_visita);
 			$ultimo_registro_visita = $this->Valoracion_docentes_model->lastID();
-			$this->save_detalle_visita($ultimo_registro_visita, $items_si_marked,$items_by_tipo_docente);
-
-			$this->index();
+			$this->save_detalle_visita($ultimo_registro_visita, $items_si_marked, $items_by_tipo_docente);
+			redirect('/valoracion/valoracion_docentes/', 'refresh');
 
 		}
 	}
@@ -220,7 +223,7 @@ class Valoracion_docentes extends CI_Controller
 	{
 
 		for ($i = 0; $i < count($items_by_tipo_docente); $i++) {
-			$items_array[] = 	$items_by_tipo_docente[$i]->id;
+			$items_array[] = $items_by_tipo_docente[$i]->id;
 		}
 		$resultado = array_diff($items_array, $items_si_marked);
 
@@ -250,18 +253,97 @@ class Valoracion_docentes extends CI_Controller
 
 		}
 
-		}
+	}
 
-public function get_detalle_visitas_bimestre1(){
+	public function get_detalle_visitas_bimestre1()
+	{
 
-	$id_profesor = $this->input->post("id");
+		$id_profesor = $this->input->post("id");
 
-	$data = $this->Valoracion_docentes_model->get_items_by_profesor($id_profesor,$this->año_actual,1);
+		$data = $this->Valoracion_docentes_model->get_items_by_profesor($id_profesor, $this->año_actual, 1);
 
-	echo  json_encode($data);
-}
+		echo json_encode($data);
+	}
 
-	public function get_id_items(){
+
+	public function get_detalle_visitas_bimestre2()
+	{
+
+		$id_profesor = $this->input->post("id");
+
+		$data = $this->Valoracion_docentes_model->get_items_by_profesor($id_profesor, $this->año_actual, 2);
+
+		echo json_encode($data);
+	}
+
+	public function get_detalle_visitas_bimestre3()
+	{
+
+		$id_profesor = $this->input->post("id");
+
+		$data = $this->Valoracion_docentes_model->get_items_by_profesor($id_profesor, $this->año_actual, 3);
+
+		echo json_encode($data);
+	}
+	public function get_detalle_visitas_bimestre4()
+	{
+
+		$id_profesor = $this->input->post("id");
+
+		$data = $this->Valoracion_docentes_model->get_items_by_profesor($id_profesor, $this->año_actual, 4);
+
+		echo json_encode($data);
+	}
+
+
+
+	public function get_puntaje_bimestre1()
+	{
+
+		$id_profesor = $this->input->post("id");
+
+		$data = $this->Valoracion_docentes_model->get_puntaje_by_profesor($id_profesor, $this->año_actual, 1);
+
+		echo json_encode($data);
+	}
+
+	public function get_puntaje_bimestre2()
+	{
+
+		$id_profesor = $this->input->post("id");
+
+		$data = $this->Valoracion_docentes_model->get_puntaje_by_profesor($id_profesor, $this->año_actual, 2);
+
+		echo json_encode($data);
+	}
+
+	public function get_puntaje_bimestre3()
+	{
+
+		$id_profesor = $this->input->post("id");
+
+		$data = $this->Valoracion_docentes_model->get_puntaje_by_profesor($id_profesor, $this->año_actual, 3);
+
+		echo json_encode($data);
+	}
+
+
+	public function get_puntaje_bimestre4()
+	{
+
+		$id_profesor = $this->input->post("id");
+
+		$data = $this->Valoracion_docentes_model->get_puntaje_by_profesor($id_profesor, $this->año_actual, 4);
+
+		echo json_encode($data);
+	}
+
+
+
+
+
+	public function get_id_items()
+	{
 
 		$id_profesor = $this->input->post("id");
 		$docente = $this->Valoracion_docentes_model->get_tipo_docente($id_profesor);
@@ -270,9 +352,8 @@ public function get_detalle_visitas_bimestre1(){
 
 		$data = $this->Valoracion_docentes_model->get_id_items($tipo_docente);
 
-		echo  json_encode($data);
+		echo json_encode($data);
 	}
-
 
 
 }

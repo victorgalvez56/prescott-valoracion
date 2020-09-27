@@ -12,7 +12,7 @@
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
 						<li class="breadcrumb-item active">Valoraciones</li>
 					</ol>
-				</div> 
+				</div>
 			</div>
 		</div><!-- /.container-fluid -->
 	</section>
@@ -35,7 +35,7 @@
 									<th>Promedio General</th>
 									<th>Valoración 1</th>
 									<th>Valoración 2</th>
-									<th>Valoración 3</th>
+									<th>Valoración Pedagógica | Objetivos</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -99,7 +99,7 @@
 											</td>
 											<td>
 												<div class="btn-group">
-													<?php if ($hijo->rol_id == 9 || $hijo->rol_id == 10 ) { ?>
+													<?php if ($hijo->rol_id == 9 || $hijo->rol_id == 10) { ?>
 
 														<button class="btn btn-warning btn-lg"
 																value="<?php echo $hijo->hijo_id; ?>"
@@ -110,10 +110,10 @@
 
 													} else { ?>
 
-															<a href="<?php echo base_url() ?>valoracion/valoracion_docentes/ver_ficha_pedagogica/<?php echo $hijo->hijo_id; ?>"
-															   class="btn btn-info btn-lg"
-															   value="<?php echo $hijo->hijo_id; ?>"><span
-																		class="fas fa-search"></span></a>
+														<a href="<?php echo base_url() ?>valoracion/valoracion_docentes/ver_ficha_pedagogica/<?php echo $hijo->hijo_id; ?>"
+														   class="btn btn-info btn-lg"
+														   value="<?php echo $hijo->hijo_id; ?>"><span
+																	class="fas fa-search"></span></a>
 
 														<button class="btn btn-primary btn-lg"
 																value="<?php echo $hijo->hijo_id; ?>"
@@ -125,7 +125,7 @@
 																id="modal-visita_rapida" data-toggle="modal"
 																data-target="#modal-registrar-visita"><span
 																	class="fas fa-edit"></span></button>
-															<?php
+														<?php
 
 													}
 													?>

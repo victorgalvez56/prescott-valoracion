@@ -50,24 +50,21 @@
 
 											<td>
 												<div class="btn-group">
-														<?php if ($hijo->val3 == true) {
-															?>
-															<button class="btn btn-success btn-lg"
-																	value="<?php echo $hijo->hijo_id; ?>"
-																	id="modal-valoracion3_leer" data-toggle="modal"
-																	data-target="#modal-leer-val"><span
-																		class="fas fa-edit"></span></button>
-															<?php
-														} else {
-															?>
-															<button class="btn btn-warning btn-lg"
-																	value="<?php echo $hijo->hijo_id; ?>"
-																	id="modal-valoracion3_leer" data-toggle="modal"
-																	data-target="#modal-leer-val"><span
-																		class="fas fa-edit"></span></button>
+													<a href="<?php echo base_url() ?>valoracion/valoracion_docentes/ver_ficha_pedagogica/<?php echo $hijo->hijo_id; ?>"
+													   class="btn btn-info btn-lg"
+													   value="<?php echo $hijo->hijo_id; ?>"><span
+																class="fas fa-search"></span></a>
 
-															<?php
-														} ?>
+													<button class="btn btn-primary btn-lg"
+															value="<?php echo $hijo->hijo_id; ?>"
+															id="modal-registro_visita" data-toggle="modal"
+															data-target="#modal-registrar-visita"><span
+																class="fas fa-edit"></span></button>
+													<button class="btn btn-warning btn-lg"
+															value="<?php echo $hijo->hijo_id; ?>"
+															id="modal-visita_rapida" data-toggle="modal"
+															data-target="#modal-registrar-visita"><span
+																class="fas fa-edit"></span></button>
 
 												</div>
 											</td>
@@ -109,7 +106,30 @@
 			</div>
 			<div class="modal-footer justify-content-between">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</button>
+				<!--<button type="button" class="btn btn-primary">Save changes</button> -->
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+</div>
 
+<div class="modal fade" id="modal-registrar-visita">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title"><input type="button" value="" id="titleValoracion"
+											   class="btn btn-block bg-gradient-success btn-lg"></h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>Error algo ocurrió</p>
+			</div>
+			<div class="modal-footer justify-content-between">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</button>
 				<!--<button type="button" class="btn btn-primary">Save changes</button> -->
 			</div>
 		</div>

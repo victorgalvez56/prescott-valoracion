@@ -90,7 +90,6 @@
 	});
 	$(document).ready(function () {
 		$('.ir-arriba').click(function () {
-			console.warn('ga')
 			$('#arriba').animate({
 				scrollTop: '0px'
 			}, 750);
@@ -136,7 +135,6 @@
 					roles.map(rol => `<option value="${rol.id}">${rol.nombre}</option>`).join('')
 			);
 		} catch (error) {
-			console.log(error)
 		}
 	})
 
@@ -160,7 +158,6 @@
 					areas.map(area => `<option value="${area.id}">${area.nombre}</option>`).join('')
 			);
 		} catch (error) {
-			console.log(error)
 		}
 	})
 
@@ -185,7 +182,6 @@
 	/* Modal para agregar valoracione1 */
 	$(document).on("click", "#modal-valoracion1_registro", function () {
 		valor_id = $(this).val();
-		console.log(valor_id)
 		$.ajax({
 			url: BASE_URL + "valoracion/valoracion_adm/validacion1_registro",
 			type: "POST",
@@ -195,7 +191,6 @@
 			},
 			success: function (data) {
 				$("#modal-registro-val .modal-body").html(data);
-				console.log($("#tipo_validacion").val())
 				$("#titleValoracion").val("Valoración 1");
 			}
 		});
@@ -237,7 +232,6 @@
 	/* Modal para agregar valoracioneobjetivos */
 	$(document).on("click", "#modal-valoracion3_registro", function () {
 		valor_id = $(this).val();
-		console.log(valor_id)
 		$.ajax({
 			url: BASE_URL + "valoracion/valoracion_adm/validacion3_registro",
 			type: "POST",
@@ -255,7 +249,6 @@
 	/* Modal para leer valoracion1 */
 	$(document).on("click", "#modal-valoracion1_leer", function () {
 		valor_id = $(this).val();
-		console.log(valor_id)
 		$.ajax({
 			url: BASE_URL + "valoracion/valoracion_adm/validacion1_leer",
 			type: "POST",
@@ -265,7 +258,6 @@
 			},
 			success: function (data) {
 				$("#modal-leer-val .modal-body").html(data);
-				console.log($("#tipo_validacion").val())
 				$("#modal-leer-val #titleValoracion").val("Valoración 1");
 			}
 		});
@@ -1142,6 +1134,222 @@
 		});
 	});
 
+	// $(document).ready(function () {
+	//
+	// 	id_profesor = $('#id_profesor').val();
+	// 	$.ajax({
+	// 		url: BASE_URL + "valoracion/valoracion_docentes/get_puntaje_bimestre1",
+	// 		type: "POST",
+	// 		dataType: "JSON",
+	// 		data: {
+	// 			id: id_profesor
+	// 		},
+	// 		success: function (data) {
+	// 			const result = data.reduce((acc, {puntaje}) => {
+	// 				if (!acc['row']) {
+	// 					acc['row'] = []
+	//
+	// 				}
+	// 				acc['row'].push(puntaje)
+	//
+	//
+	// 				return acc
+	// 			}, {})
+	//
+	// 			result_array = Object.values(result);
+	//
+	// 			colspan = result_array[0].length;
+	// 			colspan_nombre = Number(colspan);
+	// 			header = "<tr id="+ "'nombre_bimestres'"+ ">";
+	// 			header += "<td>Grado y sección</td>";
+	// 			header += "</tr>";
+	// 			$("#mostrar_niveles_dominio tbody").append(header)
+	//
+	//
+	//
+	// 			for (let i = 0; i < result_array.length; i++) {
+	// 				html = "<tr id="+ "'checked_bimestres"+i+"'"+ ">";
+	// 				for (let x = 0; x < result_array[i].length	; x++) {
+	// 					html += "<td>"+result_array[i][x]+"</td>";
+	// 				}
+	// 				html += "</tr>";
+	// 				$("#mostrar_niveles_dominio tbody").append(html)
+	// 			}
+	//
+	// 		}
+	// 	});
+	// });
+
+
+
+
+	$(document).ready(function () {
+
+		id_profesor = $('#id_profesor').val();
+		$.ajax({
+			url: BASE_URL + "valoracion/valoracion_docentes/get_puntaje_bimestre1",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				id: id_profesor
+			},
+			success: function (data) {
+				const result = data.reduce((acc, {puntaje, grado_seccion, create_at}) => {
+					if (!acc['Puntajes']) {
+						acc['Puntajes'] = []
+					}
+					if (!acc['Grado y sección']) {
+						acc['Grado y sección'] = []
+					}
+					if (!acc['Fecha']) {
+						acc['Fecha'] = []
+					}
+					acc['Puntajes'].push(puntaje)
+					acc['Grado y sección'].push(grado_seccion)
+					acc['Fecha'].push(create_at)
+
+					return acc
+				}, {})
+
+				console.warn(data)
+				console.warn(result)
+
+
+				result_array = Object.values(result);
+
+				colspan = result_array[0].length;
+				colspan_nombre = Number(colspan);
+				header = "<tr id="+ "'nombre_bimestres'"+ ">";
+				header += "<td>Niveles de dominio</td>";
+				header += "<td colspan='"+colspan_nombre+"'>Bimestre1</td>";
+				header += "</tr>";
+				$("#mostrar_niveles_dominio tbody").append(header)
+
+				array_nombres = ['Puntaje','Grado y seccion','Fecha'];
+
+				console.error(array_nombres)
+				for (let i = 0; i < result_array.length; i++) {
+					html = "<tr id="+ "'checked_bimestres"+i+"'"+ ">";
+					html += "<td >"+array_nombres[i]+"</td>";
+					for (let x = 0; x < result_array[i].length	; x++) {
+						html += "<td>"+result_array[i][x]+"</td>";
+					}
+					html += "</tr>";
+					$("#mostrar_niveles_dominio tbody").append(html)
+				}
+
+
+			}
+		});
+	});
+
+	$(document).ready(delay(function () {
+		id_profesor = $('#id_profesor').val();
+		$.ajax({
+			url: BASE_URL + "valoracion/valoracion_docentes/get_puntaje_bimestre2",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				id: id_profesor
+			},
+			success: function (data2) {
+				const result2 = data2.reduce((acc, {puntaje}) => {
+					if (!acc['row']) {
+						acc['row'] = []
+
+					}
+					acc['row'].push(puntaje)
+
+
+					return acc
+				}, {})
+				result_array2 = Object.values(result2);
+				header = "<td colspan='"+result_array2[0].length+"'>Bimestre2</td>";
+				$("#mostrar_niveles_dominio #nombre_bimestres").append(header)
+				for (let i = 0; i < result_array2.length; i++) {
+					html2 = "";
+					for (let x = 0; x < result_array2[i].length	; x++) {
+						html2 += "<td>"+result_array2[i][x]+"</td>";
+					}
+					$("#mostrar_niveles_dominio #checked_bimestres0").append(html2)
+				}
+			}
+		});
+
+	},100));
+
+
+	$(document).ready(delay(function () {
+		id_profesor = $('#id_profesor').val();
+		$.ajax({
+			url: BASE_URL + "valoracion/valoracion_docentes/get_puntaje_bimestre3",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				id: id_profesor
+			},
+			success: function (data2) {
+				const result2 = data2.reduce((acc, {puntaje}) => {
+					if (!acc['row']) {
+						acc['row'] = []
+
+					}
+					acc['row'].push(puntaje)
+
+
+					return acc
+				}, {})
+				result_array2 = Object.values(result2);
+				header = "<td colspan='"+result_array2[0].length+"'>Bimestre3</td>";
+				$("#mostrar_niveles_dominio #nombre_bimestres").append(header)
+				for (let i = 0; i < result_array2.length; i++) {
+					html2 = "";
+					for (let x = 0; x < result_array2[i].length	; x++) {
+						html2 += "<td>"+result_array2[i][x]+"</td>";
+					}
+					$("#mostrar_niveles_dominio #checked_bimestres0").append(html2)
+				}
+			}
+		});
+
+	},200));
+
+
+	$(document).ready(delay(function () {
+		id_profesor = $('#id_profesor').val();
+		$.ajax({
+			url: BASE_URL + "valoracion/valoracion_docentes/get_puntaje_bimestre4",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				id: id_profesor
+			},
+			success: function (data2) {
+				const result2 = data2.reduce((acc, {puntaje}) => {
+					if (!acc['row']) {
+						acc['row'] = []
+
+					}
+					acc['row'].push(puntaje)
+
+
+					return acc
+				}, {})
+				result_array2 = Object.values(result2);
+				header = "<td colspan='"+result_array2[0].length+"'>Bimestre4</td>";
+				$("#mostrar_niveles_dominio #nombre_bimestres").append(header)
+				for (let i = 0; i < result_array2.length; i++) {
+					html2 = "";
+					for (let x = 0; x < result_array2[i].length	; x++) {
+						html2 += "<td>"+result_array2[i][x]+"</td>";
+					}
+					$("#mostrar_niveles_dominio #checked_bimestres0").append(html2)
+				}
+			}
+		});
+
+	},300));
+
 	/* Tabla para bimestres */
 	/* Busca periodo por años list */
 	$(document).ready(function () {
@@ -1155,11 +1363,6 @@
 				id: id_profesor
 			},
 			success: function (data) {
-				// console.warn(data)
-
-
-				//
-
 
 				const result = data.reduce((acc, {item_id, marked, nombre}) => {
 					if (!acc['row' + item_id]) {
@@ -1173,18 +1376,21 @@
 					return acc
 				}, {})
 				result_array = Object.values(result);
-				console.error(result_array)
-				header = "<tr>";
+
+				colspan = result_array[0].length;
+				colspan_nombre = Number(colspan-1);
+				header = "<tr id="+ "'nombre_bimestres'"+ ">";
 				header += "<td></td>";
-				header += "<td colspan='"+result_array.length+"'>Bimestre1</td>";
+				header += "<td colspan='"+colspan_nombre+"'>Bimestre1</td>";
 				header += "</tr>";
 				$("#mostrar_visitas_bimestre1 tbody").append(header)
 
+
+
 				for (let i = 0; i < result_array.length; i++) {
+					html = "<tr id="+ "'checked_bimestres"+i+"'"+ ">";
 
-
-					html = "<tr>";
-					html += "<td>"+result_array[i][0]+"</td>";
+					html += "<td>"+Number(i+1)+". "+result_array[i][0]+"</td>";
 					for (let x = 1; x < result_array[i].length	; x++) {
 						if (result_array[i][x] == 'si') {
 							html += "<td><input type='checkbox' checked disabled></td>";
@@ -1194,88 +1400,153 @@
 					}
 					html += "</tr>";
 					$("#mostrar_visitas_bimestre1 tbody").append(html)
-
 				}
 
 			}
 		});
+	});
+	function delay(fn, ms) {
+		let timer = 0
+		return function (...args) {
+			clearTimeout(timer)
+			timer = setTimeout(fn.bind(this, ...args), ms || 0)
+		}
+	}
+	$(document).ready(delay(function () {
+		id_profesor = $('#id_profesor').val();
 		$.ajax({
-			url: BASE_URL + "valoracion/valoracion_docentes/get_detalle_visitas_bimestre1",
+			url: BASE_URL + "valoracion/valoracion_docentes/get_detalle_visitas_bimestre2",
 			type: "POST",
 			dataType: "JSON",
 			data: {
 				id: id_profesor
 			},
-			success: function (data) {
-				// console.warn(data)
-
-
-				//
-
-
-				const result = data.reduce((acc, {item_id, marked, nombre}) => {
+			success: function (data2) {
+				const result2 = data2.reduce((acc, {item_id, marked, nombre}) => {
 					if (!acc['row' + item_id]) {
 						acc['row' + item_id] = []
 					}
 					acc['row' + item_id].push(marked)
-
-
 					return acc
 				}, {})
-				result_array = Object.values(result);
-				console.error(result_array)
-				header = "<tr>";
-				header += "<td></td>";
-				header += "<td colspan='"+result_array.length+"'>Bimestre1</td>";
-				header += "</tr>";
-				$("#mostrar_visitas_bimestre1 tbody").append(header)
-
-				for (let i = 0; i < result_array.length; i++) {
-
-
-					html += "<td>"+result_array[i][0]+"</td>";
-					for (let x = 1; x < result_array[i].length	; x++) {
-						if (result_array[i][x] == 'si') {
-							html += "<td><input type='checkbox' checked disabled></td>";
+				result_array2 = Object.values(result2);
+				header = "<td colspan='"+result_array2[0].length+"'>Bimestre2</td>";
+				$("#mostrar_visitas_bimestre1 #nombre_bimestres").append(header)
+				for (let i = 0; i < result_array2.length; i++) {
+					html2="";
+					for (let x = 0; x < result_array2[i].length	; x++) {
+						if (result_array2[i][x] == 'si') {
+							html2 += "<td>";
+							html2 += "<input type='checkbox' checked disabled>";
+							html2 += "</td>";
 						} else {
-							html += "<td><input type='checkbox'  disabled></td>";
+							html2 += "<td>";
+							html2 += "<input type='checkbox'  disabled>";
+							html2 += "</td>";
 						}
+
 					}
-					$("#mostrar_visitas_bimestre1 tbody").append(html)
-
+					$("#mostrar_visitas_bimestre1 #checked_bimestres"+i+"").append(html2)
 				}
-
 			}
 		});
 
-	});
+	},100));
+	function delay3(fn, ms) {
+		let timer = 0
+		return function (...args) {
+			clearTimeout(timer)
+			timer = setTimeout(fn.bind(this, ...args), ms || 0)
+		}
+	}
+	$(document).ready(delay3(function () {
+		id_profesor = $('#id_profesor').val();
+		$.ajax({
+			url: BASE_URL + "valoracion/valoracion_docentes/get_detalle_visitas_bimestre3",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				id: id_profesor
+			},
+			success: function (data2) {
+				const result2 = data2.reduce((acc, {item_id, marked, nombre}) => {
+					if (!acc['row' + item_id]) {
+						acc['row' + item_id] = []
+					}
+					acc['row' + item_id].push(marked)
+					return acc
+				}, {})
+				result_array2 = Object.values(result2);
+				header = "<td colspan='"+result_array2[0].length+"'>Bimestre3</td>";
+				$("#mostrar_visitas_bimestre1 #nombre_bimestres").append(header)
+				for (let i = 0; i < result_array2.length; i++) {
+					html2="";
+					for (let x = 0; x < result_array2[i].length	; x++) {
+						if (result_array2[i][x] == 'si') {
+							html2 += "<td>";
+							html2 += "<input type='checkbox' checked disabled>";
+							html2 += "</td>";
+						} else {
+							html2 += "<td>";
+							html2 += "<input type='checkbox'  disabled>";
+							html2 += "</td>";
+						}
 
+					}
+					$("#mostrar_visitas_bimestre1 #checked_bimestres"+i+"").append(html2)
+				}
+			}
+		});
 
-	//<tr class="bg-primary">
-	//		<td colspan="2">
-	//
-	//		</td>
-	//		</tr>
-	//
-	//		<?php //foreach ($items as $item) : ?>
-	//		<tr class="table-primary test">
-	//			<td>
-	//			<?php //echo $item->nombre; ?>
-	//			</td>
-	//			<td style="text-align: center">
-	//			<input class="items" name="enseñanzas[]"
-	//	value="<?php //echo $item->id; ?>//">
-	//			</td>
-	//			<td style="text-align: center">
-	//			<input class="items" name="enseñanzas[]"
-	//	value="<?php //echo $item->id; ?>//">
-	//			</td>
-	//			<td style="text-align: center">
-	//			<input class="items" name="enseñanzas[]"
-	//	value="<?php //echo $item	->id; ?>//">
-	//			</td>
-	//		</tr>
-	<?php //endforeach; ?>
+	},200));
+	function delay4(fn, ms) {
+		let timer = 0
+		return function (...args) {
+			clearTimeout(timer)
+			timer = setTimeout(fn.bind(this, ...args), ms || 0)
+		}
+	}
+	$(document).ready(delay4(function () {
+		id_profesor = $('#id_profesor').val();
+		$.ajax({
+			url: BASE_URL + "valoracion/valoracion_docentes/get_detalle_visitas_bimestre4",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				id: id_profesor
+			},
+			success: function (data2) {
+				const result2 = data2.reduce((acc, {item_id, marked, nombre}) => {
+					if (!acc['row' + item_id]) {
+						acc['row' + item_id] = []
+					}
+					acc['row' + item_id].push(marked)
+					return acc
+				}, {})
+				result_array2 = Object.values(result2);
+				header = "<td colspan='"+result_array2[0].length+"'>Bimestre4</td>";
+				$("#mostrar_visitas_bimestre1 #nombre_bimestres").append(header)
+				for (let i = 0; i < result_array2.length; i++) {
+					html2="";
+					for (let x = 0; x < result_array2[i].length	; x++) {
+						if (result_array2[i][x] == 'si') {
+							html2 += "<td>";
+							html2 += "<input type='checkbox' checked disabled>";
+							html2 += "</td>";
+						} else {
+							html2 += "<td>";
+							html2 += "<input type='checkbox'  disabled>";
+							html2 += "</td>";
+						}
+
+					}
+					$("#mostrar_visitas_bimestre1 #checked_bimestres"+i+"").append(html2)
+				}
+			}
+		});
+
+	},300));
+
 
 </script>
 <style>

@@ -8,11 +8,14 @@ class Mi_valoracion_docentes extends CI_Controller
 	{
 		parent::__construct();
 		$this->permisos = $this->backend_lib->control();
+		$this->load->model("Valoracion_docentes_model");
 		$this->load->model("Valoracion_adm_model");
+
 		$this->load->model("Usuarios_model");
 		$this->load->model("Periodos_model");
-
-		$this->load->helper('date');
+		$this->fecha = time();
+		$this->fecha_actual = date("Y-m-d", $this->fecha);
+		$this->año_actual = date("Y", $this->fecha);
 	}
 
 	public function index()
@@ -31,6 +34,7 @@ class Mi_valoracion_docentes extends CI_Controller
 		$valoracion1= $this->Valoracion_adm_model->getValoracion($this->session->userdata("id"),1, $añoActual);
 		$valoracion2= $this->Valoracion_adm_model->getValoracion($this->session->userdata("id"),2, $añoActual);
 		$valoraciono=$this->Valoracion_adm_model->getValoracionObjetivos($this->session->userdata("id"), $añoActual, 3);
+		$observaciones = $this->Valoracion_docentes_model->get_observaciones($this->session->userdata("id"),$this->fecha_actual);
 
 
 		if($valoracion1 == false || $valoracion2 == false || $valoraciono == false){
@@ -63,9 +67,6 @@ class Mi_valoracion_docentes extends CI_Controller
 			}
 		}
 
-		if ($estado_entrevista2_colab == false) {
-			$valoracion_objetivo = " ";
-
 			$data  = array(
 				'permisos' => $this->permisos,
 
@@ -91,110 +92,16 @@ class Mi_valoracion_docentes extends CI_Controller
 				'promedio_final' => $promedio_final,
 				'color_tarjeta_promedio' => $color_promedio_final,
 
-				'total_val_obj'=> $valoracion_objetivo,
+				'observaciones' => $observaciones,
 
 				'estado' => $estado_val_obj,
-				'estado_entrevista2_colab' => $estado_entrevista2_colab,
 			);
 
 
 			$this->load->view("layouts/header");
 			$this->load->view("layouts/aside");
-			$this->load->view("valoraciones/valoracion_adm/mi_valoracion", $data);
+			$this->load->view("valoraciones/valoracion_docentes/mi_valoracion", $data);
 			$this->load->view("layouts/footer");
-		} else {
-			if ($estado_entrevista2_colab[0]->evaluador_id == null) {
-				$valoracion_objetivo = " ";
-
-				$data  = array(
-					'permisos' => $this->permisos,
-
-					'padre_registrador' => $this->Valoracion_adm_model->getusuariosPadreRegistrar($this->session->userdata("id"), $añoActual, 1, 1),
-
-
-					'puntajes1_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 1, 2),
-					'puntajes2_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 2, 2),
-					'puntajes3_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 3, 2),
-					'puntajes4_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 4, 2),
-
-					'tipo_validacion' => $validacion,
-					'puntajes1_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 1, 1),
-					'puntajes2_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 2, 1),
-					'puntajes3_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 3, 1),
-					'puntajes4_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 4, 1),
-
-					'total_valoracion_1' => $total_valoracion_11,
-					'total_valoracion_2' => $total_valoracion_22,
-					'total_valoracion_o' => $total_valoracion_oo,
-					'promediovaloraciones' => $promediovaloraciones,
-					'promedio_final' => $promedio_final,
-					'color_tarjeta_promedio' => $color_promedio_final,
-
-					'total_val_obj'=> $valoracion_objetivo,
-
-					'estado' => $estado_val_obj,
-					'estado_entrevista2_colab' => $estado_entrevista2_colab,
-				);
-
-				$this->load->view("layouts/header");
-				$this->load->view("layouts/aside");
-				$this->load->view("valoraciones/valoracion_adm/mi_valoracion", $data);
-				$this->load->view("layouts/footer");
-			} else {
-				$colaboradoraux =  $this->Usuarios_model->getUsuario($estado_entrevista2_colab[0]->colaborador_id);
-				$colaborador = $colaboradoraux->nombres . " " . $colaboradoraux->apellidos;
-				$evaluadoraux =  $this->Usuarios_model->getUsuario($estado_entrevista2_colab[0]->evaluador_id);
-				$evaluador = $evaluadoraux->nombres . " " . $evaluadoraux->apellidos;
-
-
-				$valoracion_objetivo_aux =  $this->Valoracion_adm_model->getValoracionObjetivos($this->session->userdata("id"), $añoActual, 3);
-
-				if($valoracion_objetivo_aux == false){
-					$valoracion_objetivo= " ";
-				}else{
-					$valoracion_objetivo = $valoracion_objetivo_aux[0]->total_valoracion;
-				}
-
-				$data  = array(
-					'permisos' => $this->permisos,
-
-					'padre_registrador' => $this->Valoracion_adm_model->getusuariosPadreRegistrar($this->session->userdata("id"), $añoActual, 1, 1),
-
-					'puntajes1_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 1, 2),
-					'puntajes2_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 2, 2),
-					'puntajes3_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 3, 2),
-					'puntajes4_val2' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 4, 2),
-
-
-					'tipo_validacion' => $validacion,
-					'puntajes1_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 1, 1),
-					'puntajes2_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 2, 1),
-					'puntajes3_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 3, 1),
-					'puntajes4_val1' => $this->Valoracion_adm_model->getvaloracion1($this->session->userdata("id"), $añoActual, 4, 1),
-
-					'total_valoracion_1' => $total_valoracion_11,
-					'total_valoracion_2' => $total_valoracion_22,
-					'total_valoracion_o' => $total_valoracion_oo,
-					'promediovaloraciones' => $promediovaloraciones,
-					'promedio_final' => $promedio_final,
-					'color_tarjeta_promedio' => $color_promedio_final,
-
-
-					'estado' => $estado_val_obj,
-					'estado_entrevista2_colab' => $estado_entrevista2_colab,
-					'estado_entrevista3_evalu' => $estado_entrevista3_evalu,
-					'total_val_obj'=> $valoracion_objetivo,
-
-					'colaborador' => $colaborador,
-					'evaluador' => $evaluador,
-				);
-
-				$this->load->view("layouts/header");
-				$this->load->view("layouts/aside");
-				$this->load->view("valoraciones/valoracion_adm/mi_valoracion", $data);
-				$this->load->view("layouts/footer");
-			}
-		}
 	}
 
 
@@ -227,7 +134,7 @@ public function entrevista2_colab_registro()
 		);
 
 		$this->Valoracion_adm_model->saveEntrevista2($data);
-		redirect(base_url() . "valoracion/mi_valoracion_adm/");
+		redirect(base_url() . "valoracion/mi_valoracion_docentes/");
 	}
 
 	public function entrevista2_evalu_registro()
@@ -254,7 +161,7 @@ public function entrevista2_colab_registro()
 		);
 
 		$this->Valoracion_adm_model->updateEntrevista($id_colaborador, $tipo_entrevista, $data, $añoActual);
-		redirect(base_url() . "valoracion/valoracion_adm/");
+		redirect(base_url() . "valoracion/mi_valoracion_docentes/");
 	}
 
 
@@ -355,7 +262,7 @@ public function entrevista2_colab_registro()
 			'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 		);
 		$this->Valoracion_adm_model->updateEntrevista($id_colaborador, $tipo_entrevista, $data, $añoActual);
-		redirect(base_url() . "valoracion/mi_valoracion_adm/");
+		redirect(base_url() . "valoracion/mi_valoracion_docentes/");
 	}
 
 	public function firma_colab_registro()
@@ -385,7 +292,7 @@ public function entrevista2_colab_registro()
 			'update_at' => $fechaActual,
 		);
 		$this->Valoracion_adm_model->updateEntrevista($this->session->userdata("id"), $tipo_entrevista, $data, $añoActual);
-		redirect(base_url() . "valoracion/mi_valoracion_adm/");
+		redirect(base_url() . "valoracion/mi_valoracion_docentes/");
 	}
 
 	public function firma_evalu_registro()
@@ -412,6 +319,6 @@ public function entrevista2_colab_registro()
 			'update_at' => $fechaActual,
 		);
 		$this->Valoracion_adm_model->updateEntrevistaEvalu($this->session->userdata("id"), $tipo_entrevista, $data, $añoActual);
-		redirect(base_url() . "valoracion/valoracion_adm/");
+		redirect(base_url() . "valoracion/mi_valoracion_docentes/");
 	}
 }

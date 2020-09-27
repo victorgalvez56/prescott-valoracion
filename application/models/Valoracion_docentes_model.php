@@ -58,7 +58,7 @@ class Valoracion_docentes_model extends CI_Model
 		$this->db->where("f.usuario_id", $id_profesor);
 		$this->db->where("v.bimestre_id", $id_bimestre);
 		$this->db->where("year(f.create_at)", $año_actual);
-		$this->db->order_by("i.id", "ASC");
+		$this->db->order_by("i.id,v.id", "ASC");
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
@@ -71,6 +71,40 @@ class Valoracion_docentes_model extends CI_Model
 		$this->db->where("fecha_fin >=", $fecha_actual);
 		$resultados = $this->db->get();
 		return $resultados->row();
+	}
+	public function get_puntaje_by_profesor($id_profesor,$año_actual,$id_bimestre)
+	{
+		$this->db->select("v.*");
+		$this->db->from("fichas_pedagogicas f");
+		$this->db->join("visitas v", "v.ficha_pedagogica_id = f.id");
+		$this->db->where("f.usuario_id", $id_profesor);
+		$this->db->where("year(f.create_at)", $año_actual);
+		$this->db->where("v.bimestre_id", $id_bimestre);
+		$this->db->order_by("v.bimestre_id", "asc");
+
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->result();
+		} else {
+			return false;
+		}
+	}
+
+	public function get_observaciones($id_profesor,$año_actual)
+	{
+		$this->db->select("v.*,u.nombres ,u.apellidos");
+		$this->db->from("fichas_pedagogicas f");
+		$this->db->join("visitas v", "v.ficha_pedagogica_id = f.id");
+		$this->db->join("usuarios u", "f.usuario_id = u.id");
+		$this->db->where("f.usuario_id", $id_profesor);
+		$this->db->where("year(f.create_at)", $año_actual);
+		$this->db->order_by("v.id", "asc");
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->result();
+		} else {
+			return false;
+		}
 	}
 
 	public function existe_ficha($id_profesor,$añoActual)

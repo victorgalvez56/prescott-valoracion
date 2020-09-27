@@ -30,6 +30,7 @@
 					</tr>
 					<?php foreach ($enseñanzas as $enseñanza) : ?>
 					<tr class="table-primary">
+
 						<td>
 							<?php echo $enseñanza->nombre;?>
 						</td>
