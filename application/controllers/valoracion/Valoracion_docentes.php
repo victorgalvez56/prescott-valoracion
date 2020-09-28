@@ -29,16 +29,13 @@ class Valoracion_docentes extends CI_Controller
 			$hijos[$i]->val2 = $this->Valoracion_adm_model->getExistValoracion($hijos[$i]->hijo_id, 2, $this->año_actual);
 			$hijos[$i]->val3 = $this->Valoracion_adm_model->getExistValoracion($hijos[$i]->hijo_id, 3, $this->año_actual);
 		}
-
 		$tipo_docente = $this->Valoracion_docentes_model->get_tipo_docente($this->session->userdata("id"));
-
 		/* Head */
 		if ($tipo_docente[0]->id_tipo_docente == 8) {
 			$data = array(
 				'permisos' => $this->permisos,
 				'hijos' => $hijos,
 			);
-
 			$this->load->view("layouts/header");
 			$this->load->view("layouts/aside");
 			$this->load->view("valoraciones/valoracion_docentes/PS/list_head", $data);
@@ -88,9 +85,7 @@ class Valoracion_docentes extends CI_Controller
 			'items' => $this->Valoracion_docentes_model->get_id_items($tipo_docente),
 			'observaciones' => $this->Valoracion_docentes_model->get_observaciones($id,$this->fecha_actual),
 		);
-//
-//		echo json_encode($this->Valoracion_docentes_model->get_observaciones($id,$this->fecha_actual));
-//die();
+
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
 		$this->load->view("valoraciones/valoracion_docentes/view", $data);
@@ -122,18 +117,38 @@ class Valoracion_docentes extends CI_Controller
 
 		$bimestre = $this->Valoracion_docentes_model->get_bimestre($this->fecha_actual);
 
+		$estado_ultima_visita = $this->Valoracion_docentes_model->get_estado_ultima_visita($id,$this->fecha_actual);
 
-		$data = array(
-			'id_profesor' => $id,
-			'fecha_hoy' => $this->fecha_actual,
-			'bimestre' => $bimestre,
-			'enseñanzas' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 1),
-			'procesos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 2),
-			'manejos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 3),
-			'documentos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 4),
-		);
 
-		$this->load->view("valoraciones/valoracion_docentes/add", $data);
+
+		if($estado_ultima_visita== false) {
+			$data = array(
+				'id_profesor' => $id,
+				'fecha_hoy' => $this->fecha_actual,
+				'bimestre' => $bimestre,
+				'enseñanzas' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 1),
+				'procesos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 2),
+				'manejos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 3),
+				'documentos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 4),
+			);
+			$this->load->view("valoraciones/valoracion_docentes/register/add", $data);
+		}else{
+			if($estado_ultima_visita[0]->estado == 'espera'){
+				$this->load->view("valoraciones/valoracion_docentes/register/espera");
+			}else{
+				$data = array(
+					'id_profesor' => $id,
+					'fecha_hoy' => $this->fecha_actual,
+					'bimestre' => $bimestre,
+					'enseñanzas' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 1),
+					'procesos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 2),
+					'manejos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 3),
+					'documentos' => $this->Valoracion_docentes_model->get_items_by_tipos($tipo_docente, 4),
+				);
+				$this->load->view("valoraciones/valoracion_docentes/register/add", $data);
+			}
+		}
+
 	}
 
 
@@ -149,7 +164,10 @@ class Valoracion_docentes extends CI_Controller
 		$valoro = $this->input->post("valoro");
 		$pregunto = $this->input->post("pregunto");
 		$sugiero = $this->input->post("sugiero");
+		$grado_seccion = $this->input->post("grado_seccion");
 
+
+		
 		$bimestre = $this->input->post("id_bimestre");
 
 		$items_si_marked = $this->input->post("items");
@@ -176,8 +194,10 @@ class Valoracion_docentes extends CI_Controller
 				'valoro_eval' => $valoro,
 				'pregunto_eval' => $pregunto,
 				'sugiero_eval' => $sugiero,
+				'grado_seccion' => $grado_seccion,
 				'ficha_pedagogica_id' => $ultimo_registro_ficha,
 				'bimestre_id' => $bimestre,
+				'estado' => 'espera',
 				'create_at' => $this->fecha_actual,
 				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"),
 			);
@@ -194,8 +214,10 @@ class Valoracion_docentes extends CI_Controller
 				'valoro_eval' => $valoro,
 				'pregunto_eval' => $pregunto,
 				'sugiero_eval' => $sugiero,
+				'grado_seccion' => $grado_seccion,
 				'ficha_pedagogica_id' => $ficha_pedagógica->id,
 				'bimestre_id' => $bimestre,
+				'estado' => 'espera',
 				'create_at' => $this->fecha_actual,
 				'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos"),
 

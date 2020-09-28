@@ -1210,24 +1210,15 @@
 
 					return acc
 				}, {})
-
-				console.warn(data)
-				console.warn(result)
-
-
 				result_array = Object.values(result);
-
 				colspan = result_array[0].length;
 				colspan_nombre = Number(colspan);
-				header = "<tr id="+ "'nombre_bimestres'"+ ">";
+				header = "<tr id="+ "'bimestres_final'"+ ">";
 				header += "<td>Niveles de dominio</td>";
 				header += "<td colspan='"+colspan_nombre+"'>Bimestre1</td>";
 				header += "</tr>";
 				$("#mostrar_niveles_dominio tbody").append(header)
-
-				array_nombres = ['Puntaje','Grado y seccion','Fecha'];
-
-				console.error(array_nombres)
+				array_nombres = ['<span class="fas fa-edit">Puntaje</span>','<span class="fas fa-graduation-cap">Grado y sección</span>','<span class="fas fa-calendar">Fecha</span>']
 				for (let i = 0; i < result_array.length; i++) {
 					html = "<tr id="+ "'checked_bimestres"+i+"'"+ ">";
 					html += "<td >"+array_nombres[i]+"</td>";
@@ -1238,11 +1229,9 @@
 					$("#mostrar_niveles_dominio tbody").append(html)
 				}
 
-
 			}
 		});
 	});
-
 	$(document).ready(delay(function () {
 		id_profesor = $('#id_profesor').val();
 		$.ajax({
@@ -1253,29 +1242,43 @@
 				id: id_profesor
 			},
 			success: function (data2) {
-				const result2 = data2.reduce((acc, {puntaje}) => {
-					if (!acc['row']) {
-						acc['row'] = []
-
+				const result2 = data2.reduce((acc, {puntaje, grado_seccion, create_at}) => {
+					if (!acc['Puntajes']) {
+						acc['Puntajes'] = []
 					}
-					acc['row'].push(puntaje)
-
+					if (!acc['Grado y sección']) {
+						acc['Grado y sección'] = []
+					}
+					if (!acc['Fecha']) {
+						acc['Fecha'] = []
+					}
+					acc['Puntajes'].push(puntaje)
+					acc['Grado y sección'].push(grado_seccion)
+					acc['Fecha'].push(create_at)
 
 					return acc
 				}, {})
-				result_array2 = Object.values(result2);
-				header = "<td colspan='"+result_array2[0].length+"'>Bimestre2</td>";
-				$("#mostrar_niveles_dominio #nombre_bimestres").append(header)
-				for (let i = 0; i < result_array2.length; i++) {
-					html2 = "";
-					for (let x = 0; x < result_array2[i].length	; x++) {
-						html2 += "<td>"+result_array2[i][x]+"</td>";
+				result_array = Object.values(result2);
+				colspan = result_array[0].length;
+				colspan_nombre = Number(colspan);
+				header = "<td colspan='"+colspan_nombre+"'>Bimestre2</td>";
+				$("#mostrar_niveles_dominio #bimestres_final").append(header)
+				console.warn(result_array)
+				for (let i = 0; i < result_array.length; i++) {
+					html2="";
+
+					for (let x = 0; x < result_array[i].length	; x++) {
+						html2 += "<td>";
+						html2 += result_array[i][x];
+						html2 += "</td>";
+
 					}
-					$("#mostrar_niveles_dominio #checked_bimestres0").append(html2)
+					$("#mostrar_niveles_dominio #checked_bimestres"+i+"").append(html2)
 				}
+
+
 			}
 		});
-
 	},100));
 
 
@@ -1289,26 +1292,41 @@
 				id: id_profesor
 			},
 			success: function (data2) {
-				const result2 = data2.reduce((acc, {puntaje}) => {
-					if (!acc['row']) {
-						acc['row'] = []
-
+				const result2 = data2.reduce((acc, {puntaje, grado_seccion, create_at}) => {
+					if (!acc['Puntajes']) {
+						acc['Puntajes'] = []
 					}
-					acc['row'].push(puntaje)
-
+					if (!acc['Grado y sección']) {
+						acc['Grado y sección'] = []
+					}
+					if (!acc['Fecha']) {
+						acc['Fecha'] = []
+					}
+					acc['Puntajes'].push(puntaje)
+					acc['Grado y sección'].push(grado_seccion)
+					acc['Fecha'].push(create_at)
 
 					return acc
 				}, {})
-				result_array2 = Object.values(result2);
-				header = "<td colspan='"+result_array2[0].length+"'>Bimestre3</td>";
-				$("#mostrar_niveles_dominio #nombre_bimestres").append(header)
-				for (let i = 0; i < result_array2.length; i++) {
-					html2 = "";
-					for (let x = 0; x < result_array2[i].length	; x++) {
-						html2 += "<td>"+result_array2[i][x]+"</td>";
+				result_array = Object.values(result2);
+				colspan = result_array[0].length;
+				colspan_nombre = Number(colspan);
+				header = "<td colspan='"+colspan_nombre+"'>Bimestre3</td>";
+				$("#mostrar_niveles_dominio #bimestres_final").append(header)
+				console.warn(result_array)
+				for (let i = 0; i < result_array.length; i++) {
+					html2="";
+
+					for (let x = 0; x < result_array[i].length	; x++) {
+						html2 += "<td>";
+						html2 += result_array[i][x];
+						html2 += "</td>";
+
 					}
-					$("#mostrar_niveles_dominio #checked_bimestres0").append(html2)
+					$("#mostrar_niveles_dominio #checked_bimestres"+i+"").append(html2)
 				}
+
+
 			}
 		});
 
@@ -1325,30 +1343,46 @@
 				id: id_profesor
 			},
 			success: function (data2) {
-				const result2 = data2.reduce((acc, {puntaje}) => {
-					if (!acc['row']) {
-						acc['row'] = []
-
+				const result2 = data2.reduce((acc, {puntaje, grado_seccion, create_at}) => {
+					if (!acc['Puntajes']) {
+						acc['Puntajes'] = []
 					}
-					acc['row'].push(puntaje)
-
+					if (!acc['Grado y sección']) {
+						acc['Grado y sección'] = []
+					}
+					if (!acc['Fecha']) {
+						acc['Fecha'] = []
+					}
+					acc['Puntajes'].push(puntaje)
+					acc['Grado y sección'].push(grado_seccion)
+					acc['Fecha'].push(create_at)
 
 					return acc
 				}, {})
-				result_array2 = Object.values(result2);
-				header = "<td colspan='"+result_array2[0].length+"'>Bimestre4</td>";
-				$("#mostrar_niveles_dominio #nombre_bimestres").append(header)
-				for (let i = 0; i < result_array2.length; i++) {
-					html2 = "";
-					for (let x = 0; x < result_array2[i].length	; x++) {
-						html2 += "<td>"+result_array2[i][x]+"</td>";
+				result_array = Object.values(result2);
+				colspan = result_array[0].length;
+				colspan_nombre = Number(colspan);
+				header = "<td colspan='"+colspan_nombre+"'>Bimestre4</td>";
+				$("#mostrar_niveles_dominio #bimestres_final").append(header)
+				console.warn(result_array)
+				for (let i = 0; i < result_array.length; i++) {
+					html2="";
+					for (let x = 0; x < result_array[i].length	; x++) {
+						html2 += "<td>";
+						html2 += result_array[i][x];
+						html2 += "</td>";
 					}
-					$("#mostrar_niveles_dominio #checked_bimestres0").append(html2)
+					$("#mostrar_niveles_dominio #checked_bimestres"+i+"").append(html2)
 				}
 			}
 		});
 
 	},300));
+
+
+
+
+
 
 	/* Tabla para bimestres */
 	/* Busca periodo por años list */
@@ -1497,6 +1531,7 @@
 				}
 			}
 		});
+
 
 	},200));
 	function delay4(fn, ms) {

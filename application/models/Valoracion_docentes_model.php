@@ -90,6 +90,23 @@ class Valoracion_docentes_model extends CI_Model
 		}
 	}
 
+	public function get_estado_ultima_visita($id_profesor,$año_actual)
+	{
+		$this->db->select("v.*");
+		$this->db->from("fichas_pedagogicas f");
+		$this->db->join("visitas v", "v.ficha_pedagogica_id = f.id");
+		$this->db->where("f.usuario_id", $id_profesor);
+		$this->db->where("year(f.create_at)", $año_actual);
+		$this->db->order_by("v.id", "desc");
+		$this->db->limit(1);
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->result();
+		} else {
+			return false;
+		}
+	}
+
 	public function get_observaciones($id_profesor,$año_actual)
 	{
 		$this->db->select("v.*,u.nombres ,u.apellidos");
@@ -106,6 +123,25 @@ class Valoracion_docentes_model extends CI_Model
 			return false;
 		}
 	}
+
+	public function get_comentario_visita_concluida($id_profesor,$año_actual)
+	{
+		$this->db->select("v.*,u.nombres ,u.apellidos");
+		$this->db->from("fichas_pedagogicas f");
+		$this->db->join("visitas v", "v.ficha_pedagogica_id = f.id");
+		$this->db->join("usuarios u", "f.usuario_id = u.id");
+		$this->db->where("f.usuario_id", $id_profesor);
+		$this->db->where("year(f.create_at)", $año_actual);
+		$this->db->where("v.estado", 'concluido');
+		$this->db->order_by("v.id", "desc");
+		$resultados = $this->db->get();
+		if ($resultados->num_rows() > 0) {
+			return $resultados->result();
+		} else {
+			return false;
+		}
+	}
+
 
 	public function existe_ficha($id_profesor,$añoActual)
 	{
@@ -179,9 +215,33 @@ class Valoracion_docentes_model extends CI_Model
 		return $this->db->update("visitas", $data);
 	}
 
+	public function concluir_visita($id_visita, $data)
+	{
+		$this->db->where("id", $id_visita);
+		return $this->db->update("visitas", $data);
+	}
+
 	public function save_detalle_visita($data)
 	{
 		return $this->db->insert("detalles_visitas", $data);
 	}
 
+
+	public function getValoracionesbyDate($fechainicio,$fechafin){
+		$this->db->select("v.*,u.*");
+		$this->db->from("usuarios u");
+		$this->db->join("valoraciones v", "v.usuario_id = u.id");
+		$this->db->where('v.create_at >=', $fechainicio);
+		$this->db->where('v.create_at <=', $fechafin);
+		$resultados = $this->db->get();
+		return $resultados->result();
+	}
+
+	public function getValoraciones(){
+		$this->db->select("v.*,u.*");
+		$this->db->from("usuarios u");
+		$this->db->join("valoraciones v", "v.usuario_id = u.id");
+		$resultados = $this->db->get();
+		return $resultados->result();
+	}
 }

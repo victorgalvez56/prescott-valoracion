@@ -22,19 +22,17 @@ class Mi_valoracion_docentes extends CI_Controller
 	{
 		$now = time();
 		$añoActual = date("Y",  $now);
-		$estado_val_obj = $this->Valoracion_adm_model->getEstadoObj($this->session->userdata("id"), $añoActual);
 		$validacion = "1";
-
-		// $estado_entrevista2 =  $this->Valoracion_adm_model->getEntrevista2($this->session->userdata("id"),$añoActual,1);
-		$estado_entrevista2_colab =  $this->Valoracion_adm_model->getEntrevistaColaborador($this->session->userdata("id"), $añoActual, 1);
-		$estado_entrevista3_evalu =  $this->Valoracion_adm_model->getEntrevistaColaborador($this->session->userdata("id"), $añoActual, 2);
-		$fechas_valoraciones = $this->Periodos_model->getFechasValidacion($añoActual, $validacion);
-
+		$estado_ultima_visita = $this->Valoracion_docentes_model->get_estado_ultima_visita($this->session->userdata("id"),$this->fecha_actual);
 
 		$valoracion1= $this->Valoracion_adm_model->getValoracion($this->session->userdata("id"),1, $añoActual);
 		$valoracion2= $this->Valoracion_adm_model->getValoracion($this->session->userdata("id"),2, $añoActual);
 		$valoraciono=$this->Valoracion_adm_model->getValoracionObjetivos($this->session->userdata("id"), $añoActual, 3);
 		$observaciones = $this->Valoracion_docentes_model->get_observaciones($this->session->userdata("id"),$this->fecha_actual);
+
+		$comentarios_profesor = $this->Valoracion_docentes_model->get_comentario_visita_concluida($this->session->userdata("id"),$this->fecha_actual);
+
+
 
 
 		if($valoracion1 == false || $valoracion2 == false || $valoraciono == false){
@@ -93,8 +91,8 @@ class Mi_valoracion_docentes extends CI_Controller
 				'color_tarjeta_promedio' => $color_promedio_final,
 
 				'observaciones' => $observaciones,
-
-				'estado' => $estado_val_obj,
+				'comentarios_profesor' => $comentarios_profesor,
+				'estado_ultima_visita' => $estado_ultima_visita,
 			);
 
 
@@ -107,161 +105,20 @@ class Mi_valoracion_docentes extends CI_Controller
 
 
 
-
-public function entrevista2_colab_registro()
+public function registro_comentario_profesor()
 	{
-		$now = time();
-		$añoActual = date("Y",  $now);
-		$fechaActual = date("Y-m-d",  $now);
 
-		$entrevista2_obj_1 = $this->input->post("entrevista2_obj_1");
-		$entrevista2_obj_2 = $this->input->post("entrevista2_obj_2");
-		$entrevista2_obj_3 = $this->input->post("entrevista2_obj_3");
-
-
-
+		$id_visita = $this->input->post("id_visita");
+		$comentario_profesor = $this->input->post("comentario_profesor");
 
 		$data = array(
-			'coment1_colab	' => $entrevista2_obj_1,
-			'coment2_colab	' => $entrevista2_obj_2,
-			'coment3_colab	' => $entrevista2_obj_3,
-
-			'tipo_entrevista_id' => 1,
-			'estado' => 1,
-			'colaborador_id' => $this->session->userdata("id"),
-			'create_at' => $fechaActual,
-			'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
-		);
-
-		$this->Valoracion_adm_model->saveEntrevista2($data);
-		redirect(base_url() . "valoracion/mi_valoracion_docentes/");
-	}
-
-	public function entrevista2_evalu_registro()
-	{
-		$now = time();
-		$añoActual = date("Y",  $now);
-		$fechaActual = date("Y-m-d",  $now);
-
-		$entrevista2_obj_1 = $this->input->post("entrevista2_obj_1");
-		$entrevista2_obj_2 = $this->input->post("entrevista2_obj_2");
-		$entrevista2_obj_3 = $this->input->post("entrevista2_obj_3");
-		$id_colaborador = $this->input->post("id_colaborador");
-
-
-
-		$tipo_entrevista = '1';
-		$data = array(
-			'coment1_evalu	' => $entrevista2_obj_1,
-			'coment2_evalu	' => $entrevista2_obj_2,
-			'coment3_evalu	' => $entrevista2_obj_3,
-			'evaluador_id' => $this->session->userdata("id"),
-			'update_at' => $fechaActual,
+			'estado' => 'concluido',
+			'opinion_colab' => $comentario_profesor,
+			'update_at' => $this->fecha_actual,
 			'update_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
 		);
 
-		$this->Valoracion_adm_model->updateEntrevista($id_colaborador, $tipo_entrevista, $data, $añoActual);
-		redirect(base_url() . "valoracion/mi_valoracion_docentes/");
-	}
-
-
-	public function entrevista3_evalu_registro()
-	{
-		$now = time();
-		$añoActual = date("Y",  $now);
-		$fechaActual = date("Y-m-d",  $now);
-
-		$option1 = $this->input->post("option1");
-		$option2 = $this->input->post("option2");
-		$option3 = $this->input->post("option3");
-		$id_colaborador = $this->input->post("id_colaborador");
-
-		$entrevista3_obj_1 = $this->input->post("entrevista3_obj_1");
-		$entrevista3_obj_2 = $this->input->post("entrevista3_obj_2");
-		$entrevista3_obj_3 = $this->input->post("entrevista3_obj_3");
-
-
-
-
-		$puntaje_val_obj = $option1+$option2+$option3;
-
-		if($puntaje_val_obj == 0){
-			$puntaje_final_objetivos = 0;
-		}elseif($puntaje_val_obj == 1){
-			$puntaje_final_objetivos = 7;
-
-		}elseif($puntaje_val_obj == 2){
-			$puntaje_final_objetivos = 14;
-
-		}else{
-			$puntaje_final_objetivos = 20;
-
-		}
-
-
-
-
-
-		$tipo_entrevista = '2';
-		$data = array(
-			'calif_obj1	' => $option1,
-			'calif_obj2	' => $option2,
-			'calif_obj3	' => $option3,
-
-			'coment1_evalu	' => $entrevista3_obj_1,
-			'coment2_evalu	' => $entrevista3_obj_2,
-			'coment3_evalu	' => $entrevista3_obj_3,
-
-			'tipo_entrevista_id	' => $tipo_entrevista,
-
-			'estado' => '1',
-
-			'colaborador_id' => $id_colaborador,
-			'evaluador_id' => $this->session->userdata("id"),
-			'create_at' => $fechaActual,
-			'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
-		);
-
-		$data_promedio_objetivos = array(
-			'total_valoracion' => $puntaje_final_objetivos,
-			'tipo_valoracion_id	' => 3,
-			'estado' => '1',
-			'usuario_id' => $id_colaborador,
-			'create_at' => $fechaActual,
-			'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
-		);
-
-		$this->Valoracion_adm_model->save($data_promedio_objetivos);
-
-		$this->Valoracion_adm_model->saveEntrevista2($data);
-		redirect(base_url() . "valoracion/valoracion_adm/");
-	}
-
-	public function entrevista3_colab_registro()
-	{
-		$now = time();
-		$añoActual = date("Y",  $now);
-		$fechaActual = date("Y-m-d",  $now);
-
-		$id_colaborador = $this->input->post("id_colaborador");
-
-		$entrevista3_obj_1 = $this->input->post("entrevista3_obj_1");
-		$entrevista3_obj_2 = $this->input->post("entrevista3_obj_2");
-		$entrevista3_obj_3 = $this->input->post("entrevista3_obj_3");
-
-
-
-		$tipo_entrevista = '2';
-		$data = array(
-			'coment1_colab	' => $entrevista3_obj_1,
-			'coment2_colab	' => $entrevista3_obj_2,
-			'coment3_colab	' => $entrevista3_obj_3,
-
-			'colaborador_id' => $id_colaborador,
-			'create_at' => $fechaActual,
-			'create_by' => $this->session->userdata("nombres") . " " . $this->session->userdata("apellidos")
-		);
-		$this->Valoracion_adm_model->updateEntrevista($id_colaborador, $tipo_entrevista, $data, $añoActual);
+		$this->Valoracion_docentes_model->concluir_visita($id_visita,$data);
 		redirect(base_url() . "valoracion/mi_valoracion_docentes/");
 	}
 

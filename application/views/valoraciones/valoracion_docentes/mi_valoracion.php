@@ -115,7 +115,7 @@
 									</div>
 								</div>
 								<div class="tab-pane active" id="tab_3">
-									<?php if($observaciones == true) {?>
+									<?php if ($observaciones == true) { ?>
 									<section class="content">
 										<div class="container-fluid">
 											<!-- Timelime example  -->
@@ -174,7 +174,7 @@
 																									<?php foreach ($observaciones as $observacion_describo) : ?>
 																										<label for="exampleInputEmail1">Evaluador
 																											<a href="#"><?php echo $observacion_describo->create_by; ?></a>
-																											- <?php echo date("d-m-Y",strtotime($observacion_describo->create_at)); ?>
+																											- <?php echo date("d-m-Y", strtotime($observacion_describo->create_at)); ?>
 																										</label>
 																										<textarea
 																												class="form-control"
@@ -200,7 +200,7 @@
 																										<?php foreach ($observaciones as $observacion_valoro) : ?>
 																											<label for="exampleInputEmail1">Evaluador
 																												<a href="#"><?php echo $observacion_valoro->create_by; ?></a>
-																												- <?php echo date("d-m-Y",strtotime($observacion_valoro->create_at)); ?>
+																												- <?php echo date("d-m-Y", strtotime($observacion_valoro->create_at)); ?>
 																											</label>
 																											<textarea
 																													class="form-control"
@@ -229,7 +229,7 @@
 																										<?php foreach ($observaciones as $observacion_pregunto) : ?>
 																											<label for="exampleInputEmail1">Evaluador
 																												<a href="#"><?php echo $observacion_pregunto->create_by; ?></a>
-																												- <?php echo date("d-m-Y",strtotime($observacion_pregunto->create_at)); ?>
+																												- <?php echo date("d-m-Y", strtotime($observacion_pregunto->create_at)); ?>
 																											</label>
 																											<textarea
 																													class="form-control"
@@ -244,8 +244,8 @@
 																					<!-- /.card -->
 																					<div class="card card-primary">
 																						<div class="card-header">
-																							<h3 class="card-title">Quick
-																								Example</h3>
+																							<h3 class="card-title">
+																								Sugiero</h3>
 																						</div>
 																						<form role="form">
 																							<div class="card-body">
@@ -254,7 +254,7 @@
 																										<?php foreach ($observaciones as $observacion_sugiero) : ?>
 																											<label for="exampleInputEmail1">Evaluador
 																												<a href="#"><?php echo $observacion_sugiero->create_by; ?></a>
-																												- <?php echo date("d-m-Y",strtotime($observacion_sugiero->create_at)); ?>
+																												- <?php echo date("d-m-Y", strtotime($observacion_sugiero->create_at)); ?>
 																											</label>
 																											<textarea
 																													class="form-control"
@@ -270,53 +270,140 @@
 																				</div>
 																			</div>
 
+																			<?php if ($estado_ultima_visita == true) { ?>
+																				<?php if ($estado_ultima_visita[0]->estado == 'espera') { ?>
+
+																					<div class="row">
+																						<div class="col-md-12">
+																							<div class="card card-primary">
+																								<div class="card-header">
+																									<h3 class="card-title">
+																										Registrar
+																										reflexión de
+																										profesor(a)
+
+																									</h3>
+																								</div>
+
+																								<div class="card-body">
+																									<div class="form-group">
+																										<div class="row">
+																											<div class="col-sm-3 border-right">
+																												<div class="description-block">
+																													<h5 class="description-header">
+																														Bimestre</h5>
+																													<span class="description-text"><?php echo $estado_ultima_visita[0]->bimestre_id; ?></span>
+																												</div>
+																											</div>
+																											<div class="col-sm-3 border-right">
+																												<div class="description-block">
+																													<h5 class="description-header">
+																														Grado
+																														y
+																														sección</h5>
+																													<span class="description-text"><?php echo $estado_ultima_visita[0]->grado_seccion; ?></span>
+																												</div>
+																											</div>
+																											<div class="col-sm-3 border-right">
+																												<div class="description-block">
+																													<h5 class="description-header">
+																														Puntaje</h5>
+																													<span class="description-text"><?php echo $estado_ultima_visita[0]->puntaje; ?></span>
+																												</div>
+																											</div>
+																											<div class="col-sm-3 border-right">
+																												<div class="description-block">
+																													<h5 class="description-header">
+																														Fecha</h5>
+																													<span class="description-text"><?php echo $estado_ultima_visita[0]->create_at; ?></span>
+																												</div>
+																											</div>
+																										</div>
+																									</div>
+																									<form action="<?php echo base_url(); ?>valoracion/mi_valoracion_docentes/registro_comentario_profesor"
+																										  method="POST">
+																										<div class="form-group">
+																											<input type="hidden" name="id_visita" value="<?php echo $estado_ultima_visita[0]->id; ?>">
+																									<textarea
+																											name="comentario_profesor"
+																											placeholder="Por favor registre su reflexión."
+																											class="form-control"
+																											rows="2"
+																									></textarea>
+																										</div>
+																										<div class="input-group">
+																											<button type="submit" class="btn btn-success">Guardar</button>
+																										</div>
+
+																									</form>
+
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+
+																				<?php } ?>
+
+																			<?php } ?>
+																			<?php if (!empty($comentarios_profesor)) : ?>
+																				<?php foreach ($comentarios_profesor as $comentario_profesor) : ?>
+																					<label for="exampleInputEmail1">Reflexión
+																						del profesor(a) <a
+																								href="#"> <?php echo $comentario_profesor->update_by; ?></a>
+																						- <?php echo date("d-m-Y", strtotime($comentario_profesor->update_at)); ?>
+																					</label>
+																					<textarea
+																							class="form-control"
+																							rows="2"
+																							disabled=""><?php echo $comentario_profesor->opinion_colab; ?></textarea>
+																				<?php endforeach; ?>
+																			<?php endif; ?>
 																		</div>
 																	</div>
 																</div>
-																<!-- /.card -->
-																<!-- Form Element sizes -->
 															</div>
 														</div>
 													</div>
-													<!-- /.box-body -->
 												</div>
-												<!-- /.box -->
-											</section>
+												<!-- /.box-body -->
 										</div>
+										<!-- /.box -->
 									</section>
-									<?php } else{?>
-
-										<div class="box box-solid">
-											<div class="box-body">
-												<div class="row">
-													<div class="col-md-12">
-														<?php if ($this->session->flashdata("error")) : ?>
-															<div class="alert alert-danger alert-dismissible">
-																<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-																<p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
-															</div>
-														<?php endif; ?>
-
-														<div class="alert alert-danger alert-dismissible">
-															<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-															<h5><i class="icon fas fa-ban"></i> Alerta!</h5>
-															La valoración aún no ha sido registrada.
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- /.box-body -->
-										</div>
-
-									<?php } ?>
 								</div>
+	</section>
+	<?php } else { ?>
+		<div class="box box-solid">
+			<div class="box-body">
+				<div class="row">
+					<div class="col-md-12">
+						<?php if ($this->session->flashdata("error")) : ?>
+							<div class="alert alert-danger alert-dismissible">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
+								</button>
+								<p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
 							</div>
+						<?php endif; ?>
+
+						<div class="alert alert-danger alert-dismissible">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<h5><i class="icon fas fa-ban"></i> Alerta!</h5>
+							La valoración aún no ha sido registrada.
 						</div>
 					</div>
 				</div>
 			</div>
+			<!-- /.box-body -->
 		</div>
-	</section>
+
+	<?php } ?>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
 </div>
 

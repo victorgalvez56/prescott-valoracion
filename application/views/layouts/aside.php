@@ -71,6 +71,14 @@
 							</p>
 						</a>
 					</li>
+					<li class="nav-item">
+						<a href="<?php echo base_url(); ?>reportes" class="nav-link">
+							<i class="nav-icon fas fa-th"></i>
+							<p>
+								Reportes
+							</p>
+						</a>
+					</li>
 					<?php if ($this->session->userdata("nombreRol") == "Administrador sistema") { ?>
 						<li class="nav-item has-treeview">
 							<a href="#" class="nav-link">
